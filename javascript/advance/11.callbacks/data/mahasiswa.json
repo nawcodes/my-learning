@@ -1,0 +1,25 @@
+
+[
+        {
+            "nama" : "rifal nurjamil",
+            "nim" : "20180050049",
+            "email" : "rifalnurchya@gmail.com",
+            "jurusan" : "Sistem Informasi",
+            "jurusan" : "Teknik Informatika",
+            "idDosenWali" : 1 
+        },
+        {
+            "nama" : "Shandika",
+            "nim" : "20180050041",
+            "email" : "Shandika@gmail.com",
+            "jurusan" : "Teknologi",
+            "idDosenWali" : 2
+        },
+        {
+            "nama" : "Emuh tar",
+            "nim" : "20180050012",
+            "email" : "emuhtare@gmail.com",
+            "jurusan" : "Sistem Awawm",
+            "idDosenWali" : 3
+        }
+]
