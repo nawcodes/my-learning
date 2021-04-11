@@ -21,8 +21,8 @@ function onloadGet() {
                     newLine.html(`<td>${no}</td>
                                 <td>${val.name}</td>
                                 <td>${val.nim}</td>
-                                <td>${val.number}</td>`
-                                );
+                                <td>${val.number}</td>
+                                <td><button class="badge badge-sm badge-primary text-primary" onclick="getId(${val.id})">edit</button></td>`);
                     dataHandler.append(newLine);
                     no++;
                 });
@@ -30,6 +30,28 @@ function onloadGet() {
         }
     );
 }
+
+function getId(dataId) {
+    const id = dataId;
+    $.ajax(
+        {
+            type:'post',
+            data:`id=${id}`,
+            url:'editData.php',
+            success: function (result) {
+                const objResult = JSON.parse(result);
+                $('[name="id"]').val(objResult.id);
+                $('[name="name"]').val(objResult.name);
+                $('[name="nim"]').val(objResult.nim);
+                $('[name="phone"]').val(objResult.number);
+                
+                
+            }
+
+        }
+    )
+}
+
 
 function insertData() {
     const name  = $('input[name="name"]').val();
@@ -45,7 +67,7 @@ function insertData() {
                 const objResult = JSON.parse(result);
                 let alert = `<div class="alert alert-danger">${objResult.message}</div>`;
                 $('#message').html(alert);
-                onloadGet()
+                onloadGet();
             }
         }
     )

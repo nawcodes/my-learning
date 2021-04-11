@@ -20,7 +20,7 @@
     <div class="container">
       <div class="row">
       <div id="message"></div>
-
+        <input type="hidden" name="id">
         <div class="col">
           <label for="">Name</label>
           <input type="text" class="form-control" name="name">
@@ -48,6 +48,8 @@
             <th>Nim</th>
             <th>Name</th>
             <th>Phone</th>
+            <th>Options</th>
+
           </tr>
         </thead>
         <tbody id="data">
