@@ -35,7 +35,9 @@
         </div>
 
         <div class="col mt-4">
-          <button class="btn btn-primary form-control" onclick="insertData()">Add data</button>
+          <button id="btn-add" class="btn btn-primary form-control" onclick="insertData()">Add data</button>
+          <button id="btn-update" class="btn btn-primary form-control" onclick="updateData()">Update</button>
+
         </div>
       </div>
     </div>
