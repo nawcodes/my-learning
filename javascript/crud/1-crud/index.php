@@ -17,6 +17,28 @@
     </div>
 
 
+    <div class="container">
+      <div class="row">
+      <div id="message"></div>
+
+        <div class="col">
+          <label for="">Name</label>
+          <input type="text" class="form-control" name="name">
+        </div>
+        <div class="col">
+          <label for="">Nim</label>
+          <input type="number" class="form-control" name="nim">
+        </div>
+        <div class="col">
+          <label for="">Phone</label>
+          <input type="number" class="form-control" name="phone">
+        </div>
+
+        <div class="col mt-4">
+          <button class="btn btn-primary form-control" onclick="insertData()">Add data</button>
+        </div>
+      </div>
+    </div>
 
     <div class="container mt-5">
       <table class="table">
