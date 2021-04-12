@@ -23,7 +23,8 @@ function onloadGet() {
                                 <td>${val.name}</td>
                                 <td>${val.nim}</td>
                                 <td>${val.number}</td>
-                                <td><button class="badge badge-sm badge-primary text-primary" onclick="getId(${val.id})">edit</button></td>`);
+                                <td><button class="badge badge-sm badge-primary text-primary" onclick="getId(${val.id})">edit</button></td>
+                                <td><button class="badge badge-sm badge-danger text-primary" onclick="deleteData(${val.id})">delete</button></td>`);
                     dataHandler.append(newLine);
                     no++;
                     $('#btn-update').hide();
@@ -51,11 +52,33 @@ function getId(dataId) {
                 $('[name="phone"]').val(objResult.number);
                 $('#btn-add').hide();
                 $('#btn-update').show();
-                
             }
 
         }
     )
+}
+
+function deleteData(idData) {
+const ask = confirm('Sure want delete this');
+if(ask) {
+    $.ajax(
+        {
+            type:'post',
+            url:'deleteData.php',
+            data:`id=${idData}`,
+            success: function (result) {
+                console.log(result);
+                const objResult = JSON.parse(result);
+                console.log(objResult);
+                let alert = `<div class="alert alert-danger">${objResult}</div>`;
+                $('#message').html(alert);
+                onloadGet();
+            }
+
+        }
+    );
+}
+
 }
 
 
