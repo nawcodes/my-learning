@@ -14,7 +14,15 @@
     <h1>Hello, Crud Ajax Implement!</h1>
 
 
+    
+
+<!-- Modal -->
+
+
     <div class="container">
+    <button type="button" class="btn btn-primary mb-3 mt-2" data-toggle="modal" data-target="#exampleModal">
+      Create
+    </button>
         <!-- get data -->
         <table class="table border border-primary">
             <thead>
@@ -28,13 +36,60 @@
                     <th scope="col">About</th>
                 </tr>
             </thead>
-            <tbody id="#data">
+            <tbody id="data">
                 
             </tbody>
         </table>
         <!-- end get data -->
     </div>
 
+
+
+    <!-- modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="">Name</label>
+          <input type="text" name="name" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="">Nim</label>
+          <input type="number" name="nim" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="">Email</label>
+          <input type="email" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="">Phone</label>
+          <input type="number" name="phone" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="">Image</label>
+          <input type="text" name="image" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">About</label>
+          <textarea class="form-control" name="about" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-insert" onclick="insert()">Insert</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- end modal -->
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -45,6 +100,8 @@
 			  crossorigin="anonymous"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script src="js/script.js"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

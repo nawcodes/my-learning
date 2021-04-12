@@ -18,7 +18,6 @@ function onloadGet() {
                 let no = 1;
                 $.each(objResult, function(key,val) {
                     const newLine = $("<tr>");
-                    
                     newLine.html(`<td>${no}</td>
                                 <td>${val.name}</td>
                                 <td>${val.nim}</td>
@@ -28,9 +27,7 @@ function onloadGet() {
                     dataHandler.append(newLine);
                     no++;
                     $('#btn-update').hide();
-
-                });
-                
+                });    
             }
         }
     );
