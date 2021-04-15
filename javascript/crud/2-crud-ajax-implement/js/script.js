@@ -37,7 +37,7 @@ function insert() {
     const email = $('input[name="email"]').val();
     const phone = $('input[name="phone"]').val();
     const image = $('input[name="image"]').val();
-    const about = $('input[name="about"]').val();
+    const about = $('textarea[name="about"]').val();
 
     $.ajax(
         {
@@ -45,7 +45,7 @@ function insert() {
             url: 'Controller/insertData.php',
             data: `name=${name}&nim=${nim}&email=${email}&phone=${phone}&image=${image}&about=${about}`,
             success: function (result) {
-                console.log(JSON.parse(result));
+                console.log(result);
             }
         }
     ) 
