@@ -1,7 +1,7 @@
-onload();
+onloadGet();
 
 
-function onload() {
+function onloadGet() {
     $.ajax(
         {
             type:'get',
@@ -45,7 +45,12 @@ function insert() {
             url: 'Controller/insertData.php',
             data: `name=${name}&nim=${nim}&email=${email}&phone=${phone}&image=${image}&about=${about}`,
             success: function (result) {
-                console.log(result);
+                const objResult = JSON.parse(result)
+                const showMessage = $('.alert-msg');
+                showMessage.html(
+                    `<div class="alert alert-primary">${objResult.message}</div>`
+                );
+                onloadGet();
             }
         }
     ) 

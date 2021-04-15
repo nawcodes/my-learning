@@ -20,6 +20,8 @@
 
 
     <div class="container">
+    <div class="alert-msg">
+    </div>
     <button type="button" class="btn btn-primary mb-3 mt-2" data-toggle="modal" data-target="#exampleModal">
       Create
     </button>
