@@ -36,6 +36,7 @@
                     <th scope="col">Phone</th>
                     <th scope="col">Image</th>
                     <th scope="col">About</th>
+                    <th scope="col">Options</th>
                 </tr>
             </thead>
             <tbody id="data">
@@ -58,6 +59,7 @@
         </button>
       </div>
       <div class="modal-body">
+      <input type="hidden" name="id" class="form-control">
         <div class="form-group">
           <label for="">Name</label>
           <input type="text" name="name" class="form-control">

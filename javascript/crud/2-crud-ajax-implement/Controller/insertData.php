@@ -32,7 +32,6 @@ if($data['name'] == '') {
     }else{
         $result['message'] = 'failed insert data ' . $conn->error;
     }
-
 }
 
 echo json_encode($result);
