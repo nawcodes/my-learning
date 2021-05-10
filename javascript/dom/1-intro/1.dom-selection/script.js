@@ -2,7 +2,7 @@
 
 const judul = document.getElementById('judul');
 console.log(judul);
-judul.style.color = 'green';
+judul.style.color = 'green'; 
 judul.innerHTML = 'Hello Rifal';
 
 // 2. getElementsByTagName
@@ -19,3 +19,5 @@ console.log(h1);
 // 3. getElementByClassName
 const p1 = document.getElementsByClassName('p1');
 console.log(p1); // return htmlCollection an array
+
+    
