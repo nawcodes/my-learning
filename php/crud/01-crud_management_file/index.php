@@ -29,6 +29,13 @@ if(isset($_GET['status'])) {
     header('Location:index.php');
 }
 
+if(isset($_GET['hapus'])) {
+    unset($todo[$_GET['key']]);
+    $updateJson = json_encode($todo);
+    file_put_contents('file/todo.json', $updateJson);
+    header('Location:index.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +62,7 @@ if(isset($_GET['status'])) {
         <li>
             <input type="checkbox" name="check" onclick="window.location.href = 'index.php?status=<?= $row['status'] == 1 ? 0 : 1 ?>&key=<?= $key ?>'" <?= $row['status'] == 1 ? 'checked' : '' ?>>
             <label for=""><?= $row['name'] ?></label>
-            <a href="">Delete</a>
+            <a href="index.php?hapus=1&key=<?= $key ?>" onclick="return confirm('Yakin mau di hapus?')">Delete</a>
         </li>
         <?php endforeach; ?>
     </ul>
