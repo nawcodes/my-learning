@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play With Colors</title>
+    <style>
+        html,body {
+            height: 100%;
+        }
+
+        body {
+           text-align: center; 
+        }
+
+        .ligthblue {
+            background-color:lightblue;
+        }
+        .box {
+            width:25px;
+            height: 25px;
+            margin:10px auto;
+        }
+        .red {
+            background-color: red;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Play With Colors</h1>
+    <button type="button" id="changeColor">Click Me!</button>
+    <br><br>
+    <div class="red box"></div>
+    <input type="range" name="rSlider" min="0" max="255">
+    <br><br>
+    <div class="green box"></div>
+    <input type="range" name="gSlider" min="0" max="255">
+    <br><br>
+    <div class="blue box"></div>
+    <input type="range" name="bSlider" min="0" max="255">
+
+
+
+    <script>
+        const button = document.getElementById("changeColor");
+
+        button.addEventListener("click", function() {
+            // document.body.style.backgroundColor = 'lightblue';
+            // document.body.setAttribute('class', 'ligthblue');
+            document.body.classList.toggle('ligthblue');
+        });
+        
+        const newButton = document.createElement('button');
+        const textButton = document.createTextNode('Random Color');
+        newButton.appendChild(textButton);
+        newButton.setAttribute('type', 'button');
+        
+        button.after(newButton);
+
+        newButton.addEventListener('click', function() {
+        const r = Math.round(Math.random() * 255 + 1); // result 1.0 - 255.0;  
+        const g = Math.round(Math.random() * 255 + 1); // result 1.0 - 255.0;  
+        const b = Math.round(Math.random() * 255 + 1); // result 1.0 - 255.0;  
+
+        document.body.style.backgroundColor = `rgb(${r},${g},${b})`;        
+        
+    });
+
+     // slider
+        const rSlider = document.querySelector('input[name=rSlider]');
+        const gSlider = document.querySelector('input[name=gSlider]');
+        const bSlider = document.querySelector('input[name=bSlider]');
+  
+        rSlider.addEventListener('input', function() {
+            const r = rSlider.value;
+            const g = gSlider.value;
+            const b = bSlider.value;
+            document.body.style.backgroundColor = `rgb(${r},${g},${b})`
+        });
+        gSlider.addEventListener('input', function() {
+            const r = rSlider.value;
+            const g = gSlider.value;
+            const b = bSlider.value;
+            document.body.style.backgroundColor = `rgb(${r},${g},${b})`
+        });
+        bSlider.addEventListener('input', function() {
+            const r = rSlider.value;
+            const g = gSlider.value;
+            const b = bSlider.value;
+            document.body.style.backgroundColor = `rgb(${r},${g},${b})`
+        });
+
+        // cursorEvent
+        document.body.addEventListener('mousemove', function(event) {
+            // mouse postion
+            // console.log(event.clientX);
+            // widthBrowser
+            // console.log(window.innerWidth);
+
+            const xPosition = Math.round((event.clientX / window.innerWidth) * 255);
+            const yPosition = Math.round((event.clientY / window.innerHeight) * 255);
+
+            document.body.style.backgroundColor = `rgb(${xPosition}, ${yPosition}, 100)`;
+
+        }) 
+        
+    </script>
+</body>
+</html>
