@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Traversal</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+      <img src="img/1.jpg" width="96" height="96">
+      <span class="nama">Miha</span>
+      <span class="telp">08123456789</span>
+      <span class="close">×</span>
+    </div> 
+
+    <div class="card">
+      <img src="img/2.jpg" width="96" height="96">
+      <span class="nama">Kana</span>
+      <span class="telp">08123456789</span>
+      <span class="close">×</span>
+
+    </div> 
+
+    <div class="card">
+      <img src="img/3.jpg" width="96" height="96">
+      <span class="nama">Konna</span>
+      <span class="telp">08123456789</span>
+            <span class="close">×</span>
+
+    </div> 
+
+    <div class="card">
+      <img src="img/4.jpg" width="96" height="96">
+      <span class="nama">Gammi</span>
+      <span class="telp">08123456789</span>
+            <span class="close">×</span>
+
+    </div> 
+
+</div>
+
+<script>
+    // const btnClose = document.querySelectorAll('.close');
+    // btnClose.forEach(function(elm) {
+    //   // BUBLING EVENT
+    //   elm.addEventListener('click', function(e){
+    //         e.target.parentElement.style.display = 'none';
+    //         e.preventDefault();
+    //         e.stopPropagation();
+    //   });
+    // });
+
+
+    // const cards = document.querySelectorAll('.card');
+    // cards.forEach(function(card) {
+    //   card.addEventListener('click', function() {
+    //     alert('ok');
+    //   })
+    // });
+
+
+    // better method
+      const container = document.querySelector('.container');
+      container.addEventListener('click', function(e) {
+        // check btn close
+        console.log(e);
+        if(e.target.className == 'close') {
+          e.target.parentElement.style.display = 'none';
+        }
+
+        // and try to add card on browser 
+      })
+
+
+</script>
+</body>
+</html>
