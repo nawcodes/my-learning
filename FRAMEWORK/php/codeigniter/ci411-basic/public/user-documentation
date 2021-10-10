@@ -1,0 +1,16 @@
+htaccess 
+- Untuk membuat preety Url
+
+fav icon 
+- untuk membuat icon di sebelah tab browser 
+
+index.php
+-berawal dari file ini app berjalan. app->run();
+
+robots.txt
+-untuk search engine
+
+bisa simpan 
+/assets/images
+/assets/css
+/js/js.js
