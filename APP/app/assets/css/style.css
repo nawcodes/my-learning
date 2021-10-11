@@ -58,8 +58,12 @@ body {
 
 .header-logo h1 {
     color: white;
+        text-shadow: 0px 3px 0px #b2a98f,
+        0px 2px 2px rgba(0, 0, 0, 0.15),
+        0px 12px 2px rgba(0, 0, 0, 0.1),
+        0px 16px 30px rgba(0, 0, 0, 0.1);
     font-size: 30px;
-    font-weight: 800;
+    font-weight: 500;
 }
 
 
@@ -69,7 +73,8 @@ body {
 
 
 .nav-hero {
-    padding: 50px 50px;
+    margin-top: 30px;
+    margin-right: 30px;
 }
 
 .nav-hero li {
@@ -106,7 +111,17 @@ body {
 }
 
 .jumbotron-text h2 {
-    font-size: 60px;
+    text-shadow: 0px 3px 0px #b2a98f,
+    0px 2px 2px rgba(0, 0, 0, 0.15),
+    0px 12px 2px rgba(0, 0, 0, 0.1),
+    0px 16px 30px rgba(0, 0, 0, 0.1);
+       color: white;
+    font-size: 45px;
+    text-shadow: 0px 3px 0px #b2a98f,
+    0px 2px 2px rgba(0, 0, 0, 0.15),
+    0px 12px 2px rgba(0, 0, 0, 0.1),
+    0px 16px 30px rgba(0, 0, 0, 0.1);
+
 }
 .jumbotron-text p {
     font-size: 20px;
@@ -114,7 +129,7 @@ body {
 }
 .jumbotron-text .text-moon {
     font-size: 22px;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 
@@ -143,8 +158,9 @@ body {
 
 .card-tokenomics {
     margin-bottom: 55px;
+    padding-bottom: 15px;
     width: 75%;
-    height: 500px;
+    height: auto;
     background-color: #2D2B40;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
@@ -154,10 +170,15 @@ body {
 
 
 .card-header-token {
-    padding: 20px 0;
+    margin: 15px 0 2px 0;
 }
 .card-header-token h4 {
-    font-size: 32px;
+    font-size: 28px;
+    
+}
+
+.section-card p {
+    font-size: 12px;
 }
 
 .card-body-token {
@@ -173,31 +194,30 @@ body {
 
 .section-card {
     width: 33%;
+    margin: 1px 1px;
     padding: 20px 20px;
+    
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
 
 
-.social-media ul {
-    display: flex;
-    text-align: center;
-    justify-content:center;
+
+
+.social-media   {
+    display: block;
+    margin-top: 13px;
+    font-size: 20px; 
+    text-align: center; 
 }
 
-.social-media ul li  {
-    margin: 20px 0;
-    font-size: 20px;
-    list-style-type: none;
-}
-
-.social-media ul li a {
+.social-media a {
     color: #E7CD50;
-    font-size: 20px;
     list-style-type: none;
     transition: 0.3s;
 }
 
-.social-media ul li a:hover {
+.social-media a:hover {
     color: #1d4e9c;
     font-size: 20px;
     list-style-type: none;
@@ -236,7 +256,6 @@ body {
 .footer .section-footer {
     text-align: center;
     margin-top: 20px;
-   
 }
 
 /* Portrait and Landscape */
@@ -248,11 +267,12 @@ body {
 
     }
     
-
     .nav-hero {
-        padding: 10px 0;
         display: flex;
         justify-content:center;
+    margin-top: 30px;
+    margin-right: 0;
+
     }
 
     
@@ -285,6 +305,7 @@ body {
      }
 
      .jumbotron-text h2 {
+
          font-size: 30px;
      }
 
@@ -294,33 +315,216 @@ body {
      }
 
      .jumbotron-text .text-moon {
-         font-size: 15px;
+         font-size: 13px;
          font-weight: 600;
      }
      
+
+
+     .card-tokenomics {
+         height: auto;
+         padding-bottom: 9px;
+     }
+
+     .card-header-token {
+         padding: 10px 0;
+     }
+
+
+    
+
+     .card-body-token {
+         flex-direction: column;
+         margin-top: 0px;
+     }
+
+     .section-card {
+         box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+         rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+         rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+         width: 100%;
+         padding: 10px 0;
+         margin-bottom: 5px;
+     }
+
+     .section-card h4 {
+        font-size: 15px;
+     }
+
+     .section-card p {
+        font-size: 9px;
+     }
+
+
+     .footer-logo p {
+         font-size: 20px;
+
+     }
+
+     .footer .section-footer {
+         font-size: 10px;
+     }
 
      
  }
 
  /* Small devices (portrait tablets and large phones, 600px and up) */
- @media only screen and (min-width: 600px) {
-     ...
+ @media only screen and (min-width: 600px) and (max-width: 900px) {
+     .header-logo {
+         padding-top: 20px;
+
+     }
+
+     .nav-hero {
+         display: flex;
+         justify-content: center;
+         margin-top: 30px;
+         margin-right: 0;
+
+     }
+
+
+     .hero-jumbotron {
+         padding: 0 0;
+         margin-top: -40px;
+         margin-bottom: 40px;
+         flex-direction: column-reverse;
+     }
+
+     .jumbotron-text {
+         width: 100%;
+         margin: 0 0;
+         padding: 2px 2px;
+         text-align: center;
+
+     }
+
+     .jumbotron-logo {
+         width: 100%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin-bottom: 5px;
+     }
+
+     .jumbotron-logo img {
+         width: 300px;
+         margin: 0 0;
+     }
+
+     .jumbotron-text h2 {
+
+         font-size: 40px;
+     }
+
+     .jumbotron-text p {
+         font-size: 20px;
+         font-weight: 400;
+     }
+
+     .jumbotron-text .text-moon {
+         font-size: 25px;
+         font-weight: 600;
+     }
+
+
+
+     .card-tokenomics {
+         height: auto;
+         padding-bottom: 9px;
+     }
+
+     .card-header-token {
+         padding: 10px 0;
+     }
+
+
+     .card-body-token {
+         flex-direction: column;
+         margin-top: 0px;
+     }
+
+     .section-card {
+         box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+             rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+             rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+         width: 100%;
+         padding: 10px 0;
+         margin-bottom: 5px;
+     }
+
+     .section-card h4 {
+         font-size: 21px;
+     }
+
+     .section-card p {
+         font-size: 17px;
+     }
+
+
+     .footer-logo p {
+         font-size: 39px;
+
+     }
+
+     .footer .section-footer {
+         font-size: 20px;
+     }
  }
 
  /* Medium devices (landscape tablets, 768px and up) */
- @media only screen and (min-width: 768px) {
-     ...
- }
+
 
  /* Large devices (laptops/desktops, 992px and up) */
- @media only screen and (min-width: 992px) {
-     ...
+ @media only screen and (min-width: 901px) and (max-width: 1190px) {
+     .hero-jumbotron {
+         padding: 0 0;
+         height:auto;
+         margin-bottom: 40px;
+     }
+
+     .jumbotron-text {
+        width: 100%;
+        text-align: center;
+        padding: 0 0;
+        margin-top: 50px;
+     }
+
+     .jumbotron-logo {
+         width: 100%;
+         margin-bottom: 5px;
+     }
+
+     .jumbotron-logo img {
+         width: 400px;
+         margin-top: 40px;
+     }
+
+     .jumbotron-text h2 {
+
+         font-size: 30px;
+     }
+
+     .jumbotron-text p {
+         font-size: 15px;
+         font-weight: 400;
+     }
+
+     .jumbotron-text .text-moon {
+         font-size: 17px;
+         font-weight: 600;
+     }
+
+   
+
+      .section-card {
+          padding: 5px 0;
+      }
+      
+
  }
 
  /* Extra large devices (large laptops and desktops, 1200px and up) */
- @media only screen and (min-width: 1200px) {
-     ...
- }
 
 
 
