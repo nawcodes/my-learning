@@ -43,30 +43,23 @@ body {
     justify-content: center;
     align-items: center;
     padding-top:80px;
-}
+     flex-direction: column;
 
-
-.logo {
-     display: flex;
-     width: 300px;
-     height: 300px;
-     flex-wrap: wrap;
-     justify-content: center;    
 }
 
 .logo img {
+    justify-self: center;
     width: 150px;
     height: 150px;
     box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.9);
     border-radius: 50%;
-    margin-bottom: -40px;
+    margin: 20px 0;
 }
 
-.logo h1  {
+.header-logo h1 {
     color: white;
     font-size: 30px;
     font-weight: 800;
-    line-height: 0.4;
 }
 
 
@@ -249,7 +242,64 @@ body {
 /* Portrait and Landscape */
  /* Extra small devices (phones, 600px and down) */
  @media only screen and (max-width: 600px) {
-     ...
+
+    .header-logo {
+        padding-top: 20px;
+
+    }
+    
+
+    .nav-hero {
+        padding: 10px 0;
+        display: flex;
+        justify-content:center;
+    }
+
+    
+     .hero-jumbotron {
+         padding: 0 0;
+         margin-top: -40px;
+         margin-bottom: 40px;
+         flex-direction: column-reverse;
+     }
+
+     .jumbotron-text {
+         width: 100%;
+         margin: 0 0;
+         padding: 2px 2px;
+                  text-align: center;
+
+     }
+
+     .jumbotron-logo {
+         width: 100%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin-bottom: 5px;
+     }
+
+     .jumbotron-logo img {
+         width:300px;
+         margin: 0 0;
+     }
+
+     .jumbotron-text h2 {
+         font-size: 30px;
+     }
+
+     .jumbotron-text p {
+         font-size: 13px;
+         font-weight: 400;
+     }
+
+     .jumbotron-text .text-moon {
+         font-size: 15px;
+         font-weight: 600;
+     }
+     
+
+     
  }
 
  /* Small devices (portrait tablets and large phones, 600px and up) */
