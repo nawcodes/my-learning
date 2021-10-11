@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    background-image: url('../img/bg-star.jpg');
+    background-size:cover;
+    /*  */
+    color: white;
+    position:relative;
+}
+
+.opacity-hero {
+    position: absolute;
+    background-color: #2D2A40;
+    opacity: 0.8;
+    overflow: hidden;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+
+.hero-card {
+    background-color: white;
+    width: 80%;
+    height: auto;
+    margin-top: 15px;
+    border-radius:8px;
+    overflow: hidden;
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.8);
+}
+
+
+
+.header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top:80px;
+}
+
+
+.logo {
+     display: flex;
+     width: 300px;
+     height: 300px;
+     flex-wrap: wrap;
+     justify-content: center;    
+}
+
+.logo img {
+    width: 150px;
+    height: 150px;
+    box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.9);
+    border-radius: 50%;
+    margin-bottom: -40px;
+}
+
+.logo h1  {
+    color: white;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 0.4;
+}
+
+
+.hero-card {
+    background-color: #3A384F;
+}
+
+
+.nav-hero {
+    padding: 50px 50px;
+}
+
+.nav-hero li {
+    margin-right: 20px;
+    padding: 0 10px;
+    list-style-type: none;
+}
+
+.nav-hero li a {
+   text-decoration: none;
+   color: #E7CD50;
+   transition: 0.7s;
+
+}
+
+.nav-hero li a:hover {
+   color: white;
+   opacity: 0.9;
+}
+
+.hero-jumbotron {
+    display: flex;
+    padding: 30px 30px;
+    color: #E7CD50;
+    width: 100%;
+    height: 500px;
+}
+
+.jumbotron-text {
+    width: 50%;
+    margin-left: 40px;
+    margin-top: 10px;
+    padding: 50px 50px;
+}
+
+.jumbotron-text h2 {
+    font-size: 60px;
+}
+.jumbotron-text p {
+    font-size: 20px;
+    font-weight: 400;
+}
+.jumbotron-text .text-moon {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+
+.btn-jumbo {
+    margin-top: 40px ;
+    text-align: center;
+
+}
+.btn-jumbo a {
+    width: 50%;
+}
+
+.jumbotron-logo {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.jumbotron-logo img {
+    margin-bottom: 70px;
+}
+
+
+
+.card-tokenomics {
+    margin-bottom: 55px;
+    width: 75%;
+    height: 500px;
+    background-color: #2D2B40;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+   rgba(0, 0, 0, 0.5) 0px 10px 10px;
+}
+
+
+
+.card-header-token {
+    padding: 20px 0;
+}
+.card-header-token h4 {
+    font-size: 32px;
+}
+
+.card-body-token {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly; 
+    text-align: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 30px;
+
+}
+
+.section-card {
+    width: 33%;
+    padding: 20px 20px;
+}
+
+
+
+.social-media ul {
+    display: flex;
+    text-align: center;
+    justify-content:center;
+}
+
+.social-media ul li  {
+    margin: 20px 0;
+    font-size: 20px;
+    list-style-type: none;
+}
+
+.social-media ul li a {
+    color: #E7CD50;
+    font-size: 20px;
+    list-style-type: none;
+    transition: 0.3s;
+}
+
+.social-media ul li a:hover {
+    color: #1d4e9c;
+    font-size: 20px;
+    list-style-type: none;
+}
+
+
+.footer {
+    margin-top: 30px ;
+    width: inherit;
+    height: 150px;
+    background-color: #10182F;
+}
+
+.footer-logo {
+    padding: 40px 0;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+.footer-logo img {
+    width: 50px;
+    height: 50px;  
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius:50%;
+}
+
+.footer-logo p {
+    font-size:30px;
+    padding-top: 14px;
+    margin-left: 5px;
+    
+}
+.footer .section-footer {
+    text-align: center;
+    margin-top: 20px;
+   
+}
+
+/* Portrait and Landscape */
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+     ...
+ }
+
+ /* Small devices (portrait tablets and large phones, 600px and up) */
+ @media only screen and (min-width: 600px) {
+     ...
+ }
+
+ /* Medium devices (landscape tablets, 768px and up) */
+ @media only screen and (min-width: 768px) {
+     ...
+ }
+
+ /* Large devices (laptops/desktops, 992px and up) */
+ @media only screen and (min-width: 992px) {
+     ...
+ }
+
+ /* Extra large devices (large laptops and desktops, 1200px and up) */
+ @media only screen and (min-width: 1200px) {
+     ...
+ }
+
+
+
+
+
+
+
+
