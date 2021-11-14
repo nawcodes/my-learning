@@ -13,11 +13,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #23E3C9;
+    background-image: url('img/MTC.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+   
 }
 
 .slider {
-    background: red;
+    box-shadow: rgba(0, 0, 0, 0.9) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.9) 0px 18px 36px -18px inset;
     width: 99%;
     height: 99vh;
     border-radius:10px;
@@ -44,7 +48,39 @@ body {
 }
 
 .slide.home {
-    padding: 18rem 20rem;
+    padding: 18rem 19rem;
+}
+
+.slide.home h2 {
+    color: #F7F6F9;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 0;
+}
+
+.slide.home p {
+    color: #F7F6F9;
+    text-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    font-size: 1.2rem;
+}
+.slide.home p span {
+    font-size: 2rem;
+    background-color: #CDA695;
+    padding: 0.4rem 0.4rem;
+    border-radius: 10px;
+}
+
+.slide.home .btn {
+    text-align: center;
+    padding-top: 25px;
+}
+
+.btn a {
+    padding: 1rem 1rem;
+    text-decoration: none;
+    background-color: #CDA695;
+    border-radius: 7px;
+    color: #fff;
 }
 
 .slide.tokenomics {
@@ -53,10 +89,71 @@ body {
     padding: 5rem 10rem;
 }
 
+.slide.tokenomics h2 {
+    color: #fff;
+    font-size: 2rem;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+
 .slide.tokenomics .card {
-    background-color: #1D2537;
+    color: #1D2537;
+    background-color: #bac0cc;
     text-align: center;
     width: 25%;
+    margin: 0 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.slide.about {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 5rem;
+    flex-wrap: wrap;
+}
+
+.slide.about h3 {
+    color: white;
+        text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+
+.slide.footer {
+    padding: 4rem 5rem;
+    text-align: center;
+    color: white;
+    
+}
+
+
+.slide.footer h2 {
+    font-size: 3rem;
+            text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+.slide.footer p {
+    font-size: 2rem;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.slide.footer .contract {
+    font-size: 1.5rem;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    background: #CDA695;
+    border-top-left-radius: 100px;
+}
+
+
+.slide.about .card {
+    background-color: #1D2537;
+    text-align: center;
+    width: 17%;
+    height: 300px;
     margin: 0 0.5rem;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -82,9 +179,8 @@ body {
 }
 
 .manual-btn {
-    border: 2px solid #40D3DC;
-    padding: 5px;
-    border-radius: 10px;
+    padding : 0 0.5rem;
+    color: #CDA695;
     cursor: pointer;
     transition: 1s;
 }
@@ -95,7 +191,8 @@ body {
 }
 
 .manual-btn:hover {
-    background: #40D3DC;
+    border: 2px solid green;
+    border-radius: 5px;
 }
 
 #radio1:checked ~ .first {
