@@ -1,5 +1,6 @@
 const about = document.querySelector('.about');
 const card = about.querySelectorAll('.card');
+const our = document.getElementById('our');
 
 for (let index = 0; index < card.length; index++) {
     const element = card[index];
