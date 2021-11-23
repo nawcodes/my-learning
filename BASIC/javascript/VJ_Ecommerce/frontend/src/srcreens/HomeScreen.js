@@ -1,7 +1,19 @@
-import data from '../data.js'; 
+const BASEURL = 'http://localhost:3000/';
 const homeScreen = {
-    render: () => {
-        const {products} = data;
+    render: async () => {
+        const response = await fetch(BASEURL + 'api/products', {
+            headers: {
+                "Content-type": "application/json",
+            }
+        });
+
+        if(!response || !response.ok) {
+            return `<div>Error in gettingg data</div>`;
+        }
+
+        const products = await response.json();
+
+
         return `
         <ul class="products"> 
             ${products.map( product => `

@@ -11,7 +11,7 @@ const routes = {
     '/product/:id' : ProductScreen,
 }
 
-const router = () => {
+const router = async () => {
     const request = parseRequestUrl();
     const main = document.getElementById('main-container');
 
@@ -24,7 +24,7 @@ const router = () => {
     console.log(request);
     console.log(parseUrl);
     console.log(screen);
-    main.innerHTML = screen.render();
+    main.innerHTML = await screen.render();
 }
 
 window.addEventListener('load', router);
