@@ -1,18 +1,20 @@
+import axios from 'axios';
 const BASEURL = 'http://localhost:3000/';
 const homeScreen = {
     render: async () => {
-        const response = await fetch(BASEURL + 'api/products', {
+        const response = await axios({
+            url: BASEURL + 'api/products',
             headers: {
                 "Content-type": "application/json",
             }
         });
 
-        if(!response || !response.ok) {
+
+        if(!response || response.statusText !== 'OK') {
             return `<div>Error in gettingg data</div>`;
         }
 
-        const products = await response.json();
-
+        const products = await response.data;
 
         return `
         <ul class="products"> 

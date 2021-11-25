@@ -13,4 +13,3 @@ app.get("/api/products", (req, res) => {
 app.listen(port, () => {
     console.log(`Serve at http://localhost:${port}`);
 });
-
