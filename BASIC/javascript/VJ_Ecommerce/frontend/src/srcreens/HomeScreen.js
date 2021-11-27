@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Rating from '../component/Rating';
 const BASEURL = 'http://localhost:3000/';
 const homeScreen = {
     render: async () => {
@@ -8,8 +9,6 @@ const homeScreen = {
                 "Content-type": "application/json",
             }
         });
-
-
         if(!response || response.statusText !== 'OK') {
             return `<div>Error in gettingg data</div>`;
         }
@@ -28,6 +27,14 @@ const homeScreen = {
                                 <a href="/#/product/${product._id}">
                                     ${product.name}
                                 </a>
+                            </div>
+                            <div class="product-rating">
+                                ${Rating.render(
+                                    {
+                                        value: product.rating,
+                                        text: `${product.numReviews} reviews`,
+                                    }
+                                )}
                             </div>
                             <div class="product-brand">
                                 ${product.brand}
