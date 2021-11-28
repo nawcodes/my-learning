@@ -326,6 +326,17 @@ eval("\n\nvar bind = __webpack_require__(/*! ./helpers/bind */ \"./node_modules/
 
 /***/ }),
 
+/***/ "./src/api.js":
+/*!********************!*\
+  !*** ./src/api.js ***!
+  \********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"getProduct\": () => (/* binding */ getProduct)\n/* harmony export */ });\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./config */ \"./src/config.js\");\n\r\n\r\n\r\nconst getProduct = async (id) => {\r\n    try {\r\n        const response = await axios__WEBPACK_IMPORTED_MODULE_0___default()({\r\n            url: `${_config__WEBPACK_IMPORTED_MODULE_1__.apiUrl}/api/products/${id}`,\r\n            method: 'GET',\r\n            headers: {\r\n                 'Content-Type': 'application/json'\r\n            }\r\n\r\n        });\r\n        if(response.statusText !== 'OK') {\r\n            throw new Error(response.data.message);\r\n        }\r\n\r\n        return response.data;\r\n    }catch(err) {\r\n        console.log(err);\r\n        return {\r\n            error: err.response.data.message || err.message,\r\n        };\r\n    }\r\n} \n\n//# sourceURL=webpack://frontend/./src/api.js?");
+
+/***/ }),
+
 /***/ "./src/component/Rating.js":
 /*!*********************************!*\
   !*** ./src/component/Rating.js ***!
@@ -334,6 +345,17 @@ eval("\n\nvar bind = __webpack_require__(/*! ./helpers/bind */ \"./node_modules/
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst Rating = {\r\n    render: (props) => {\r\n        if(!props.value) {\r\n            return `<div></div>`\r\n        } \r\n\r\n        return `\r\n            <div class=\"rating\">\r\n                <span>\r\n                    <i class=\"${props.value >= 1 \r\n                    ?'fas fa-star' \r\n                    :props.value >= 0.5\r\n                    ?'fas fa-star-half-alt' \r\n                    :'far fa-star'\r\n                    }\">\r\n                    </i>\r\n                </span>\r\n                <span>\r\n                    <i class=\"\r\n                    ${props.value >= 2 \r\n                    ?'fas fa-star' \r\n                    :props.value >= 1.5\r\n                    ?'fas fa-star-half-alt' \r\n                    :'far fa-star'\r\n                    }\">\r\n                    </i>\r\n                </span>\r\n                <span>\r\n                    <i class=\"\r\n                    ${props.value >= 3 \r\n                    ?'fas fa-star' \r\n                    :props.value >= 2.5\r\n                    ?'fas fa-star-half-alt' \r\n                    :'far fa-star'\r\n                    }\">\r\n                    </i>\r\n                </span>\r\n                <span>\r\n                    <i class=\"\r\n                    ${props.value >= 4 \r\n                    ?'fas fa-star' \r\n                    :props.value >= 3.5\r\n                    ?'fas fa-star-half-alt' \r\n                    :'far fa-star'\r\n                    }\">\r\n                    </i>\r\n                </span>\r\n                <span>\r\n                    <i class=\"\r\n                    ${props.value >= 5 \r\n                    ?'fas fa-star' \r\n                    :props.value >= 4.5\r\n                    ?'fas fa-star-half-alt' \r\n                    :'far fa-star'\r\n                    }\">\r\n                    </i>\r\n                </span>\r\n                <span> ${props.text || ''}</span>\r\n            </div>\r\n        `\r\n    },\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Rating);\n\n//# sourceURL=webpack://frontend/./src/component/Rating.js?");
+
+/***/ }),
+
+/***/ "./src/config.js":
+/*!***********************!*\
+  !*** ./src/config.js ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"apiUrl\": () => (/* binding */ apiUrl)\n/* harmony export */ });\nconst apiUrl = 'http://localhost:3000';\n\n//# sourceURL=webpack://frontend/./src/config.js?");
 
 /***/ }),
 
@@ -377,7 +399,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst ProductScreen = {\r\n    render: () => { \r\n        return `\r\n        <div>Product Screen</div>\r\n        `;\r\n    }\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProductScreen);\n\n//# sourceURL=webpack://frontend/./src/srcreens/ProductScreen.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ \"./src/api.js\");\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ \"./src/utils.js\");\n\r\n\r\n\r\n\r\nconst ProductScreen = {\r\n    render: async () => { \r\n        const request = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.parseRequestUrl)();\r\n        console.log(request);\r\n        const product = await (0,_api__WEBPACK_IMPORTED_MODULE_0__.getProduct)(request.id);\r\n        if(product.error) {\r\n            return `<h1>${product.error}</h1>`;  \r\n        }\r\n        return `<h1>${product.name}</h1>`;  \r\n    }\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProductScreen);\n\n//# sourceURL=webpack://frontend/./src/srcreens/ProductScreen.js?");
 
 /***/ }),
 

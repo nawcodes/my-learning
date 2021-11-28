@@ -1,5 +1,5 @@
 package-lock.json
 frontend/node_modules/*
+frontend/dist/main.js
 node_modules
-
 package-lock.json
