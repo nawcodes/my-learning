@@ -1,21 +1,52 @@
 import { getProduct } from "../api";
 import { getCartItems, setCartItems } from "../localStorage";
-import { parseRequestUrl } from "../utils";
-
+import { parseRequestUrl, rerender } from "../utils";
 const addToCart = (item, forceUpdate = false) => {
         let cartItems = getCartItems();
         const existItem = cartItems.find((x) => x.product === item.product);
         if(existItem) {
-            cartItems = cartItems.map((x) => x.product === existItem.product ? item : x);
+            if(forceUpdate) {
+                cartItems = cartItems.map((x) => x.product === existItem.product ? item : x);
+            }
         } else {
             cartItems = [...cartItems, item];
 
         }
         setCartItems(cartItems);
+        if(forceUpdate) {
+            rerender(CartScreen);
+        }
 };
 
+const removeFromCart = (id) =>  {
+    // array of object
+    setCartItems(getCartItems().filter(x => x.product !== id));
+    if(id === parseRequestUrl().id) {
+        document.location.hash = '/cart';
+    } else {
+        rerender(CartScreen);
+    }
+}
+
 const CartScreen = {
-    after_render: () => {},
+    after_render: () => {
+        const qtySelects = document.getElementsByClassName("qty-select");
+
+        Array.from(qtySelects).forEach( qtySelect => {
+            qtySelect.addEventListener("change", (e) => {
+                const item = getCartItems().find((x) => x.product === qtySelect.id );
+                // is mean ...item selected data, change qty to e.target.value
+                addToCart( {...item, qty: Number(e.target.value)}, true);
+            });
+        });
+
+        const deleteBtn = document.getElementsByClassName('delete-button'); 
+        Array.from(deleteBtn).forEach((deleteBtn) => {
+            deleteBtn.addEventListener('click', () => {
+                removeFromCart(deleteBtn.id);
+            });
+        });
+    },
     render: async () => {
         const request = parseRequestUrl();
         if(request.id) {
@@ -59,8 +90,12 @@ const CartScreen = {
                                 <div>
                                 Qty : 
                                     <select class="qty-select" id="${item.product}">
-                                        <option value="1">1</option>
-                                    </select>
+                                    ${[...Array(item.countInStock).keys()].map((x) => 
+                                        item.qty === x + 1 ? 
+                                        `<option value="${x+1}" selected>${x+1}</option>` :
+                                        `<option value="${x+1}" >${x+1}</option>` 
+                                    )}
+                                </select>
                                     <button type="button" class="delete-button" id="${item.product}">Delete</button>
                                 </div>
                             </div>
@@ -82,7 +117,7 @@ const CartScreen = {
                     </button>
             </div>
         </div>
-        <div>${getCartItems().length}</div>`;
+        `;
     }
 
     
