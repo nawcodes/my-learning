@@ -1,6 +1,8 @@
 import { getProduct } from "../api";
 import { getCartItems, setCartItems } from "../localStorage";
 import { parseRequestUrl, rerender } from "../utils";
+
+\
 const addToCart = (item, forceUpdate = false) => {
         let cartItems = getCartItems();
         const existItem = cartItems.find((x) => x.product === item.product);
@@ -9,13 +11,16 @@ const addToCart = (item, forceUpdate = false) => {
                 cartItems = cartItems.map((x) => x.product === existItem.product ? item : x);
             }
         } else {
+            // is mean old cart and new data on set again.
             cartItems = [...cartItems, item];
-
         }
+
         setCartItems(cartItems);
+
         if(forceUpdate) {
             rerender(CartScreen);
         }
+
 };
 
 const removeFromCart = (id) =>  {
@@ -31,7 +36,6 @@ const removeFromCart = (id) =>  {
 const CartScreen = {
     after_render: () => {
         const qtySelects = document.getElementsByClassName("qty-select");
-
         Array.from(qtySelects).forEach( qtySelect => {
             qtySelect.addEventListener("change", (e) => {
                 const item = getCartItems().find((x) => x.product === qtySelect.id );
@@ -89,7 +93,9 @@ const CartScreen = {
                                 </div>
                                 <div>
                                 Qty : 
+
                                     <select class="qty-select" id="${item.product}">
+
                                     ${[...Array(item.countInStock).keys()].map((x) => 
                                         item.qty === x + 1 ? 
                                         `<option value="${x+1}" selected>${x+1}</option>` :
@@ -97,7 +103,7 @@ const CartScreen = {
                                     )}
                                 </select>
                                     <button type="button" class="delete-button" id="${item.product}">Delete</button>
-                                </div>
+                                </div> 
                             </div>
                             <div class="cart-price">
                                 $${item.price}
@@ -119,8 +125,6 @@ const CartScreen = {
         </div>
         `;
     }
-
-    
 };
 
 export default CartScreen;
