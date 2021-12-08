@@ -2,6 +2,7 @@ import { getProduct } from "../api";
 import { getCartItems, setCartItems } from "../localStorage";
 import { parseRequestUrl, rerender } from "../utils";
 
+\
 const addToCart = (item, forceUpdate = false) => {
         let cartItems = getCartItems();
         const existItem = cartItems.find((x) => x.product === item.product);
@@ -35,7 +36,6 @@ const removeFromCart = (id) =>  {
 const CartScreen = {
     after_render: () => {
         const qtySelects = document.getElementsByClassName("qty-select");
-        
         Array.from(qtySelects).forEach( qtySelect => {
             qtySelect.addEventListener("change", (e) => {
                 const item = getCartItems().find((x) => x.product === qtySelect.id );
@@ -93,7 +93,9 @@ const CartScreen = {
                                 </div>
                                 <div>
                                 Qty : 
-                                <select class="qty-select" id="${item.product}">
+
+                                    <select class="qty-select" id="${item.product}">
+
                                     ${[...Array(item.countInStock).keys()].map((x) => 
                                         item.qty === x + 1 ? 
                                         `<option value="${x+1}" selected>${x+1}</option>` :
@@ -120,7 +122,8 @@ const CartScreen = {
                         Procced to Checkout
                     </button>
             </div>
-        </div>`;
+        </div>
+        `;
     }
 };
 
