@@ -2,7 +2,6 @@ import { getProduct } from "../api";
 import { getCartItems, setCartItems } from "../localStorage";
 import { parseRequestUrl, rerender } from "../utils";
 
-\
 const addToCart = (item, forceUpdate = false) => {
         let cartItems = getCartItems();
         const existItem = cartItems.find((x) => x.product === item.product);
