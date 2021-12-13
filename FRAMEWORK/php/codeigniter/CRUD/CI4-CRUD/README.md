@@ -6,11 +6,11 @@
     - CODEGNITER 4
     - XAMPP, WAMP / LAMP
 # SESI 2 "PENGINSTALAN FRAMEWORK"
-    -Install Framework CI-4
-        - Install Lewat Git / CMD : 
-            - BUKA CMD dan lokasikan penempatan install project. (contoh ketik pada terminal: cd C:\xampp\htdocs ) 
-            - lalu ketik pada CMD = composer create-project codeigniter4/appstarter nama_aplikasi --no-dev 
-            - CATATAN! : harus terinstall COMPOSER : https://getcomposer.org/download/
+    * Install Framework CI-4
+        * Install Lewat Git / CMD : 
+            1. BUKA CMD dan lokasikan penempatan install project. (contoh ketik pada terminal: cd C:\xampp\htdocs ) 
+            2. lalu ketik pada CMD = composer create-project codeigniter4/appstarter nama_aplikasi --no-dev 
+            3. CATATAN! : harus terinstall COMPOSER : https://getcomposer.org/download/
 # SESI 3 "KONFIGURASI AWAL"
     1. edit env menjadi .env
         - mohon di baca pada .env pada CI4-CRUD dan di pahami!.
