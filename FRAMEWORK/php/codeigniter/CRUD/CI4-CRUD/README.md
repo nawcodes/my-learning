@@ -18,4 +18,21 @@
     2. jalankan xamp/ lamp/ wamp
     3. ketik pada terminal vscode / cmd / git bash : php spark serve   
         - perintah ini untuk menjalankan aplikasi kita pada web
-# SESI 4 ""
+# SESI 4 "KONFIGURASI DATABASE"
+    1. buat database melalui : pilih salah satu
+        a. membuat database manual di localhost/phpmyadmin
+        b. membuat database dengan fitur CI 
+            1. ketik pada terminal 
+                - php spark db:create nama_database
+                - boleh di check di phpmyadmin bila sudah menjalankan perintah tsb.
+            2. membuat migration untuk setiap table pada database yang sudah di buat.
+                - php spark make:migration nama_tabel 
+                - boleh dilihat pada CI4-CRUD pada folder App/Database/Migrations/tanggal_nama_tabel
+                - lihat fungsi up dan pahami
+                - lihat fungsi down dan pahami
+    2. Jalankan perintah untuk membuat tabel tersebut.
+        - php spark migration     
+        - boleh dicheck pada phpmyadmin namaDb/namaTabel  
+    3. Mohon Baca .gitKeep untuk melihat pengertian fungsi setiap folder di folder migration
+
+# SESI 5 "" 
