@@ -13,8 +13,7 @@ class Poeples extends Seeder
         $faker = \Faker\Factory::create('id_ID');
         for ($i = 0; $i < 50; $i++) {
             $data = [
-                'uuid' => $faker->randomNumber(10),
-                'name' => $faker->name(),
+                'uuid' => date('His') . $i + $i,
                 'email' => $faker->email(),
                 'image' => $faker->imageUrl(),
                 'phone' => $faker->phoneNumber(),
