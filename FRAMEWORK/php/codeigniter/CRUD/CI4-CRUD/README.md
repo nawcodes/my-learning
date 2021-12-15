@@ -34,5 +34,13 @@
         - php spark migration     
         - boleh dicheck pada phpmyadmin namaDb/namaTabel  
     3. Mohon Baca .gitKeep untuk melihat pengertian fungsi setiap folder di folder migration
-
+    4. TAMBAHAN: BILA INGIN MENGGUNAKAN SEED UNTUK MEMBUAT RATUSAN DATA SEKALIGUS BOLEH MENGIKUTI LANGKAH INI
+        - pastikan terminal sudah dilokasi aplikasi anda berada
+        - dan ketik pada terminal : composer require --dev fakerphp/faker | seed lebih mudah dengan aplikasi pihak ketiga
+        - setelah terdownload selanjutnya, ketik perintah pada terminal : php spark make:seed nama_seed
+        - boleh di check pada folder app/database/migration/seeds
+        - boleh dilihat scriptnya dan pahami, untuk lebih lanjutnya silahkan baca dokumentasi faker : https://github.com/fzaninotto/Faker
+        - kasusnya saya menggunakan model untuk menginsert data , bila tidak memakai seed boleh langsung query SQL native / query bawaan codeigniter, untuk modelnya silahkan di check pada App/Model/poeples dan pahami
+        -Untuk memasukan data lebih dari 100 tsb, ketik perintah pada terminal : php spark db:seed nama_seed 
+        - pastikan tidak ada error dan check pada database 
 # SESI 5 "" 
