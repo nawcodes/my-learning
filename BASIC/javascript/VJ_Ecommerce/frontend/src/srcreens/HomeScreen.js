@@ -1,14 +1,17 @@
 import axios from 'axios';
 import Rating from '../component/Rating';
+import { hideLoading, showLoading } from '../utils';
 const BASEURL = 'http://localhost:3000/';
 const homeScreen = {
     render: async () => {
+        showLoading();
         const response = await axios({
             url: BASEURL + 'api/products',
             headers: {
                 "Content-type": "application/json",
             }
         });
+        hideLoading();
         if(!response || response.statusText !== 'OK') {
             return `<div>Error in gettingg data</div>`;
         }
