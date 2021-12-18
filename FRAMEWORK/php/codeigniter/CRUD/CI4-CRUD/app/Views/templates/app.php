@@ -40,9 +40,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <?= $this->renderSection('content'); ?>
-                </div>
+                <?= $this->renderSection('content'); ?>
                 <!-- /.container-fluid -->
 
                 <!-- End of Main Content -->
@@ -100,8 +98,13 @@
         <!-- Page level plugins -->
         <script src="assets/boostrapVendor/vendor/chart.js/Chart.min.js"></script>
 
+        <!-- Page level plugins -->
+        <script src="assets/boostrapVendor/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="assets/boostrapVendor/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
         <!-- Page level custom scripts -->
         <script src="assets/boostrapVendor/js/demo/chart-area-demo.js"></script>
+        <script src="assets/boostrapVendor/js/demo/datatables-demo.js"></script>
         <script src="assets/boostrapVendor/js/demo/chart-pie-demo.js"></script>
 
 </body>

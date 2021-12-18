@@ -14,6 +14,7 @@ class Poeples extends Seeder
         for ($i = 0; $i < 50; $i++) {
             $data = [
                 'uuid' => date('His') . $i + $i,
+                'name' => $faker->name,
                 'email' => $faker->email(),
                 'image' => $faker->imageUrl(),
                 'phone' => $faker->phoneNumber(),
