@@ -1,5 +1,11 @@
-<?= $this->extend('templates/app'); ?>
+<!--
+    FILE INI ADALAH TAMPILAN CONTENT YANG SUDAH DIPISAHKAN DARI FILE ASLINYA.
+ -->
 
+<!-- extend adalah layaknya file ini di export untuk bisa di panggil di file yang lainnya.   -->
+<?= $this->extend('templates/app'); ?> 
+
+<!-- section adalah untuk membungkus file di dalamnya  -->
 <?= $this->section('content'); ?>
 <div class="container-fluid">
 
@@ -43,6 +49,7 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                        <!-- perulangan dari $data['users'] yang di kirim di controller -->
                         <?php $no = 1;
                         foreach ($users as $row => $u) : ?>
                             <tr>
@@ -71,3 +78,4 @@
 
 
 <?= $this->endSection('content'); ?>
+<!-- endSection adalah penutup bungkus dari html di atas. -->

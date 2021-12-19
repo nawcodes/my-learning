@@ -43,4 +43,23 @@
         - kasusnya saya menggunakan model untuk menginsert data , bila tidak memakai seed boleh langsung query SQL native / query bawaan codeigniter, untuk modelnya silahkan di check pada App/Model/poeples dan pahami
         -Untuk memasukan data lebih dari 100 tsb, ketik perintah pada terminal : php spark db:seed nama_seed 
         - pastikan tidak ada error dan check pada database 
-# SESI 5 "" 
+# SESI 5 "MEMBUAT CONTROLLER & MODEL & SETTING ROUTES & MENAMPILKAN HALAMAN PERTAMA"
+    1. Bila kalian tidak mengikuti SESI 4 no 4. kalian boleh memasukan data manual pada php myadmin.
+    2. membuat Contoroller melalui terminal
+        - ketik: php spark make:controller Dashboard
+    3. membuat Model melalui terminal
+        - ketik: php spark make:model UsersModel 
+        - kasusnya nanti di controller dashboard kita akan handle data users
+        - silahkan lihat pada App/Model/UsersModel.php untuk melihat konfigurasi yang saya gunakan | mohon di pahami.
+    4. mengatur halaman view 
+        - note: halaman view di buat secara manual pada folder App/Views
+        - membuat folder dashboard 
+            - lalu membuat file bernama index.php, silahkan bila ingin copy paste, pastikan kalian memaminya
+        - membuat folder tempaltes 
+            - lalu membuat file bernama app.php & sidebar.php & topbar.php, silahkan bila ingin copy paste, pastikan kalian memaminya
+        - kasusnya membuat halaman view disini yaitu di namai Templating, membuat file secara terpisah agar mudah dalam debuging dan implementasi.
+    5. buka controller yang tadi sudah di buat.
+        - silahkan pelajari dan pahami
+    6. buka file  App/Config/Routes.php
+        - silahkan pelajari dan pahami
+    7. 
