@@ -32,8 +32,17 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
+
+// SESI 5
 // akses ini adalah akses halaman ketika pertama kali dibuka. 
 $routes->get('/', 'Dashboard::index'); // buka Controller Dashboard dan method index sebagai handle tampilan nya.
+// AKHIR SESI 6
+
+
+
+// SESI
+$routes->get('data/create', 'Dashboard::createForm');
+$routes->post('data/save', 'Dashboard::save');
 
 /*
  * --------------------------------------------------------------------
