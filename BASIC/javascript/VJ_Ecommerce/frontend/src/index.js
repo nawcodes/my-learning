@@ -7,6 +7,8 @@ import SigninScreen from './srcreens/SigninScreen.js';
 import Header from './component/Header.js';
 import RegisterScreen from './srcreens/RegisterScreen.js';
 import ProfileScreen from './srcreens/ProfileScreen.js';
+import ShippingScreen from './srcreens/ShippingScreen.js';
+import PaymentScreen from './srcreens/PaymentScreen.js';
 
 
 
@@ -19,10 +21,12 @@ const routes = {
     '/signin' : SigninScreen,
     '/register' : RegisterScreen,
     '/profile' : ProfileScreen,
+    '/shipping' : ShippingScreen,
+    '/payment' : PaymentScreen,
 }
 
 const router = async () => {
-    showLoading();
+    // showLoading();
     const request = parseRequestUrl();
     
     const parseUrl = 
@@ -36,7 +40,7 @@ const router = async () => {
     const main = document.getElementById('main-container');
     main.innerHTML = await screen.render();
     if(screen.after_render()) await screen.after_render(); 
-    hideLoading();
+    // hideLoading();
 }
 
 window.addEventListener('load', router);
