@@ -19,7 +19,7 @@ const ShippingScreen = {
     render: () => {
         const {name} = getUserInfo();
         if(!name) {
-            document.location.hash = '/';
+            document.location.hash = '/signin';
         }
         const {address, city, postalCode, country} = getShipping();
 

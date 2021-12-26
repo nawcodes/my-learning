@@ -44,7 +44,7 @@ export const showMessage = (message, callback) => {
 export const redirectUser = () => {
     if(getCartItems().length !== 0) {
         document.location.hash = '/shipping';
-    }else {
+    } else {
         document.location.hash = '/';
     }
 }
