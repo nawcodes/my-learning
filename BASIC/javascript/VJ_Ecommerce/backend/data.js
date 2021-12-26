@@ -1,7 +1,7 @@
 export default  {
     products: [
         {
-            _id:'1',
+            _id:'111111111111111111111111',
             name:'Table dyznis',
             category:'Tables',
             image: '/images/product1.png',
@@ -12,7 +12,7 @@ export default  {
             countInStock: 6,           
         },
         {
-            _id:'2',
+            _id:'222222222222222222222222',
             name:'Repsont Da',
             category:'Tables',
             image: '/images/product2.png',
