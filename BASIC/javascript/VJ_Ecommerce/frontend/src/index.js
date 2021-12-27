@@ -10,6 +10,7 @@ import ProfileScreen from './srcreens/ProfileScreen.js';
 import ShippingScreen from './srcreens/ShippingScreen.js';
 import PaymentScreen from './srcreens/PaymentScreen.js';
 import placeOrderScreen from './srcreens/PlaceOrderScreen.js';
+import OrderScreen from './srcreens/OrderScreen';
 
 
 
@@ -17,6 +18,7 @@ import placeOrderScreen from './srcreens/PlaceOrderScreen.js';
 const routes = {
     '/': homeScreen,
     '/product/:id' : ProductScreen,
+    '/order/:id' : OrderScreen,
     '/cart/:id' : CartScreen,
     '/cart' : CartScreen, 
     '/signin' : SigninScreen,
