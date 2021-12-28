@@ -5,7 +5,7 @@ export default  {
             name:'Table dyznis',
             category:'Tables',
             image: '/images/product1.png',
-            price: 6023,
+            price: 100,
             brand: 'DIC',
             rating: 5.0,
             numReviews: 10,

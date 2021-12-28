@@ -27,6 +27,11 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
+app.use('/api/paypal/clientId', (req, res, next) => {
+    res.send({
+        clientId: config.PAYPAL_CLIENT_ID
+    })
+});
 
 app.get("/api/products", (req, res) => {
     res.send(data.products);
