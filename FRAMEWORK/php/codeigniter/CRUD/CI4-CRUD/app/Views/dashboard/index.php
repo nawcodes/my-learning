@@ -7,13 +7,12 @@
 
 <!-- section adalah untuk membungkus file di dalamnya  -->
 <?= $this->section('content'); ?>
-<div class="container-fluid">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-2 text-gray-800"><?= $subtitle ?></h1>
         <div>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Create</a>
+            <a href="/data/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Create</a>
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Print Report</a>
         </div>
     </div>
@@ -73,7 +72,6 @@
             </div>
         </div>
     </div>
-</div>
 
 
 
