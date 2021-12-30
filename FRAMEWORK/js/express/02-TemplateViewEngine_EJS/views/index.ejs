@@ -1,0 +1,23 @@
+
+
+    <!-- ejs -->
+    <% const name = 'rifalnurjamil' %> 
+    <h1>Hello World HTML</h1>
+    <h2>
+    Hello <%= name %> 
+    </h2>
+    <h3>We Learn <%= title %> </h3>
+    <h4>Daftar Mahasiswaz</h4>
+
+    <% if (mahasiswa.length < 1) { %>
+     <p>Data mahasiswa masih kosong</p>
+
+    <% }else{ %>
+
+    <% mahasiswa.forEach(m => { %>
+    <ul>
+        <li>Nama : <%= m.nama %> </li>
+        <li>Email : <%= m.email %></li>
+    </ul>
+    <% }) %>
+    <% } %> 
