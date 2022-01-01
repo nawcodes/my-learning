@@ -1,13 +1,36 @@
 const express = require('express');
+const morgan = require('morgan');
 const app = express()
 const port = 3000
 
 // layouting 
+// third party middle ware
 const expressLayouts = require('express-ejs-layouts');
-
+// end third party middleware
 
 app.use(expressLayouts);
+app.use(morgan('dev'));
 app.set('view engine', 'ejs');
+
+
+
+
+// 03-StartMiddleWare
+//http://expressjs.com/en/guide/using-middleware.html#using-middleware
+ 
+
+
+  // Built In MiddleWare
+app.use(express.static('public'));
+// fungsi ini di khususkan untuk file akses yang akan di public kan, gambar, etc
+  // End Built In MiddleWare
+
+app.use((res,req,next) => {
+  console.log('Time:', Date.now());
+  next(); // next mencari path sesuai dengan url yang di akses
+});
+
+// End 03-StartMiddleWare
 
 
 app.get('/', (req, res) => {
@@ -41,14 +64,20 @@ res.render('index',
 
 })
 
-app.get('/about', (req, res) => {
+app.get('/about', (req, res, next) => {
 
-res.render('about', {
+  res.render('about', {
 
-  layout: 'layouts/main-layout',
-  title: 'About Page',
+    layout: 'layouts/main-layout',
+    title: 'About Page',
 
-});
+  });
+
+  // path ini adalah headers
+  // setelah next dijalankan akan menuju headers 404
+  // error karena tidak bisa mengirim 2 buah headers
+  // solved: kecuali salah satu route tidak merender
+  // next();  
 
 
 })
