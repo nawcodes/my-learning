@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Contact List</h2>
+            <table class="table mt-3">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    <% if (contacts.length === 0) { %>
+                    <tr>
+                        <td colspan="4">
+                            <div class="alert alert-primary" role="alert">
+                                Contact have not been created yet, You must <a href="/contact" class="alert-link">+ Add Contact</a> first.
+                            </div>
+                        </td>
+                    </tr>
+                    <% } %>
+                    
+                    <% contacts.forEach((c, i) => { %>      
+                    <tr>
+                        <th scope="row"><%= i++ + 1;  %> </th>
+                        <td><%= c.nama %></td>
+                        <td><%= c.nohp %></td>
+                        <td>
+                            <a href="/contact/<%= c.nama %>" class="badge rounded-pill bg-success"> <i class="bi bi-info-circle"></i> detail </i></a>        
+                        </td>
+                    </tr> 
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
