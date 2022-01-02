@@ -9,10 +9,6 @@ app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
 
-
-
-
-
 app.use(express.static('public'));
 
 
@@ -20,13 +16,13 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
 
 
-res.render('index', 
-{
-  name: 'rifal nurjamil',
-  title: 'ExpressWithEJS',
-  mahasiswa,
-  layout: 'layouts/main-layout'
-});
+  res.render('index', 
+  {
+    name: 'rifal nurjamil',
+    title: 'ExpressWithEJS',
+    mahasiswa,
+    layout: 'layouts/main-layout'
+  });
 
 })
 
