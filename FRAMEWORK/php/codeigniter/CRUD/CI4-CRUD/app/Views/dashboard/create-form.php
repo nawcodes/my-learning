@@ -2,7 +2,7 @@
 <?= $this->section('content'); ?>
 
 <div class="col-lg-12 mb-3">
-    <form action="/data/save" method="post">
+    <form action="/data/save" method="post" enctype="multipart/form-data">
         <?= csrf_field(); ?>
         <div class="row">
             <div class="col-lg">
@@ -23,6 +23,14 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Phone</label>
                     <input type="number" class="form-control" name="phone" id="phone">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="mb-3">
+                    <label for="formFileSm" class="form-label">Photo</label>
+                    <input class="form-control form-control-sm" name="image" id="image" type="file">
                 </div>
             </div>
         </div>

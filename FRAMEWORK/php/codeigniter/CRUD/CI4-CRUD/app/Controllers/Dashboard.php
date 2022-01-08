@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UsersModel;
+use CodeIgniter\Files\File;
 
 class Dashboard extends BaseController
 {
@@ -36,12 +37,22 @@ class Dashboard extends BaseController
     }
 
     public function save() {
+
+        $img = $this->request->getFile('image');
+
+        if($img->getError() == 4 ) {
+            $imageName = 'default.png';      
+        } else {
+            $imageName = $this->request->getVar('name') . '-' . $img->getRandomName();
+            $img->move('assets/image', $imageName);
+        }
+
         $uuid = date('His') . rand(10, 100);
         $data = [
             'uuid' => $uuid,
             'name' => $this->request->getVar('name'),
             'email' => $this->request->getVar('email'),
-            'image' => '-',
+            'image' => $imageName,
             'phone' => $this->request->getVar('phone'),
         ];
 

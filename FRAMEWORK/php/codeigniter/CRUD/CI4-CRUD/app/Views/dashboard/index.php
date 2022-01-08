@@ -54,7 +54,7 @@
                             <tr>
                                 <th><?= $no++ ?></th>
                                 <th class="text-center">
-                                    <img src="<?= $u['image'] ?>" alt="" class=" rounded" width="50">
+                                    <img src="/assets/image/<?= $u['image'] ?>" alt="" class=" rounded" width="50">
                                 </th>
                                 <th><?= $u['uuid'] ?></th>
                                 <th><?= $u['name'] ?></th>

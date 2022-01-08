@@ -1,6 +1,5 @@
 # MY IGNORE
-composer.json
-composer.lock
+public/assets/image
 
 #-------------------------
 # Operating Specific Junk Files
