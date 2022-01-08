@@ -4,11 +4,17 @@
   "description": "1. Create Folder Structure\r     1. create root folder as VJS E-commerce\r     2. add public \r     3. create src folder in frontend\r     4. create index.html with heading VJS E-commerce in src\r     5. run npm init in frontend folder \r     6. npm install live-sercer \r     7. add start command as live-server src --verbose --\r     8. run npm start",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "live-server src/index --verbose"
   },
   "author": "nawawi",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.2"
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "express-ejs-layouts": "^2.5.1"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
   }
 }
