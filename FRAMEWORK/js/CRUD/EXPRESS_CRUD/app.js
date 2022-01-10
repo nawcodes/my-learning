@@ -1,7 +1,26 @@
 // call requirement
-const express = require('express');
-const cors = require('cors');
-const expressLayouts = require('express-ejs-layouts');
+const express           = require('express'),
+      cors              = require('cors'),
+      expressLayouts    = require('express-ejs-layouts')
+
+
+const config = require('./lib/config/config');
+const mongoose = require('mongoose');
+
+
+
+mongoose.connect('mongodb://127.0.0.1:27017/ex_data', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+    console.log('Connected to mongodb');
+}).catch(err => {
+    console.log(err);
+});
+
+
+
+
 
 
 // declare requirement
@@ -12,6 +31,7 @@ const app = express();
 
 // use requirement after declare
 app.set('view engine', 'ejs');
+app.set('views', './src/views');
 app.use(cors());
 app.use(expressLayouts);
 app.use(express.static('public'));
