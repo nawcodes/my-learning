@@ -52,15 +52,69 @@ client.connect((error, client) => {
     //     console.log(result);
     // }));
     // find specific
-    console.log( db.collection('mahasiswa').find(
-        { 
-            //nama : 'Nawi'
-            _id : ObjectID('61dc54279b5d8c19239599a7')
+    // console.log( db.collection('mahasiswa').find(
+    //     { 
+    //         //nama : 'Nawi'
+    //         _id : ObjectID('61dc54279b5d8c19239599a7')
         
-        }
-    ).toArray((err, result) => {
-        console.log(result);
-    }));
+    //     }
+    // ).toArray((err, result) => {
+    //     console.log(result);
+    // }));
+    
+    // update 
+    // const updatePromise = db.collection('mahasiswa').updateOne(
+    //     {
+    //         _id : ObjectID('61db037195ba3d880c33c385')
+    //     }, 
+    //     {
+    //         $set : {
+    //             nama : "rifalnurjamils"
+    //         }
+    //     }
+    // )
+
+
+    // updatePromise.then((result) => {
+    //     console.log(result);
+    // }).catch((error) => {
+    //     console.log(error);
+    // })
+
+    // update many
+
+    // db.collection('mahasiswa').updateMany(
+    //     {
+    //         nama: "Nawi astnawes",
+    //     },
+    //     {
+    //         $set: {
+    //             nama: "Nawis",
+    //         },
+    //     }
+    // )
+
+    // delete 
+    // db.collection('mahasiswa').deleteOne(
+    //     {
+    //         _id: ObjectID('61dc54279b5d8c19239599a7')
+    //     }
+    // ).then((result) => {
+    //     console.log(result);
+    // }).catch((err) => {
+    //     console.log(err);
+    // }) 
+
+    // delete many
+    // db.collection('mahasiswa').deleteMany(
+    //     {
+    //         nama: "Nawi "
+    //     }
+    // ).then((result) => {
+    //     console.log(result);
+    // }).catch((err) => {
+    //     console.log(err);
+    // }) 
 
 });
 
