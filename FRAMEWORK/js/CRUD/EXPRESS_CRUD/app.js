@@ -1,31 +1,16 @@
 // call requirement
 const express           = require('express'),
       cors              = require('cors'),
-      expressLayouts    = require('express-ejs-layouts')
+      expressLayouts    = require('express-ejs-layouts'),
+      mongoose = require('mongoose')
 
-
-const config = require('./lib/config/config');
-const mongoose = require('mongoose');
-
-
-
-mongoose.connect('mongodb://127.0.0.1:27017/ex_data', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log('Connected to mongodb');
-}).catch(err => {
-    console.log(err);
-});
-
-
-
-
+import config from './src/config/config';
 
 
 // declare requirement
 const port = 3000;
 const app = express();
+
 
 
 
@@ -36,6 +21,15 @@ app.use(cors());
 app.use(expressLayouts);
 app.use(express.static('public'));
 
+// database handle
+mongoose.connect(config.MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then((result) => {
+    console.log('Connected to mongodb');
+}).catch(err => {
+    console.log(err);
+});
 
 
 // routing handle 
