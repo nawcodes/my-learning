@@ -1,17 +1,13 @@
 // call requirement
 const express           = require('express'),
       cors              = require('cors'),
-      expressLayouts    = require('express-ejs-layouts'),
-      mongoose = require('mongoose')
+      expressLayouts    = require('express-ejs-layouts')
 
-import config from './src/config/config';
 
 
 // declare requirement
 const port = 3000;
 const app = express();
-
-
 
 
 // use requirement after declare
@@ -21,15 +17,7 @@ app.use(cors());
 app.use(expressLayouts);
 app.use(express.static('public'));
 
-// database handle
-mongoose.connect(config.MONGODB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then((result) => {
-    console.log('Connected to mongodb');
-}).catch(err => {
-    console.log(err);
-});
+
 
 
 // routing handle 
