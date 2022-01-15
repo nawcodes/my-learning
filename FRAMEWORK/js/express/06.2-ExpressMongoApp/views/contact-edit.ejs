@@ -10,7 +10,8 @@
                     </ul>
                 </div>
             <% } %>
-            <form method="post" action="/contact/update">
+            <form method="post" action="/contact?_method=PUT">
+                <input type="hidden" name="_id" value="<%= contact._id  %>">
                 <input type="hidden" name="nama_hidden" value="<%= contact.nama_hidden || contact.nama %>">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>

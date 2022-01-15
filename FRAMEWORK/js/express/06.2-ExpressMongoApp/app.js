@@ -1,5 +1,6 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
+const methodOverride = require('method-override');
 
 require('./utils/db');
 
@@ -29,6 +30,7 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 
 
 
@@ -80,8 +82,10 @@ app.get('/contact', async (req, res, next) => {
 
 app.post('/contact', 
   [
-    body('nama').custom((value) => {
-      const duplicate = checkDuplicate(value);
+    body('nama').custom( async (value) => {
+      const duplicate = await Contact.findOne({
+        nama: value
+      })
       if(duplicate) {
         throw new Error('Nama kontak sudah digunakan');
       }
@@ -99,26 +103,39 @@ app.post('/contact',
         errors: errors.array()
       })
     }else {
-      addContact(req.body);
-      req.flash('msg', 'Data contact has been saved');
-      res.redirect('/contact');
+      Contact.insertMany(req.body, (err, result) => {
+        req.flash('msg', 'Data contact has been saved');
+        res.redirect('/contact');
+      });
     }
 });
 
-app.get('/contact/delete/:nama', (req, res) => {
-  const contact = findContact(req.params.nama);
-  if(!contact) {
-    res.status(404);
-    res.send('404');
-  } else {
-    deleteContact(req.params.nama);
-    req.flash('msg', 'Contact has been deleted');
-    res.redirect('/contact');
-  }
+// app.get('/contact/delete/:nama', async (req, res) => {
+//   const contact = await Contact.findOne({nama: req.params.nama});
+//   if(!contact) {
+//     res.status(404);
+//     res.send('404');
+//   } else {
+//     Contact.deleteOne({
+//       _id: contact._id
+//     }).then((result) => {
+//       req.flash('msg', 'Contact has been deleted');
+//       res.redirect('/contact');
+//     })
+//   }
+// });
+
+app.delete('/contact' , async (req, res) => {
+    Contact.deleteOne({
+      nama: req.body.nama
+    }).then((result) => {
+      req.flash('msg', 'Contact has been deleted');
+      res.redirect('/contact');
+    })
 });
 
-app.get('/contact/edit/:nama', (req, res, next) => {
-  const contact = findContact(req.params.nama);
+app.get('/contact/edit/:nama', async (req, res, next) => {
+  const contact = await Contact.findOne({nama: req.params.nama});
   res.render('contact-edit', {
     title : 'Contact Form',
     layout: 'layouts/main-layout',
@@ -127,9 +144,9 @@ app.get('/contact/edit/:nama', (req, res, next) => {
 });
 
 
-app.post('/contact/update', [
-    body('nama').custom((value, {req}) => {
-      const duplicate = checkDuplicate(value);
+app.put('/contact', [
+    body('nama').custom(async(value, {req}) => {
+      const duplicate = await Contact.findOne({nama: value});
       if(value !== req.body.nama_hidden && duplicate) {
         throw new Error('Nama kontak sudah digunakan');
       }
@@ -148,9 +165,22 @@ app.post('/contact/update', [
       });
       
     }else {
-      updateContact(req.body);
-      req.flash('msg', 'Data contact has been updated');
-      res.redirect('/contact');
+      console.log(req.body);
+      Contact.updateOne({
+        _id: req.body._id
+      },
+      {
+        $set: {
+          nama: req.body.nama,
+          email: req.body.email,
+          nohp: req.body.nohp,
+        },
+      }
+      ).then((result) => {
+        console.log(result);
+        req.flash('msg', 'Data contact has been updated');
+        res.redirect('/contact');
+      })
     }
 });
 
