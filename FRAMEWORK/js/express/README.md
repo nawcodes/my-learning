@@ -9,3 +9,6 @@ locationApp/{InTerminal: node app}
     - run as admin powershell: {inTerminal: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser, Then (Y)}
 ## using nodemon 
 - install nodemon:{InTerminal: nodemon app}
+
+
+## If You Wish To Run App With Single File Without App.js 

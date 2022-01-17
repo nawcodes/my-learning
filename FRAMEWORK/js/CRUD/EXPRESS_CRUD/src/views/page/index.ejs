@@ -38,9 +38,9 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        
+                        <% data.forEach(result => { let numb = 1; %> 
                             <tr>
-                                <th></th>
+                                <th><%= numb++ %> </th>
                                 <th class="text-center">
                                     <img src="" alt="" class=" rounded" width="50">
                                 </th>
@@ -54,6 +54,7 @@
                                     <a href="" class="text-danger"><i class="fas fa-trash"></i></a>
                                 </th>
                             </tr>
+                        <% }) %>
                     </tbody>
                 </table>
             </div>
