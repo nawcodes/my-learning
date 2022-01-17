@@ -14,25 +14,25 @@ mongoose.connect(config.MONGODB_URL, {
 
 
 // Schema 
-const Exdata = mongoose.model('mahasiswa', {
-    'email' : {
-        type: String,
-    },
-    'nama' : {
-        type: String,
-    },
-}, 'mahasiswa' );
+// const Exdata = mongoose.model('mahasiswa', {
+//     'email' : {
+//         type: String,
+//     },
+//     'nama' : {
+//         type: String,
+//     },
+// }, 'mahasiswa' );
 
 
 
-const exData1 = new Exdata({
-    nama : 'haha',
-    email: 'haha@gmail.com',
-})
+// const exData1 = new Exdata({
+//     nama : 'haha',
+//     email: 'haha@gmail.com',
+// })
 
 
-exData1.save().then((result) => {
-    console.log(result);
-}).catch((err) => {
-    console.log(err);
-})
+// exData1.save().then((result) => {
+//     console.log(result);
+// }).catch((err) => {
+//     console.log(err);
+// })
