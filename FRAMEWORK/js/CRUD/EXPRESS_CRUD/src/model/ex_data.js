@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 
-
 const Person = mongoose.model('Person', {
     uuid: {
         type: String,
-        required: true,
     },
     name: {
         type: String,
@@ -20,9 +18,8 @@ const Person = mongoose.model('Person', {
     },
     image: {
         type: String,
-        required: false,
     }, 
-})
+});
 
 
 module.exports = Person;
