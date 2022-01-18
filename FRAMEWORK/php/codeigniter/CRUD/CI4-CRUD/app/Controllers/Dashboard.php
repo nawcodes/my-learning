@@ -176,7 +176,7 @@ class Dashboard extends BaseController
         $img = $this->request->getFile('image');
 
         if($img == null || $img->getError() == 4) {
-            $img = $find->image;
+            $imageName = $find->image;
         }else{
             $imageName = $this->request->getVar('name') . '-' . $img->getRandomName();
             $img->move('assets/image', $imageName);
@@ -189,7 +189,7 @@ class Dashboard extends BaseController
                 'name' => $this->request->getVar('name'),
                 'email' => $this->request->getVar('email'),
                 'phone' => $this->request->getVar('phone'),
-                'image' => $img,
+                'image' => $imageName,
         ]; 
 
         $this->users->update($uuid, $data);
@@ -201,6 +201,10 @@ class Dashboard extends BaseController
 
 
     public function delete($uuid) {
+        if($_POST['_method'] != 'DELETE') {
+            session()->setFlashdata('error', 'The data cannot been founded because you are was changing the specific data, Try again!');
+            return redirect()->to('/');
+        } 
         $find = (object) $this->users->find($uuid);
         if(!$find) {
             session()->setFlashdata('notfound', 'Cannot found the data');

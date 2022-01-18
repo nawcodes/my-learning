@@ -45,6 +45,7 @@ $routes->get('data/create', 'Dashboard::createForm');
 $routes->get('data/edit/(:num)', 'Dashboard::editForm/$1');
 $routes->post('data/save', 'Dashboard::save');
 $routes->post('data/update/(:num)', 'Dashboard::update/$1');
+$routes->delete('data/(:num)', 'Dashboard::delete/$1');
 
 /*
  * --------------------------------------------------------------------

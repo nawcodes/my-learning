@@ -71,7 +71,7 @@
                             <th><?= $u['name'] ?></th>
                             <th><?= $u['email'] ?></th>
                             <th><?= $u['phone'] ?></th>
-                            <form action="/data/{$u['uuid']}" method="post" class="">
+                            <form action="/data/<?= $u['uuid'] ?>" method="post" class="">
                                 <?= csrf_field(); ?>
                                 <input type="hidden" name="_method" value="DELETE">
                                 <th class="text-center">
