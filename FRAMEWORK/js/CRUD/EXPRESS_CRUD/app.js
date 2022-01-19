@@ -2,7 +2,9 @@
 const express           = require('express'),
       cors              = require('cors'),
       expressLayouts    = require('express-ejs-layouts'),
-      Data           = require('./src/model/ex_data')
+      Data           = require('./src/model/ex_data'),
+      {body, check, validationResult} = require('express-validator');
+      
 require('./src/utils/db');
 // declare requirement
 const port = 3000;
@@ -32,10 +34,43 @@ app.get('/data/create', (req, res) => {
     })
 });
 
-app.post('/data', (req, res) => {
-    Data.insertMany(req.body, (err, result) => {
-        console.log(result, err);
-    });
+app.post('/data',
+ [
+     body('name', 'Field Full Name is required').exists({checkFalsy: true}),
+     check('email', 'Email must be valid email').isEmail(),
+     body('phone', 'Field Phone is Required & must be ID format').isMobilePhone('id-ID'),
+ ],
+ (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        // res.send(errors);
+        res.render('page/create-form', {
+            title: 'Create form',
+            layout: 'layouts/main-layout',
+            errors : errors.array()
+        })
+    }else{
+        const uuid =  String(Math.floor(Math.random() * Date.now())).substr(0,11);
+        try {
+
+            Data.insertMany({
+            uuid: uuid,
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
+            
+            }, (err, result) => {
+                res.redirect('/');
+            });
+            
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({message: error.message})
+        }
+        
+        // res.send(uuid);
+    }
+    
 });
 
 
