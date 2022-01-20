@@ -15,7 +15,7 @@
     <h1 class="h3 mb-2 text-gray-800"><?= $subtitle ?></h1>
     <div>
         <a href="/data/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Create</a>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Print Report</a>
+        <a href="/print" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Print Report</a>
     </div>
 </div>
 
