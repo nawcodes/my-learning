@@ -15,7 +15,10 @@
     <h1 class="h3 mb-2 text-gray-800"><?= $subtitle ?></h1>
     <div>
         <a href="/data/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Create</a>
-        <a href="/print" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Print Report</a>
+        <form action="/print" class="d-inline">
+            <input type="hidden" name="request" value="find_all_data">
+            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Print Report</button>
+        </form>
     </div>
 </div>
 

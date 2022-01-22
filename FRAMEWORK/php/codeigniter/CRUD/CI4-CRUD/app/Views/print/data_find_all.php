@@ -33,12 +33,6 @@
 </head>
 
 <body>
-    <div class="d-flex flex-row-reverse bd-highlight">
-        <a href="<?php echo base_url('PrintOut/convertPdf') ?>" class="btn btn-primary">
-            Download PDF
-        </a>
-    </div>
-
     <table>
         <tr>
             <td>
@@ -64,14 +58,24 @@
             </tr>
         </thead>
         <tbody class="center">
-            <tr>
-                <th scope="row">1</th>
-                <td scope="row">20180050049</td>
-                <td scope="row"><img src="https://via.placeholder.com/50" alt=""></td>
-                <td scope="row">Rifal Nurjamil</td>
-                <td scope="row">rifalnurjamil@gmail.com</td>
-                <td scope="row">085940775599</td>
-            </tr>
+            <?php $numb = 1;
+            foreach ($data as $d) :  ?>
+                <tr>
+                    <th scope="row"><?= $numb++ ?></th>
+                    <td scope="row"><?= $d['uuid'] ?></td>
+                    <?php if (file_exists(FCPATH . '/assets/image/' . $d['image'])) :  ?>
+                        <?php 
+                            $type = pathinfo(FCPATH . '/assets/image/' . $d['image'], PATHINFO_EXTENSION);    
+                        ?>
+                        <td scope="row"><img src="data:image/<?= $type ?>;base64,<?php echo base64_encode(file_get_contents(FCPATH . "/assets/image/" . $d['image'])) ?>" width='50' /></td>
+                    <?php else : ?>
+                        <td scope="row">no image</td>
+                    <?php endif; ?>
+                    <td scope="row"><?= $d['name'] ?></td>
+                    <td scope="row"><?= $d['email'] ?></td>
+                    <td scope="row"><?= $d['phone'] ?></td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
         <tfoot class="gray">
             <tr>
