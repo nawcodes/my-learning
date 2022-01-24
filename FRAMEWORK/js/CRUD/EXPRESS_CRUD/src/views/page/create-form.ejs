@@ -1,5 +1,5 @@
 <div class="col-lg-12 mb-3">
-    <form method="post" action="/data">
+    <form method="post" action="/data" enctype="multipart/form-data">
         <% if(typeof errors != "undefined") { %>
             <% errors.forEach(e => { %>
                 <div class="row">
@@ -35,6 +35,15 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Phone</label>
                     <input type="number" class="form-control" name="phone" id="phone" value="<%= typeof req != 'undefined' ? req.phone : '' %>">
+                    <div class="form-text text-danger">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Photo</label>
+                    <input type="file" class="form-control" name="image" id="image" value="">
                     <div class="form-text text-danger">
                         
                     </div>
