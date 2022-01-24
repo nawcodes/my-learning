@@ -1,5 +1,7 @@
 // call requirement
+
 const express           = require('express'),
+      fs =  require('fs'),
       cors              = require('cors'),
       expressLayouts    = require('express-ejs-layouts'),
       multer = require('multer'),
@@ -14,13 +16,14 @@ const app = express();
 
 const diskStorage = multer.diskStorage({
     destination: (req, res, cb) => {
-        cb(null, path.join(__dirname, '/uploads'));
+        cb(null, path.join(__dirname, '/public/assets/img'));
     }, 
     filename: (req, file, cb) => {
-        console.log(file);
         cb(null, `${file.fieldname} - ${Date.now() + path.extname(file.originalname)}`);
     }
 })
+
+
 
 
 // use requirement after declare
@@ -50,50 +53,74 @@ app.get('/data/create', (req, res) => {
 });
 
 app.post('/data',
+ multer({storage: diskStorage}).single('image'),
  [
      body('name', 'Field Full Name is required').exists({checkFalsy: true}),
      check('email', 'Email must be valid email').isEmail(),
      body('phone', 'Field Phone is Required & must be ID format').isMobilePhone('id-ID'),
+     check('image', 'an image must be right image').custom((value, {req}) => {
+            const extension = (path.extname(req.file.originalname)).toLowerCase();
+            switch (extension) {
+                case '.jpg':
+                    return true;
+                case '.jpeg':
+                    return true;
+                case  '.png':
+                    return true;
+                case  '.JPEG':
+                    return true;
+                case  '.JPG':
+                    return true;
+                case  '.PNG':
+                    return true;
+                default:
+                    fs.unlink(req.file.path, (err) => {
+                        if(err) {
+                            console.log(err);
+                        }
+                        console.log('image successfully deleted');
+                    });
+                    return false;
+            }
+     })
  ],
- multer({storage: diskStorage}).single('image'),
  (req, res) => {
-    const file = req.file.path;
-    console.log(file);
-    // const errors = validationResult(req);
-    // if(!errors.isEmpty()) {
-    //     // res.send(errors);
-    //     console.log(errors);
-    //     res.render('page/create-form', {
-    //         title: 'Create form',
-    //         layout: 'layouts/main-layout',
-    //         errors : errors.array(),
-    //         req : req.body,
-    //     })
-    // }else{
-    //     const uuid =  String(Math.floor(Math.random() * Date.now())).substr(0,11);
-    //     try {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        // res.send(errors);
+        console.log(errors);
+        res.render('page/create-form', {
+            title: 'Create form',
+            layout: 'layouts/main-layout',
+            errors : errors.array(),
+            req : req.body,
+        })
+    }else{
+        const uuid =  String(Math.floor(Math.random() * Date.now())).substr(0,11);
+        try {
 
-    //         Data.insertMany({
-    //         uuid: uuid,
-    //         name: req.body.name,
-    //         email: req.body.email,
-    //         phone: req.body.phone,
+            Data.insertMany({
+            uuid: uuid,
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
+            image: req.file.filename ? req.file.filename : 'default.png',
             
-    //         }, (err, result) => {
-    //             if(err) {
-    //                 console.log(err);
-    //             }
-    //             console.log(result);
-    //         });
+            }, (err, result) => {
+                if(err) {
+                    console.log(err);
+                }
+                console.log(result);
+            });
 
-    //         return res.redirect('/');            
-    //     } catch (error) {
-    //         console.log(error);
-    //         res.status(500).send({message: error.message});
-    //     }
+            return res.redirect('/');            
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({message: error.message});
+        }
     
-    //     return res.redirect('/')
-    // }
+        return res.redirect('/')
+    }
     
 });
 
