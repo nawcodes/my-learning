@@ -1,6 +1,6 @@
 <div class="col-lg-12 mb-3">
     <form method="post" action="/data">
-        <% if(typeof error == "undefined") { %>
+        <% if(typeof errors != "undefined") { %>
             <% errors.forEach(e => { %>
                 <div class="row">
                     <div class="col-lg">
@@ -12,13 +12,12 @@
                     </div>
                 </div>
             <% }) %>
-        
         <% } %> 
         <div class="row">
             <div class="col-lg">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" name="email" id="email">
+                    <input type="email" class="form-control" name="email" id="email" value="<%= typeof req != 'undefined' ? req.email : '' %>">
                     <div class="form-text text-danger">  
                     </div>
                 </div>
@@ -28,14 +27,14 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Full Name</label>
-                    <input type="text" class="form-control" name="name" id="name">
+                    <input type="text" class="form-control" name="name" id="name" value="<%= typeof req != 'undefined' ? req.name : '' %>">
                     
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Phone</label>
-                    <input type="number" class="form-control" name="phone" id="phone">
+                    <input type="number" class="form-control" name="phone" id="phone" value="<%= typeof req != 'undefined' ? req.phone : '' %>">
                     <div class="form-text text-danger">
                         
                     </div>

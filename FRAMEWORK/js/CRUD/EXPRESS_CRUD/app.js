@@ -44,10 +44,12 @@ app.post('/data',
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
         // res.send(errors);
+        console.log(errors);
         res.render('page/create-form', {
             title: 'Create form',
             layout: 'layouts/main-layout',
-            errors : errors.array()
+            errors : errors.array(),
+            req : req.body,
         })
     }else{
         const uuid =  String(Math.floor(Math.random() * Date.now())).substr(0,11);
@@ -60,15 +62,19 @@ app.post('/data',
             phone: req.body.phone,
             
             }, (err, result) => {
-                res.redirect('/');
+                if(err) {
+                    console.log(err);
+                }
+                console.log(result);
             });
-            
+
+            return res.redirect('/');            
         } catch (error) {
             console.log(error);
-            res.status(500).send({message: error.message})
+            res.status(500).send({message: error.message});
         }
-        
-        // res.send(uuid);
+    
+        return res.redirect('/')
     }
     
 });
