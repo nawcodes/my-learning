@@ -55,36 +55,30 @@ app.get('/data/create', (req, res) => {
 app.post('/data',
  multer({storage: diskStorage}).single('image'),
  [
-     body('name', 'Field Full Name is required').exists({checkFalsy: true}),
-     check('email', 'Email must be valid email').isEmail(),
-     body('phone', 'Field Phone is Required & must be ID format').isMobilePhone('id-ID'),
-     check('image', 'an image must be right image').custom((value, {req}) => {
-            const extension = (path.extname(req.file.originalname)).toLowerCase();
-            switch (extension) {
-                case '.jpg':
-                    return true;
-                case '.jpeg':
-                    return true;
-                case  '.png':
-                    return true;
-                case  '.JPEG':
-                    return true;
-                case  '.JPG':
-                    return true;
-                case  '.PNG':
-                    return true;
-                default:
+     check('image').custom((value, {req}) => {
+             if(typeof req.file != 'undefined') {
+                 const extension = (path.extname(req.file.originalname)).toLowerCase();
+                 console.log(extension.length);
+                 const validExtesion = [
+                     '.jpg', '.jpeg', '.png'
+                 ]
+                 const checkExt = validExtesion.find((ext) => ext === extension);
+                 if(checkExt !== extension ) {
                     fs.unlink(req.file.path, (err) => {
-                        if(err) {
-                            console.log(err);
-                        }
-                        console.log('image successfully deleted');
+                     if(err) {
+                         console.log(err);
+                     }
                     });
-                    return false;
-            }
-     })
+                    throw new Error('an image must be right image');
+                 }
+             }
+             return true;
+      }),
+    body('name', 'Field Full Name is required').exists({checkFalsy: true}),
+    check('email', 'Email must be valid email').isEmail(),
+    body('phone', 'Field Phone is Required & must be ID format').isMobilePhone('id-ID'),
  ],
- (req, res) => {
+ (req, res) => {  
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
         // res.send(errors);
@@ -104,7 +98,7 @@ app.post('/data',
             name: req.body.name,
             email: req.body.email,
             phone: req.body.phone,
-            image: req.file.filename ? req.file.filename : 'default.png',
+            image: typeof req.file == 'undefined' ? 'default.png' : req.file.filename,
             
             }, (err, result) => {
                 if(err) {
@@ -112,7 +106,7 @@ app.post('/data',
                 }
                 console.log(result);
             });
-
+            console.log(`Insert data are success`);
             return res.redirect('/');            
         } catch (error) {
             console.log(error);
