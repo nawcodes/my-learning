@@ -211,6 +211,37 @@ async (req, res) => {
 });
 
 
+app.delete('/data', async (req, res) => {
+   const data = await Data.findOne({_id: req.body._id});
+   if(typeof data != null || typeof data != 'undefined') {
+        try {
+            Data.deleteOne({
+                _id: req.body._id,
+            }).then(result => {
+                console.log(result);
+                if(fs.existsSync(`public/assets/img/${data.image}`)) {
+                fs.unlink(`public/assets/img/${data.image}`, (err) => {
+                    if(err) {
+                    console.log(`unlink err: ${err}`);
+                    }
+                });
+                    console.log('An image has been deleted too');
+                } else {
+                    console.log('No once file in system or never upload file before');
+                }
+                res.redirect('/');
+            }).catch(err => {
+                console.log(`${err} something went wrong deleted data`);
+            })
+           
+        } catch (error) {
+            console.log(error);
+            throw new Error(error.message);
+        }
+   }
+});
+
+
 app.use('/', (req, res) => {
     res.status(404);
     res.send('<h1>404 Not Found</h1>');
