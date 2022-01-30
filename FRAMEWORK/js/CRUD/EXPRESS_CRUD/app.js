@@ -4,6 +4,9 @@ const express           = require('express'),
       fs =  require('fs'),
       cors              = require('cors'),
       expressLayouts    = require('express-ejs-layouts'),
+      session = require('express-session'),
+      cookie = require('cookie-parser'),
+      flash = require('connect-flash'),
       multer = require('multer'),
       methodOverride              = require('method-override'),
       path = require('path'),
@@ -35,7 +38,14 @@ app.use(expressLayouts);
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'));
-
+app.use(cookie('secret'));
+app.use(session({
+  cookie: {maxAge: 6000},
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(flash());
 
 // routing handle 
 app.get('/', async (req, res) => {
@@ -44,6 +54,7 @@ app.get('/', async (req, res) => {
         layout: 'layouts/main-layout',
         title : 'Home',
         data: data,
+        msg: req.flash('msg'),
     });
 });
 
@@ -83,7 +94,6 @@ app.post('/data',
  (req, res) => {  
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-        // res.send(errors);
         console.log(errors);
         res.render('page/create-form', {
             title: 'Create form',
@@ -108,7 +118,7 @@ app.post('/data',
                 }
                 console.log(result);
             });
-            console.log(`Insert data are success`);
+            req.flash('msg', 'Inserted data successfully');
             return res.redirect('/');            
         } catch (error) {
             console.log(error);
@@ -136,7 +146,6 @@ multer({storage: diskStorage}).single('image'),
      check('image').custom((value, {req}) => {
              if(typeof req.file != 'undefined') {
                  const extension = (path.extname(req.file.originalname)).toLowerCase();
-                //  console.log(extension.length);
                  const validExtesion = [
                      '.jpg', '.jpeg', '.png'
                  ]
@@ -174,7 +183,7 @@ async (req, res) => {
             if(fs.existsSync(`public/assets/img/${checkData.image}`) && typeof req.file != 'undefined') {
                 fs.unlink(`public/assets/img/${checkData.image}`, (err) => {
                     if(err) {
-                    console.log(`unlik err: ${err}`);
+                    console.log(`unlink err: ${err}`);
                     }
                 });
                 console.log('New image successfully changed');
@@ -199,7 +208,7 @@ async (req, res) => {
                 }
                 console.log(result);
             });
-            console.log(`Update data are success`);
+            req.flash('msg', 'Update data are success');
             return res.redirect('/');            
         } catch (error) {
             console.log(error);
@@ -229,6 +238,7 @@ app.delete('/data', async (req, res) => {
                 } else {
                     console.log('No once file in system or never upload file before');
                 }
+                req.flash('msg', 'Successfully deleted data');
                 res.redirect('/');
             }).catch(err => {
                 console.log(`${err} something went wrong deleted data`);
