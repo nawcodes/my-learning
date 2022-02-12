@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Beginners.</title>
+    <style>
+        body {
+            margin: 5%;
+            font-family: 'Serif';
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+
+        <img src="image/logo.png" width="80" alt="">
+        <h1>What is Vue.js</h1>
+        <p v-once>Call me : {{ name.toUpperCase() }}</p>
+        <p v-once>Expression : {{ isActive ? 'Is active, yeay!' : 'Not active'}}</p>
+        <p v-once>fromFunc : {{getName()}}</p>
+        <p>The Progressive javascript Framework</p>
+    
+        <footer id="footer">
+            <p>Copyright 2020</p>
+        </footer>
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+        const member = {
+            // string, number, boolean, array, object
+            name: "It's Calling Beauty Vue!",
+            message: "Hello World",
+            isActive: true,
+        }
+        const vm = new Vue({
+            el: '#app',
+            data: member,
+            methods: {
+                getName: function() {
+                    return 'Hello, ' + this.name
+                }
+            }
+        }); 
+    </script>
+</body>
+</html>
