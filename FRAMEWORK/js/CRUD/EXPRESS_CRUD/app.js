@@ -4,7 +4,11 @@ const express           = require('express'),
       fs =  require('fs'),
       cors              = require('cors'),
       expressLayouts    = require('express-ejs-layouts'),
+      session = require('express-session'),
+      cookie = require('cookie-parser'),
+      flash = require('connect-flash'),
       multer = require('multer'),
+      methodOverride              = require('method-override'),
       path = require('path'),
       Data           = require('./src/model/ex_data'),
       {body, check, validationResult} = require('express-validator');
@@ -19,7 +23,7 @@ const diskStorage = multer.diskStorage({
         cb(null, path.join(__dirname, '/public/assets/img'));
     }, 
     filename: (req, file, cb) => {
-        cb(null, `${file.fieldname} - ${Date.now() + path.extname(file.originalname)}`);
+        cb(null, `${req.body.name}-${Date.now() + path.extname(file.originalname)}`);
     }
 })
 
@@ -33,7 +37,15 @@ app.use(cors());
 app.use(expressLayouts);
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}))
-
+app.use(methodOverride('_method'));
+app.use(cookie('secret'));
+app.use(session({
+  cookie: {maxAge: 6000},
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(flash());
 
 // routing handle 
 app.get('/', async (req, res) => {
@@ -42,6 +54,7 @@ app.get('/', async (req, res) => {
         layout: 'layouts/main-layout',
         title : 'Home',
         data: data,
+        msg: req.flash('msg'),
     });
 });
 
@@ -81,7 +94,6 @@ app.post('/data',
  (req, res) => {  
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-        // res.send(errors);
         console.log(errors);
         res.render('page/create-form', {
             title: 'Create form',
@@ -106,7 +118,7 @@ app.post('/data',
                 }
                 console.log(result);
             });
-            console.log(`Insert data are success`);
+            req.flash('msg', 'Inserted data successfully');
             return res.redirect('/');            
         } catch (error) {
             console.log(error);
@@ -116,6 +128,127 @@ app.post('/data',
         return res.redirect('/')
     }
     
+});
+
+app.get('/data/edit/:uuid', async (req, res) => {
+    const dataOne = await Data.findOne({uuid: req.params.uuid})
+    res.render('page/edit-form', {
+        layout: 'layouts/main-layout',
+        title : 'Edit Form',
+        data: dataOne,
+    }); 
+})
+
+app.put('/data',
+multer({storage: diskStorage}).single('image'),
+ [
+
+     check('image').custom((value, {req}) => {
+             if(typeof req.file != 'undefined') {
+                 const extension = (path.extname(req.file.originalname)).toLowerCase();
+                 const validExtesion = [
+                     '.jpg', '.jpeg', '.png'
+                 ]
+                 const checkExt = validExtesion.find((ext) => ext === extension);
+                 if(checkExt !== extension ) {
+                    fs.unlink(req.file.path, (err) => {
+                     if(err) {
+                         throw new Error('cannot deleted file');
+                     }
+                    });
+                    throw new Error('an image must be right image');
+                 }
+             }
+             return true;
+      }),
+    body('name', 'Field Full Name is required').exists({checkFalsy: true}),
+    check('email', 'Email must be valid email').isEmail(),
+    body('phone', 'Field Phone is Required & must be ID format').isMobilePhone('id-ID'),
+ ],
+async (req, res) => {
+    const errors = validationResult(req);
+    const checkData = await Data.findOne({uuid : req.body.uuid});
+    if(!errors.isEmpty()) {
+        res.render('page/edit-form', {
+            title: 'edit form',
+            layout: 'layouts/main-layout',
+            errors : errors.array(),
+            data: checkData,
+            req : req.body,
+        })
+    }else{
+        if(!checkData) {
+            res.status(404).send({message: 'Are data has been trying to manipulating, try again!'});
+        }else{
+            if(fs.existsSync(`public/assets/img/${checkData.image}`) && typeof req.file != 'undefined') {
+                fs.unlink(`public/assets/img/${checkData.image}`, (err) => {
+                    if(err) {
+                    console.log(`unlink err: ${err}`);
+                    }
+                });
+                console.log('New image successfully changed');
+            } else {
+                console.log('No once file in system or never upload file before');
+            }
+        }
+
+        try {
+            Data.updateOne(
+            {_id: req.body._id},
+            {
+                $set: {
+                    name: req.body.name,
+                    email: req.body.email,
+                    phone: req.body.phone,
+                    image: typeof req.file == 'undefined' ? 'default.png' : req.file.filename,
+                }
+            }, (err, result) => {
+                if(err) {
+                    console.log(err);
+                }
+                console.log(result);
+            });
+            req.flash('msg', 'Update data are success');
+            return res.redirect('/');            
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({message: error.message});
+        }
+        return res.redirect('/')
+    }
+    
+});
+
+
+app.delete('/data', async (req, res) => {
+   const data = await Data.findOne({_id: req.body._id});
+   if(typeof data != null || typeof data != 'undefined') {
+        try {
+            Data.deleteOne({
+                _id: req.body._id,
+            }).then(result => {
+                console.log(result);
+                if(fs.existsSync(`public/assets/img/${data.image}`)) {
+                fs.unlink(`public/assets/img/${data.image}`, (err) => {
+                    if(err) {
+                    console.log(`unlink err: ${err}`);
+                    }
+                });
+                    console.log('An image has been deleted too');
+                } else {
+                    console.log('No once file in system or never upload file before');
+                }
+                req.flash('msg', 'Successfully deleted data');
+                res.redirect('/');
+            }).catch(err => {
+                console.log(`${err} something went wrong deleted data`);
+            })
+           
+        } catch (error) {
+            console.log(error);
+            throw new Error(error.message);
+        }
+   }
 });
 
 

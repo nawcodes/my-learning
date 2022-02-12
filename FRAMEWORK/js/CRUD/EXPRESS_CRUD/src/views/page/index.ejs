@@ -7,6 +7,12 @@
         </div>
     </div>
 
+    <% if (msg.length !== 0) { %>
+        <div class="alert alert-primary" role="alert">
+        <%= msg %> 
+        </div>
+    <% } %>
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -49,11 +55,14 @@
                                 <th><%= result.name %></th>
                                 <th><%= result.email %></th>
                                 <th><%= result.phone %></th>
-                                <th class="text-center">
-                                    <a href="" class="text-danger"><i class="fas fa-eye"></i></a>
-                                    <a href="/data/edit/<%= result.uuid %>" class="text-primary"><i class="fas fa-edit"></i></a>
-                                    <a href="" class="text-danger"><i class="fas fa-trash"></i></a>
-                                </th>
+                                <form action="/data?_method=DELETE" method="POST" class="">
+                                    <input type="hidden" name="_id" value="<%= result._id %>">
+                                    <th class="text-center">
+                                        <a href="" class="text-danger"><i class="fas fa-eye"></i></a>
+                                        <a href="/data/edit/<%= result.uuid %>" class="text-primary"><i class="fas fa-edit"></i></a>
+                                        <button type="submit" class="text-danger" style="border:none; background-color:transparent;"><i class="fas fa-trash" onclick="return confirm('Are you sure wanna delete it?')"></i></button>
+                                    </th>
+                                </form>
                             </tr>
                         <% }) %>
                     </tbody>
