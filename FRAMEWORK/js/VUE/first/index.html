@@ -14,6 +14,12 @@
         #section .theory {
             margin-left: 2%;
         }
+
+        .active {
+            background: salmon;
+            border: 0;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -61,6 +67,43 @@
                             <li>V-HTML: sebuah data yang berupa html</li>
                         </ol>
                         </li>
+                    <li><strong> #Binding Directive</strong>
+                        Write vanila javascript in directive vue
+                        <br>
+                        <small>Example V-text = "name.toUpperCase"</small>
+                    </li>
+                    <li><strong> #Binding Attributes</strong>
+                        <p>See in code, how it works</p>
+                        <img v-bind:src="image" alt="" width="50">
+                    </li>
+                </ul>
+            </div>
+            <hr>
+
+            <div class="theory">
+                <h2>#Events</h2>
+                <ul>
+                    <li>Ditulis di bagian html, seperti V-ON:namEvent</li>
+                    <li>Example: 
+                        <br>
+                        <button v-on:click="handlerClick">Click Me To Count</button>
+                        <p v-text="qty"></p>
+                        <p>it's {{ oddEven }}</p>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div class="theory">
+                
+                <h2>#ClassBinding</h2>
+                <ul>
+                    <li>Ditulis di bagian html, seperti <strong>v-bind:class="nameClass || ['class1', class2]"</strong></li>
+                    <li>Example: 
+                        <br>
+                        <button class="active">Home</button>
+                        <button>About</button>
+                        <button>Blog</button>
+                    </li>
                 </ul>
             </div>
             <hr>
@@ -76,17 +119,16 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
-        const member = {
-            // string, number, boolean, array, object
-            name: "It's Calling Beauty Vue!",
-            callName: "B.Vue",
-            message: "Hello World",
-            isActive: true,
-            qty: 1,
-        }
         const vm = new Vue({
             el: '#app',
-            data: member,
+            data: {
+                name: "It's Calling Beauty Vue!",
+                callName: "B.Vue",
+                message: "Hello World",
+                isActive: true,
+                qty: 1,
+                image: 'image/logo.png'
+            },
             methods: {
                 getName: function() {
                     return 'Hello, ' + this.name + 'and my call name its ' + this.callName;  
@@ -94,11 +136,17 @@
                 changeName: function(newName) {
                     this.callName = newName;
                     return this.getName();
+                },
+                handlerClick: function() {
+                    this.qty++;
                 }
             },
             computed: {
                 totalPay: function() {
                     return this.qty * 10000;
+                },
+                oddEven: function() {
+                    return this.qty%2 === 0 ? 'its odd' : 'its even';
                 }
             }
         }); 
