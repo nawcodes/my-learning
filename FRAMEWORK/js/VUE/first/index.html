@@ -126,6 +126,17 @@
                 </ul>
             </div>
             <hr>
+            <div class="theory">
+                
+                <h2>V-FOR: Looping </h2>
+                <ul>
+                    <li>Ditulis di bagian html, seperti <strong>v-for="k in properties data"</strong></li>
+                    <li> example 
+                        <p v-for="k in kelas">{{ k }}</p>
+                    </li>
+                </ul>
+            </div>
+            <hr>
         </article>
     
         <footer id="footer">
@@ -148,7 +159,7 @@
                 qty: 1,
                 image: 'image/logo.png',
                 menu: 'home',
-                kelas: [],
+                kelas: ['Golang', 'PHP', 'Python'],
             },
             methods: {
                 getName: function() {
