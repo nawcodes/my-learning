@@ -92,7 +92,9 @@
                     </li>
                 </ul>
             </div>
+
             <hr>
+            
             <div class="theory">
                 
                 <h2>#ClassBinding</h2>
@@ -103,6 +105,23 @@
                         <button v-bind:class="{active: menu === 'home'}" v-on:click="menu = 'home' ">Home</button>
                         <button v-bind:class="{active: menu === 'about'}" v-on:click="menu = 'about' ">About</button>
                         <button v-bind:class="{active: menu === 'blog'}" v-on:click="menu = 'blog' ">Blog</button>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+
+            <div class="theory">
+                
+                <h2>#Twoway Binding: </h2>
+                <input type="text" v-model="name">
+                <ul>
+                    <li>Ditulis di bagian html, seperti <strong>v-model="propertiesData" </strong></li>
+                    <li>Bila di view dirubah, di datanya punya ikut berubah secara live 
+                        <br>
+                        <p>TwoWaysBindingData: {{ kelas }}</p>
+                        <label for=""><input type="checkbox" v-model="kelas" value="React">React</label>
+                        <label for=""><input type="checkbox" v-model="kelas" value="Vue">Vue</label>
+                        <label for=""><input type="checkbox" v-model="kelas" value="Angular">Angular</label>
                     </li>
                 </ul>
             </div>
@@ -128,7 +147,8 @@
                 isActive: true,
                 qty: 1,
                 image: 'image/logo.png',
-                menu: 'home'
+                menu: 'home',
+                kelas: [],
             },
             methods: {
                 getName: function() {
