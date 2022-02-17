@@ -134,6 +134,7 @@
                     <li> example 
                         <p v-for="k in kelas">{{ k }}</p>
                     </li>
+                    <li v-for="x in checkOddEvenNumbers(numbers)">{{ x }}</li>
                 </ul>
             </div>
             <hr>
@@ -160,6 +161,7 @@
                 image: 'image/logo.png',
                 menu: 'home',
                 kelas: ['Golang', 'PHP', 'Python'],
+                numbers: [1,2,3,4,5],
             },
             methods: {
                 getName: function() {
@@ -172,6 +174,11 @@
                 handlerClick: function() {
                     this.qty++;
                 },
+                checkOddEvenNumbers: (number) => {
+                    return number.filter(numb => {
+                        return numb %2 === 0;
+                    });
+                }   
             },
             computed: {
                 totalPay: function() {
