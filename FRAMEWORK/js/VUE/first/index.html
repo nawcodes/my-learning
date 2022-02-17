@@ -10,6 +10,16 @@
             margin: 5%;
             font-family: 'Serif';
         }
+
+        #section .theory {
+            margin-left: 2%;
+        }
+
+        .active {
+            background: salmon;
+            border: 0;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -18,33 +28,125 @@
 
         <img src="image/logo.png" width="80" alt="">
         <h1>What is Vue.js</h1>
-        <p v-once>Call me : {{ name.toUpperCase() }}</p>
+        <p>Call me : {{ callName.toUpperCase() }}</p>
         <p v-once>Expression : {{ isActive ? 'Is active, yeay!' : 'Not active'}}</p>
         <p v-once>fromFunc : {{getName()}}</p>
         <p>The Progressive javascript Framework</p>
+
+        <hr>
+        
+        <article id="section">
+            <h1>Theory Implement</h1>
+            <div class="theory">
+                <h2>#Paramater</h2>
+                <ul>
+                    <li>Try to write in inspect vm.changeName(newName)</li>
+                    <li>{{ callName }}</li>
+                </ul>
+            </div>
+            <hr>
+
+            <div class="theory">
+                <h2>#Computed Properties</h2>
+                <ul>
+                    <li>Simplenya ini adalah property vue yang menyimpan logic apa saja, tentunya lebih kompleks dan tidak menyimpan logic di structure html langsung</li>
+                    <li>Try to write in inspect vm.qty = num</li>
+                    <li>Rp.{{ totalPay }},-</li>
+                </ul>
+            </div>
+
+            <hr>
+            <div class="theory">
+                <h2>#Directive Vue</h2>
+                <ul>
+                    <li>Directive adalah property yang melakukan tugasnya masing masing</li>
+                    <li>Ditulis di bagian html, seperti</li>
+                    <li> <ol>
+                            <li>V-ONCE:</li>
+                            <li>V-TEXT: value</li>
+                            <li>V-HTML: sebuah data yang berupa html</li>
+                        </ol>
+                        </li>
+                    <li><strong> #Binding Directive</strong>
+                        Write vanila javascript in directive vue
+                        <br>
+                        <small>Example V-text = "name.toUpperCase"</small>
+                    </li>
+                    <li><strong> #Binding Attributes</strong>
+                        <p>See in code, how it works</p>
+                        <img v-bind:src="image" alt="" width="50">
+                    </li>
+                </ul>
+            </div>
+            <hr>
+
+            <div class="theory">
+                <h2>#Events</h2>
+                <ul>
+                    <li>Ditulis di bagian html, seperti V-ON:namEvent</li>
+                    <li>Example: 
+                        <br>
+                        <button v-on:click="handlerClick">Click Me To Count</button>
+                        <p v-text="qty"></p>
+                        <p>it's {{ oddEven }}</p>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div class="theory">
+                
+                <h2>#ClassBinding</h2>
+                <ul>
+                    <li>Ditulis di bagian html, seperti <strong>v-bind:class="nameClass || ['class1', class2]"</strong></li>
+                    <li>Example: 
+                        <br>
+                        <button class="active">Home</button>
+                        <button>About</button>
+                        <button>Blog</button>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+        </article>
     
         <footer id="footer">
             <p>Copyright 2020</p>
         </footer>
-
     </div>
+
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
-        const member = {
-            // string, number, boolean, array, object
-            name: "It's Calling Beauty Vue!",
-            message: "Hello World",
-            isActive: true,
-        }
         const vm = new Vue({
             el: '#app',
-            data: member,
+            data: {
+                name: "It's Calling Beauty Vue!",
+                callName: "B.Vue",
+                message: "Hello World",
+                isActive: true,
+                qty: 1,
+                image: 'image/logo.png'
+            },
             methods: {
                 getName: function() {
-                    return 'Hello, ' + this.name
+                    return 'Hello, ' + this.name + 'and my call name its ' + this.callName;  
+                },
+                changeName: function(newName) {
+                    this.callName = newName;
+                    return this.getName();
+                },
+                handlerClick: function() {
+                    this.qty++;
+                }
+            },
+            computed: {
+                totalPay: function() {
+                    return this.qty * 10000;
+                },
+                oddEven: function() {
+                    return this.qty%2 === 0 ? 'its odd' : 'its even';
                 }
             }
         }); 
