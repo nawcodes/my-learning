@@ -100,9 +100,9 @@
                     <li>Ditulis di bagian html, seperti <strong>v-bind:class="nameClass || ['class1', class2]"</strong></li>
                     <li>Example: 
                         <br>
-                        <button class="active">Home</button>
-                        <button>About</button>
-                        <button>Blog</button>
+                        <button v-bind:class="{active: menu === 'home'}" v-on:click="menu = 'home' ">Home</button>
+                        <button v-bind:class="{active: menu === 'about'}" v-on:click="menu = 'about' ">About</button>
+                        <button v-bind:class="{active: menu === 'blog'}" v-on:click="menu = 'blog' ">Blog</button>
                     </li>
                 </ul>
             </div>
@@ -127,7 +127,8 @@
                 message: "Hello World",
                 isActive: true,
                 qty: 1,
-                image: 'image/logo.png'
+                image: 'image/logo.png',
+                menu: 'home'
             },
             methods: {
                 getName: function() {
@@ -139,7 +140,7 @@
                 },
                 handlerClick: function() {
                     this.qty++;
-                }
+                },
             },
             computed: {
                 totalPay: function() {
