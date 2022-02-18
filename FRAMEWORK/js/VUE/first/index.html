@@ -138,6 +138,22 @@
                 </ul>
             </div>
             <hr>
+
+            <div class="theory">
+                
+                <h2>V-IF: Condition & V-ELSE = Condition "give Velse after v-IF" </h2>
+                <ul>
+                    <li>Ditulis di bagian html, seperti <strong>v-if="condition"</strong></li>
+                    <li> example
+                        <span v-if="kelas.length > 1"> 
+                        <p v-for="k in kelas">{{ k }}</p>
+                        </span>
+                        <p v-else="">Kelas masih kosong</p>
+                    </li>
+                    <li v-for="x in checkOddEvenNumbers(numbers)">{{ x }}</li>
+                </ul>
+            </div>
+            <hr>
         </article>
     
         <footer id="footer">
