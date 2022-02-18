@@ -92,7 +92,9 @@
                     </li>
                 </ul>
             </div>
+
             <hr>
+            
             <div class="theory">
                 
                 <h2>#ClassBinding</h2>
@@ -100,10 +102,39 @@
                     <li>Ditulis di bagian html, seperti <strong>v-bind:class="nameClass || ['class1', class2]"</strong></li>
                     <li>Example: 
                         <br>
-                        <button class="active">Home</button>
-                        <button>About</button>
-                        <button>Blog</button>
+                        <button v-bind:class="{active: menu === 'home'}" v-on:click="menu = 'home' ">Home</button>
+                        <button v-bind:class="{active: menu === 'about'}" v-on:click="menu = 'about' ">About</button>
+                        <button v-bind:class="{active: menu === 'blog'}" v-on:click="menu = 'blog' ">Blog</button>
                     </li>
+                </ul>
+            </div>
+            <hr>
+
+            <div class="theory">
+                
+                <h2>#Twoway Binding: </h2>
+                <input type="text" v-model="name">
+                <ul>
+                    <li>Ditulis di bagian html, seperti <strong>v-model="propertiesData" </strong></li>
+                    <li>Bila di view dirubah, di datanya punya ikut berubah secara live 
+                        <br>
+                        <p>TwoWaysBindingData: {{ kelas }}</p>
+                        <label for=""><input type="checkbox" v-model="kelas" value="React">React</label>
+                        <label for=""><input type="checkbox" v-model="kelas" value="Vue">Vue</label>
+                        <label for=""><input type="checkbox" v-model="kelas" value="Angular">Angular</label>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div class="theory">
+                
+                <h2>V-FOR: Looping </h2>
+                <ul>
+                    <li>Ditulis di bagian html, seperti <strong>v-for="k in properties data"</strong></li>
+                    <li> example 
+                        <p v-for="k in kelas">{{ k }}</p>
+                    </li>
+                    <li v-for="x in checkOddEvenNumbers(numbers)">{{ x }}</li>
                 </ul>
             </div>
             <hr>
@@ -127,7 +158,10 @@
                 message: "Hello World",
                 isActive: true,
                 qty: 1,
-                image: 'image/logo.png'
+                image: 'image/logo.png',
+                menu: 'home',
+                kelas: ['Golang', 'PHP', 'Python'],
+                numbers: [1,2,3,4,5],
             },
             methods: {
                 getName: function() {
@@ -139,7 +173,12 @@
                 },
                 handlerClick: function() {
                     this.qty++;
-                }
+                },
+                checkOddEvenNumbers: (number) => {
+                    return number.filter(numb => {
+                        return numb %2 === 0;
+                    });
+                }   
             },
             computed: {
                 totalPay: function() {
