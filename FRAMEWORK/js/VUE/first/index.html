@@ -180,6 +180,10 @@
                         <button v-bind:class="{active: menu === 'about'}" v-on:click.prevent="changeMenu('about')">About</button>
                         <button v-bind:class="{active: menu === 'blog'}" v-on:click.prevent="changeMenu('blog')">Blog</button>
                     </li>
+                    <li>Example: $event input with event keyboard
+                        <br>
+                        <input type="text" name="kelas" v-on:keyup.enter="addClass">
+                    </li>
                 </ul>
             </div>
             <hr>
@@ -228,6 +232,14 @@
                 changeMenu: function (menu) {
                     // event.preventDefault();
                     this.menu = menu;
+                },
+                addClass: function(event) {
+                    let result = event.target.value;
+                    console.log(result); 
+                    this.kelas.push(result);
+                    // or unshift for add in first index array
+                    event.target.value = '';
+
                 }    
             },
             computed: {
