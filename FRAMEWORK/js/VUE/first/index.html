@@ -173,6 +173,13 @@
                         <button v-bind:class="{active: menu === 'about'}" v-on:click="changeMenu('about', $event)">About</button>
                         <button v-bind:class="{active: menu === 'blog'}" v-on:click="changeMenu('blog', $event)">Blog</button>
                     </li>
+                    <br>
+                    <li>Example: $event Modifiers
+                        <br>
+                        <button v-bind:class="{active: menu === 'home'}" v-on:click.prevent="changeMenu('home')">Home</button>
+                        <button v-bind:class="{active: menu === 'about'}" v-on:click.prevent="changeMenu('about')">About</button>
+                        <button v-bind:class="{active: menu === 'blog'}" v-on:click.prevent="changeMenu('blog')">Blog</button>
+                    </li>
                 </ul>
             </div>
             <hr>
@@ -218,9 +225,8 @@
                         return numb %2 === 0;
                     });
                 },
-                changeMenu: function (menu, event) {
-                    console.log(event);
-                    event.preventDefault();
+                changeMenu: function (menu) {
+                    // event.preventDefault();
                     this.menu = menu;
                 }    
             },
