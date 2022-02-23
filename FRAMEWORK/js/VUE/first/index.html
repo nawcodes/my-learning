@@ -138,6 +138,56 @@
                 </ul>
             </div>
             <hr>
+
+            <div class="theory">
+                
+                <h2>V-IF: Condition & V-ELSE = Condition "give Velse after v-IF" </h2>
+                <ul>
+                    <li>Ditulis di bagian html, seperti <strong>v-if="condition"</strong></li>
+                    <li> example
+                        <span v-if="kelas.length > 1"> 
+                        <p v-for="k in kelas">{{ k }}</p>
+                        </span>
+                        <p v-else="">Kelas masih kosong</p>
+                    </li>
+                </ul>
+                <hr>
+                <h2>Using Templates Condition</h2>
+                <template v-if="kelas.length > 1">
+                    <ul>
+                        <li v-for="k in kelas">{{ k }}</li>
+                    </ul>
+                </template>
+                <p v-else="">Kelas Masih kosong</p>
+            </div>
+            <hr>
+
+             <div class="theory">
+                
+                <h2>#Event Handler With $event || (e)</h2>
+                <ul>
+                    <li>Ditulis di bagian html, seperti <strong>v-on:click="param, $event"</strong></li>
+                    <li>Example: 
+                        <br>
+                        <button v-bind:class="{active: menu === 'home'}" v-on:click="changeMenu('home', $event)">Home</button>
+                        <button v-bind:class="{active: menu === 'about'}" v-on:click="changeMenu('about', $event)">About</button>
+                        <button v-bind:class="{active: menu === 'blog'}" v-on:click="changeMenu('blog', $event)">Blog</button>
+                    </li>
+                    <br>
+                    <li>Example: $event Modifiers
+                        <br>
+                        <button v-bind:class="{active: menu === 'home'}" v-on:click.prevent="changeMenu('home')">Home</button>
+                        <button v-bind:class="{active: menu === 'about'}" v-on:click.prevent="changeMenu('about')">About</button>
+                        <button v-bind:class="{active: menu === 'blog'}" v-on:click.prevent="changeMenu('blog')">Blog</button>
+                    </li>
+                    <li>Example: $event input with event keyboard
+                        <br>
+                        <input type="text" name="kelas" v-on:keyup.enter="addClass">
+                    </li>
+                </ul>
+            </div>
+            <hr>
+
         </article>
     
         <footer id="footer">
@@ -178,7 +228,19 @@
                     return number.filter(numb => {
                         return numb %2 === 0;
                     });
-                }   
+                },
+                changeMenu: function (menu) {
+                    // event.preventDefault();
+                    this.menu = menu;
+                },
+                addClass: function(event) {
+                    let result = event.target.value;
+                    console.log(result); 
+                    this.kelas.push(result);
+                    // or unshift for add in first index array
+                    event.target.value = '';
+
+                }    
             },
             computed: {
                 totalPay: function() {
