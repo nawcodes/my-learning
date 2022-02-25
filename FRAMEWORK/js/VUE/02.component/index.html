@@ -27,21 +27,8 @@
     <div id="app">
 
         <header-component></header-component>
-
-        
         <hr>
-        <article id="section">
-            <h1>Add Class Feature</h1>
-            <div class="theory">
-                <input type="text"  v-on:keyup.enter="addClass">
-                <ul>
-                    <li v-for="(c, index) in isClass">{{index+1}} - {{ c }}</liTry to write in inspect vm.changeName(newName)</li>
-                </ul>
-            </div>
-            <hr>
-        </article>
-    
-        <footer-component></footer-component>
+        <main-component></main-component>
     </div>
 
 
@@ -65,25 +52,40 @@
             }
         })
 
-        Vue.component('footer-component', {
+        Vue.component('main-component', {
             template: `
-                <footer id="footer">
-                    <p>Copyright 2020</p>
-                </footer>
-            `
+                <article id="section">
+                    <h1>Add Class Feature</h1>
+                    <div class="theory">
+                        <input type="text" v-on:keyup.enter="addClass" v-model="newClass">
+                        <ul>
+                            <li v-for="(c, index) in isClass">{{index+1}} - {{ c }}</liTry to write in inspect vm.changeName(newName)</li>
+                        </ul>
+                    </div>
+                    <hr>
+                </article>
+            `,
+            data: function() {
+                return {
+                    isClass : ['Python', 'Golang', 'Javascript'],
+                    newClass: "",
+                }
+            },
+            methods: {
+                addClass: function(event) {
+                    this.isClass.push(this.newClass);
+                    this.newClass = '';
+                }
+            }
         })
 
         const vm = new Vue({
             el: '#app',
             data: {
-                isClass : ['Python', 'Golang', 'Javascript'],
-                newClass: "",
+                
             },
             methods: {                
-                addClass: function(event) {
-                    this.isClass.push(this.newClass);
-                    this.newClass = '';
-                } 
+                 
             },
         }); 
     </script>
