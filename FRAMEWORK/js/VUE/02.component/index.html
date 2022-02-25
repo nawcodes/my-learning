@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component In Vue.</title>
+    <style>
+        body {
+            margin: 5%;
+            font-family: 'Serif';
+        }
+
+        #section .theory {
+            margin-left: 2%;
+        }
+
+        .active {
+            background: salmon;
+            border: 0;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+
+        <header-component></header-component>
+
+        
+        <hr>
+        <article id="section">
+            <h1>Add Class Feature</h1>
+            <div class="theory">
+                <input type="text"  v-on:keyup.enter="addClass">
+                <ul>
+                    <li v-for="(c, index) in isClass">{{index+1}} - {{ c }}</liTry to write in inspect vm.changeName(newName)</li>
+                </ul>
+            </div>
+            <hr>
+        </article>
+    
+        <footer-component></footer-component>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+
+        Vue.component('header-component' , {
+            template: `
+                <img src="image/logo.png" width="80" alt="" style="">
+                <h1>Next I'ts Component In Vue JS</h1>
+            `,
+        })
+
+        Vue.component('footer-component', {
+            template: `
+                <footer id="footer">
+                    <p>Copyright 2020</p>
+                </footer>
+            `
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                isClass : ['Python', 'Golang', 'Javascript'],
+                newClass: "",
+            },
+            methods: {                
+                addClass: function(event) {
+                    this.isClass.push(this.newClass);
+                    this.newClass = '';
+                } 
+            },
+        }); 
+    </script>
+</body>
+</html>
