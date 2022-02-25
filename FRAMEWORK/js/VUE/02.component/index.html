@@ -52,9 +52,17 @@
 
         Vue.component('header-component' , {
             template: `
+                <header>
                 <img src="image/logo.png" width="80" alt="" style="">
-                <h1>Next I'ts Component In Vue JS</h1>
+                <h1>{{ title }}</h1>
+                </header>
             `,
+            // data must be a function!!!!!!
+            data: function() {
+                return {
+                    title: 'Hello Vue Component',
+                }
+            }
         })
 
         Vue.component('footer-component', {
