@@ -28,7 +28,7 @@
 
         <header-component></header-component>
         <hr>
-            <theory-component name="It's Props"></theory-component>
+        <theory-component name="It's Props" v-bind:kelas="kelas"></theory-component>
     </div>
 
 
@@ -53,7 +53,7 @@
         })
 
         Vue.component('theory-component', {
-            props: ['name'],
+            props: ['name', 'kelas'],
             template: `
             <article id="section">
                 <div>
@@ -76,10 +76,23 @@
                         <li>5. After implement and fill it the value, what ever you want do</li>
                     </ul>
                     <div class="theory">
-                        <h2>
+                        <section>
+                        <h2> 
                             The Result
                             </h2>
                         Render Props : {{name}}
+                        </section>
+                        <section>
+                        <hr>
+                        <h2> 
+                            And How I Can Sending Data As Array ?
+                        </h2>
+                        Just Write In Element Component at html: v-bind:name="arrayFoo"
+                        <br>
+                        The Result : 
+                        <ul><li v-for="k in kelas"> {{k}}
+                            </li></ul>
+                        </section>
                     </div>
                     <hr>
                 </div>
@@ -102,7 +115,7 @@
         const vm = new Vue({
             el: '#app',
             data: {
-                
+                kelas:  ['Python', 'Golang', 'Javascript'], 
             },
             methods: {                
                  
