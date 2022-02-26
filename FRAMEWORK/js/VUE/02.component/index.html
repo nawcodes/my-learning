@@ -28,7 +28,7 @@
 
         <header-component></header-component>
         <hr>
-        <main-component></main-component>
+            <theory-component name="It's Props"></theory-component>
     </div>
 
 
@@ -52,9 +52,11 @@
             }
         })
 
-        Vue.component('main-component', {
+        Vue.component('theory-component', {
+            props: ['name'],
             template: `
-                <article id="section">
+            <article id="section">
+                <div>
                     <h1>Add Class Feature</h1>
                     <div class="theory">
                         <input type="text" v-on:keyup.enter="addClass" v-model="newClass">
@@ -63,7 +65,25 @@
                         </ul>
                     </div>
                     <hr>
-                </article>
+                </div>
+                <div>
+                    <h1>Props | Props it's element name in vue js was maker, and it's giving a attribute for data and will be receive in function vue component as by data.</h1>
+                    <ul>
+                        <li>1. Make The Vue.Component('foo')</li>
+                        <li>2. Implement in html <foo></foo></li>
+                        <li>3. Give a custom attribute  <foo data="foo"></foo></li>
+                        <li>4. Add Props : ['nama']  in function Vue.Component('foo', {props:['nama']})</li>
+                        <li>5. After implement and fill it the value, what ever you want do</li>
+                    </ul>
+                    <div class="theory">
+                        <h2>
+                            The Result
+                            </h2>
+                        Render Props : {{name}}
+                    </div>
+                    <hr>
+                </div>
+            </article>
             `,
             data: function() {
                 return {
