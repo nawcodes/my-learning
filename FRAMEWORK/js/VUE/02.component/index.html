@@ -28,7 +28,7 @@
 
         <header-component></header-component>
         <hr>
-        <theory-component name="It's Props" v-bind:kelas="kelas" ></theory-component>
+        <theory-component name="It's Props" v-bind:kelas="kelas" v-on:deleteClass="deletekelas"></theory-component>
         <component-a></component-a>
     </div>
 
@@ -106,6 +106,17 @@
                     </div>
                     <hr>
                 </div>
+                <div>
+                    <h1>$emit | Sebuah fungsi untuk interaksi child dengan induknya, sedangkan kebalikannya induk melalui child yaitu melalui properti</h1>
+                    <div class="theory">
+                        <ul>
+                            <li v-for="(c, index) in isClass">{{index+1}} - {{ c }}</liTry to write in inspect vm.changeName(newName) 
+                                </li>
+                                <a href="#" v-on:click.prevent="$emit('deleteClass')">delete</a>                            
+                        </ul>
+                    </div>
+                    <hr>
+                </div>
             </article>
             `,
             data: function() {
@@ -134,7 +145,9 @@
                 'component-a' : componentA,
             },
             methods: {                
-                 
+                 deletekelas: function() {
+                     console.log('ok');
+                 }
             },
         }); 
     </script>
