@@ -180,13 +180,23 @@
                         <button v-bind:class="{active: menu === 'about'}" v-on:click.prevent="changeMenu('about')">About</button>
                         <button v-bind:class="{active: menu === 'blog'}" v-on:click.prevent="changeMenu('blog')">Blog</button>
                     </li>
+                    <br>
                     <li>Example: $event input with event keyboard
                         <br>
                         <input type="text" name="kelas" v-on:keyup.enter="addClass">
                     </li>
+                    <br>
+                    <li>Example: form input binding with v-model
+                        <br>
+                        <input type="text" name="kelas" v-on:keyup.enter="addClass" v-model="newClass">
+                    </li>
                 </ul>
             </div>
             <hr>
+
+            <div style="text-align: center;">
+                <a href="../02.component/index.html">next it's component</a>
+            </div>
 
         </article>
     
@@ -212,6 +222,7 @@
                 menu: 'home',
                 kelas: ['Golang', 'PHP', 'Python'],
                 numbers: [1,2,3,4,5],
+                newClass: "",
             },
             methods: {
                 getName: function() {
@@ -234,13 +245,13 @@
                     this.menu = menu;
                 },
                 addClass: function(event) {
-                    let result = event.target.value;
-                    console.log(result); 
-                    this.kelas.push(result);
+                    // let result = event.target.value;
+                    this.kelas.push(this.newClass);
                     // or unshift for add in first index array
-                    event.target.value = '';
+                    // event.target.value = '';
+                    this.newClass = '';
 
-                }    
+                } 
             },
             computed: {
                 totalPay: function() {
