@@ -28,7 +28,7 @@
 
         <header-component></header-component>
         <hr>
-        <theory-component name="It's Props" v-bind:kelas="kelas" v-on:deleteClass="deletekelas"></theory-component>
+        <theory-component name="It's Props" v-bind:kelas="kelas" v-on:hapuskelas="kelashapus"></theory-component>
         <component-a></component-a>
     </div>
 
@@ -112,7 +112,7 @@
                         <ul>
                             <li v-for="(c, index) in isClass">{{index+1}} - {{ c }}</liTry to write in inspect vm.changeName(newName) 
                                 </li>
-                                <a href="#" v-on:click.prevent="$emit('deleteClass')">delete</a>                            
+                                <a href="#" v-on:click.prevent="$emit('hapuskelas', index)">delete</a>                            
                         </ul>
                     </div>
                     <hr>
@@ -145,8 +145,8 @@
                 'component-a' : componentA,
             },
             methods: {                
-                 deletekelas: function() {
-                     console.log('ok');
+                 kelashapus: function(index) {
+                    this.isClass.splice(index, 1);
                  }
             },
         }); 
