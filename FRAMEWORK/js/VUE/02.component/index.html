@@ -28,7 +28,7 @@
 
         <header-component></header-component>
         <hr>
-        <theory-component name="It's Props" v-bind:kelas="kelas" v-on:hapuskelas="kelashapus"></theory-component>
+        <theory-component name="It's Props" v-bind:kelas="kelas" v-on:hapuskelas="kelashapus" v-on:submitkelas="submitkelas"></theory-component>
         <component-a></component-a>
     </div>
 
@@ -109,8 +109,17 @@
                 <div>
                     <h1>$emit | Sebuah fungsi untuk interaksi child dengan induknya, sedangkan kebalikannya induk melalui child yaitu melalui properti</h1>
                     <div class="theory">
+                        <h3> Example data In Methods Child</h3>
                         <ul>
                             <li v-for="(c, index) in isClass">{{index+1}} - {{ c }}</liTry to write in inspect vm.changeName(newName) 
+                                </li>
+                                <a href="#" v-on:click.prevent="$emit('hapuskelas', index)">delete</a>                            
+                        </ul>
+                        <br>
+                        <h3>Example data In Methods Parent</h3>
+                        <input v-on:keyup.enter="$emit('submitkelas', $event)" placeholder="event submit menggunakan $emit | TAP ENTER" style="width:100%">
+                        <ul>
+                            <li v-for="(c, index) in kelas">{{index+1}} - {{ c }}</liTry to write in inspect vm.changeName(newName) 
                                 </li>
                                 <a href="#" v-on:click.prevent="$emit('hapuskelas', index)">delete</a>                            
                         </ul>
@@ -146,8 +155,11 @@
             },
             methods: {                
                  kelashapus: function(index) {
-                    this.isClass.splice(index, 1);
-                 }
+                    this.kelas.splice(index, 1);
+                 },
+                 submitkelas: function(e) {
+                    this.kelas.push(e.target.value);
+                }
             },
         }); 
     </script>
