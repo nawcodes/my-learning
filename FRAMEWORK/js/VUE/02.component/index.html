@@ -30,6 +30,9 @@
         <hr>
         <theory-component name="It's Props" v-bind:kelas="kelas" v-on:hapuskelas="kelashapus" v-on:submitkelas="submitkelas"></theory-component>
         <component-a></component-a>
+        <footer-component>
+            Nawcodes
+        </footer-component>
     </div>
 
 
@@ -143,7 +146,15 @@
         })
 
 
-        var componentA = { template: `<div>it's Component A With Vanilla Javascript<div>`}
+        var componentA = { template: `<div>it's Component A With Vanilla Javascript<div>`};
+        var footerComponent = {
+            template: `
+            <footer id="footer">
+                <p>Copy Right Reserverd <slot></slot><p> 
+                
+            </footer>
+            `
+        } 
 
         const vm = new Vue({
             el: '#app',
@@ -152,6 +163,7 @@
             },
             components: {
                 'component-a' : componentA,
+                'footer-component' : footerComponent,
             },
             methods: {                
                  kelashapus: function(index) {
