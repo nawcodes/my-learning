@@ -21,13 +21,23 @@
             padding: 5px;
         }
     </style>
+    <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+
 </head>
 <body>
 
     <div id="app">
+      
         <header-component></header-component>
+        <nav>
+                <router-link to="/">Home</router-link>
+                <router-link to="/about">About</router-link>
+                <router-link to="/kelas">Kelas</router-link>
+        </nav>
         <hr>
         <theory-component v-bind:kelas="kelas" v-on:hapuskelas="kelashapus" v-on:submitkelas="submitkelas"></theory-component>
+        <router-view></router-view>
         <footer-component>
             Nawcodes
         </footer-component>
@@ -36,8 +46,16 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
+
+           
+        // Routes Component 
+            // Nav Component
+            const Home = {template : '<div> Home </div>'}  
+            const About = {template : '<div> About </div>'}  
+            const Kelas = {template : '<div> Kelas </div>'}  
+        // End Routes Component
+
 
         Vue.component('header-component' , {
             template: `
@@ -61,7 +79,7 @@
                 <div>
                     <h1>Add Class Feature</h1>
                     <div class="theory">
-                        <input type="text" v-on:keyup.enter="$emit('submitkelas')">
+                        <input type="text" v-on:keyup.enter="$emit('submitkelas', $event)">
                         <ul>
                             <li v-for="(c, index) in kelas">{{index+1}} - {{ c }} <a href="#" v-on:click.prevent="$emit('hapuskelas', index)"> Delete</a> </li>
                         </ul>
@@ -72,24 +90,36 @@
             `,
         })
 
-
-        var componentA = { template: `<div>it's Component A With Vanilla Javascript<div>`};
         var footerComponent = {
             template: `
             <footer id="footer">
-                <p>Copy Right Reserverd <slot></slot><p> 
-                
+                <p>Copy Right Reserverd <slot></slot></p> 
             </footer>
             `
         } 
 
+     
+        
+        // Instance  Component To Routes 
+        const routes = [
+            {path: '/', component : Home},
+            {path: '/about', component : About},
+            {path: '/kelas' , component : Kelas},
+        ]
+
+        // Instance Routes To Router
+        const router = new VueRouter({
+            routes
+        }) 
+
+
         const vm = new Vue({
             el: '#app',
+            router,
             data: {
                 kelas:  ['Python', 'Golang', 'Javascript'], 
             },
             components: {
-                'component-a' : componentA,
                 'footer-component' : footerComponent,
             },
             methods: {                
