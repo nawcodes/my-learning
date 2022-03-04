@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Router In Vue. 2</title>
+    <style>
+        body {
+            margin: 5%;
+            font-family: 'Serif';
+        }
+
+        #section .theory {
+            margin-left: 2%;
+        }
+
+        .active {
+            background: salmon;
+            border: 0;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <header-component></header-component>
+        <hr>
+        <theory-component v-bind:kelas="kelas" v-on:hapuskelas="kelashapus" v-on:submitkelas="submitkelas"></theory-component>
+        <footer-component>
+            Nawcodes
+        </footer-component>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+
+        Vue.component('header-component' , {
+            template: `
+                <header>
+                <img src="image/logo.png" width="80" alt="" style="">
+                <h1>{{ title }}</h1>
+                </header>
+            `,
+            // data must be a function!!!!!!
+            data: function() {
+                return {
+                    title: 'Hello Router In Vue 2', 
+                }
+            }
+        })
+
+        Vue.component('theory-component', {
+            props: ['name', 'kelas'],
+            template: `
+            <article id="section">
+                <div>
+                    <h1>Add Class Feature</h1>
+                    <div class="theory">
+                        <input type="text" v-on:keyup.enter="$emit('submitkelas')">
+                        <ul>
+                            <li v-for="(c, index) in kelas">{{index+1}} - {{ c }} <a href="#" v-on:click.prevent="$emit('hapuskelas', index)"> Delete</a> </li>
+                        </ul>
+                    </div>
+                    <hr>
+                </div>
+            </article>
+            `,
+        })
+
+
+        var componentA = { template: `<div>it's Component A With Vanilla Javascript<div>`};
+        var footerComponent = {
+            template: `
+            <footer id="footer">
+                <p>Copy Right Reserverd <slot></slot><p> 
+                
+            </footer>
+            `
+        } 
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                kelas:  ['Python', 'Golang', 'Javascript'], 
+            },
+            components: {
+                'component-a' : componentA,
+                'footer-component' : footerComponent,
+            },
+            methods: {                
+                 kelashapus: function(index) {
+                    this.kelas.splice(index, 1);
+                 },
+                 submitkelas: function(e) {
+                    this.kelas.push(e.target.value);
+                }
+            },
+        }); 
+    </script>
+</body>
+</html>
