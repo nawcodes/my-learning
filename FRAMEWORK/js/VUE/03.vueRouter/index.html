@@ -36,8 +36,7 @@
                 <router-link to="/kelas">Kelas</router-link>
         </nav>
         <hr>
-        <theory-component v-bind:kelas="kelas" v-on:hapuskelas="kelashapus" v-on:submitkelas="submitkelas"></theory-component>
-        <router-view></router-view>
+        <router-view v-bind:kelas="kelas" v-on:hapuskelas="kelashapus" v-on:submitkelas="submitkelas"></router-view>
         <footer-component>
             Nawcodes
         </footer-component>
@@ -53,7 +52,23 @@
             // Nav Component
             const Home = {template : '<div> Home </div>'}  
             const About = {template : '<div> About </div>'}  
-            const Kelas = {template : '<div> Kelas </div>'}  
+            const Kelas = {
+                props: ['name', 'kelas'],
+                template: `
+                <article id="section">
+                    <div>
+                        <h1>Add Class Feature</h1>
+                        <div class="theory">
+                            <input type="text" v-on:keyup.enter="$emit('submitkelas', $event)">
+                            <ul>
+                                <li v-for="(c, index) in kelas">{{index+1}} - {{ c }} <a href="#" v-on:click.prevent="$emit('hapuskelas', index)"> Delete</a> </li>
+                            </ul>
+                        </div>
+                        <hr>
+                    </div>
+                </article>
+                `,
+            }  
         // End Routes Component
 
 
@@ -72,23 +87,7 @@
             }
         })
 
-        Vue.component('theory-component', {
-            props: ['name', 'kelas'],
-            template: `
-            <article id="section">
-                <div>
-                    <h1>Add Class Feature</h1>
-                    <div class="theory">
-                        <input type="text" v-on:keyup.enter="$emit('submitkelas', $event)">
-                        <ul>
-                            <li v-for="(c, index) in kelas">{{index+1}} - {{ c }} <a href="#" v-on:click.prevent="$emit('hapuskelas', index)"> Delete</a> </li>
-                        </ul>
-                    </div>
-                    <hr>
-                </div>
-            </article>
-            `,
-        })
+
 
         var footerComponent = {
             template: `
