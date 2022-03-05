@@ -61,7 +61,7 @@
                         <div class="theory">
                             <input type="text" v-on:keyup.enter="$emit('submitkelas', $event)">
                             <ul>
-                                <li v-for="(c, index) in kelas">{{index+1}} - {{ c }} <a href="#" v-on:click.prevent="$emit('hapuskelas', index)"> Delete</a> </li>
+                                <li v-for="(c, index) in kelas">{{index+1}} - {{ c.nama }} <a href="#" v-on:click.prevent="$emit('hapuskelas', c.id)"> Delete</a> </li>
                             </ul>
                         </div>
                         <hr>
@@ -115,14 +115,19 @@
             el: '#app',
             router,
             data: {
-                kelas:  ['Python', 'Golang', 'Javascript'], 
+                kelas:  [
+                    {id: 1, nama: 'Javascript' , description: 'Javascript its programing language'},
+                    {id: 2, nama: 'PHP' , description: 'PHP its programing language'}
+                ], 
             },
             components: {
                 'footer-component' : footerComponent,
             },
             methods: {                
-                 kelashapus: function(index) {
-                    this.kelas.splice(index, 1);
+                 kelashapus: function(id) {
+                    // this.kelas.splice(index, 1);
+                    // console.log(id);
+                    this.kelas = this.kelas.filter(item => item.id != id);
                  },
                  submitkelas: function(e) {
                     this.kelas.push(e.target.value);
