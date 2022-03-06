@@ -23,6 +23,7 @@
     </style>
     <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
 
 </head>
 <body>
@@ -58,16 +59,54 @@
                 <article id="section">
                     <div>
                         <h1>Add Class Feature</h1>
+                        <form v-on:submit.prevent="submitkelas">
+                            <div>
+                                <label For="kelas">Judul:</label>
+                                <input type="text" v-model="newkelas.name" name="name" id="name">    
+                            </div>    
+                            <div>
+                                <label For="deskripsi">Deskripsi:</label>
+                                <textarea v-model="newkelas.description" name="description" id="description"></textarea>    
+                            </div>    
+                            <div>
+                                <label For="kelas">Photo:</label>
+                                <input type="file" name="photo" id="photo">    
+                            </div>
+                            <button type="submit" >Submit</button>     
+                            
+                        </form>
                         <div class="theory">
-                            <input type="text" v-on:keyup.enter="$emit('submitkelas', $event)">
                             <ul>
-                                <li v-for="(c, index) in kelas">{{index+1}} - {{ c.nama }} <a href="#" v-on:click.prevent="$emit('hapuskelas', c.id)"> Delete</a> </li>
+                                <li v-for="(c, index) in kelas">{{index+1}} - {{ c.name }} <a href="#" v-on:click.prevent="$emit('hapuskelas', c.id)"> Delete</a> </li>
                             </ul>
                         </div>
                         <hr>
                     </div>
                 </article>
                 `,
+                data: function() {
+                    return {
+                        newkelas : {
+                            name: '',
+                            description: '',
+                            photo: ''
+                        }
+                    }
+                },
+                methods: {
+                    submitkelas: function(e) {
+                        // console.log(this.newkelas);
+                        const data = {
+                            id: uuidv4(),
+                            name: this.newkelas.name,
+                            description: this.newkelas.description,
+                            photo: null,
+                        }
+                        this.$emit('submitkelas', data);
+                        this.newkelas.name = "";
+                        this.newkelas.description = "";
+                    }
+                }
             }  
         // End Routes Component
 
@@ -116,21 +155,21 @@
             router,
             data: {
                 kelas:  [
-                    {id: 1, nama: 'Javascript' , description: 'Javascript its programing language'},
-                    {id: 2, nama: 'PHP' , description: 'PHP its programing language'}
+                    {id: 1, name: 'Javascript' , description: 'Javascript its programing language', photo: ''},
+                    {id: 2, name: 'PHP' , description: 'PHP its programing language', photo: '',}
                 ], 
             },
             components: {
                 'footer-component' : footerComponent,
             },
             methods: {                
-                 kelashapus: function(id) {
+                kelashapus: function(id) {
                     // this.kelas.splice(index, 1);
                     // console.log(id);
                     this.kelas = this.kelas.filter(item => item.id != id);
-                 },
-                 submitkelas: function(e) {
-                    this.kelas.push(e.target.value);
+                },
+                submitkelas: function(data) {
+                    this.kelas.push(data);
                 }
             },
         }); 
