@@ -69,8 +69,9 @@
                                 <textarea v-model="newkelas.description" name="description" id="description"></textarea>    
                             </div>    
                             <div>
+                                <img :src="previewimage" v-if="previewimage" width="200"/>
                                 <label For="kelas">Photo:</label>
-                                <input type="file" name="photo" id="photo">    
+                                <input type="file" v-on:change="upload" name="photo" id="photo">    
                             </div>
                             <button type="submit" >Submit</button>     
                             
@@ -90,7 +91,8 @@
                             name: '',
                             description: '',
                             photo: ''
-                        }
+                        },
+                        previewimage: ''
                     }
                 },
                 methods: {
@@ -100,11 +102,16 @@
                             id: uuidv4(),
                             name: this.newkelas.name,
                             description: this.newkelas.description,
-                            photo: null,
+                            photo: this.newkelas.photo,
                         }
                         this.$emit('submitkelas', data);
                         this.newkelas.name = "";
                         this.newkelas.description = "";
+                    },
+                    upload: function(e) {
+                        const imageName = e.target.files[0].name;
+                        this.newkelas.photo = imageName;
+                        this.previewimage = URL.createObjectURL(e.target.files[0]);
                     }
                 }
             }  
