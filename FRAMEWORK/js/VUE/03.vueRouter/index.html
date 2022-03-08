@@ -71,14 +71,17 @@
                             <div>
                                 <img :src="previewimage" v-if="previewimage" width="200"/>
                                 <label For="kelas">Photo:</label>
-                                <input type="file" v-on:change="upload" name="photo" id="photo">    
+                                <input type="file" ref="photo" v-on:change="upload" name="photo" id="photo">    
                             </div>
                             <button type="submit" >Submit</button>     
                             
                         </form>
                         <div class="theory">
                             <ul>
-                                <li v-for="(c, index) in kelas">{{index+1}} - {{ c.name }} <a href="#" v-on:click.prevent="$emit('hapuskelas', c.id)"> Delete</a> </li>
+                                <li v-for="(c, index) in kelas">
+                                    <img :src="'image/' + c.photo" v-if="c.photo" width="150"/>
+                                    <p>{{index+1}} - {{ c.name }} <a href="#" v-on:click.prevent="$emit('hapuskelas', c.id)"> Delete</a></p> 
+                                </li>
                             </ul>
                         </div>
                         <hr>
@@ -107,6 +110,9 @@
                         this.$emit('submitkelas', data);
                         this.newkelas.name = "";
                         this.newkelas.description = "";
+                        this.newkelas.photo = "";
+                        this.previewimage = "";
+                        this.$refs.photo.value = "";
                     },
                     upload: function(e) {
                         const imageName = e.target.files[0].name;
@@ -162,7 +168,7 @@
             router,
             data: {
                 kelas:  [
-                    {id: 1, name: 'Javascript' , description: 'Javascript its programing language', photo: ''},
+                    {id: 1, name: 'Javascript' , description: 'Javascript its programing language', photo: 'logo.png'},
                     {id: 2, name: 'PHP' , description: 'PHP its programing language', photo: '',}
                 ], 
             },
