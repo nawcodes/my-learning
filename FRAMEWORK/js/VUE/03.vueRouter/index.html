@@ -53,6 +53,7 @@
             // Nav Component
             const Home = {template : '<div> Home </div>'}  
             const About = {template : '<div> About </div>'}  
+            const NotFound = {template : '<div> Page its not found! </div>'}  
             const Kelas = {
                 props: ['name', 'kelas'],
                 template: `
@@ -147,13 +148,13 @@
             `
         } 
 
-     
         
         // Instance  Component To Routes 
         const routes = [
             {path: '/', component : Home},
             {path: '/about', component : About},
             {path: '/kelas' , component : Kelas},
+            {path: '*' , component : NotFound},
         ]
 
         // Instance Routes To Router
