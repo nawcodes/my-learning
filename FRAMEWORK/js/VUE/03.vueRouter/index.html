@@ -62,11 +62,13 @@
                         <form v-on:submit.prevent="submitkelas">
                             <div>
                                 <label For="kelas">Judul:</label>
-                                <input type="text" v-model="newkelas.name" name="name" id="name">    
+                                <input type="text" v-model="newkelas.name" name="name" id="name">
+                                <small class="error" v-if="error.name">{{error.name}}</small>    
                             </div>    
                             <div>
                                 <label For="deskripsi">Deskripsi:</label>
-                                <textarea v-model="newkelas.description" name="description" id="description"></textarea>    
+                                <textarea v-model="newkelas.description" name="description" id="description"></textarea>
+                                <small class="error" v-if="error.description">{{error.description}}</small>    
                             </div>    
                             <div>
                                 <img :src="previewimage" v-if="previewimage" width="200"/>
@@ -92,11 +94,29 @@
                             description: '',
                             photo: ''
                         },
-                        previewimage: ''
+                        previewimage: '',
+                        error: {
+                            name: '',
+                            description: '',
+                        }
                     }
                 },
                 methods: {
                     submitkelas: function(e) {
+                        this.error.name = '';
+                        this.error.description = '';
+
+
+                        if(this.newkelas.name == '') {
+                            this.error.name = 'The name of class is required.';
+                        }
+
+                        if(this.newkelas.description == '') {
+                            this.error.description = "The description field is required.";
+                        } 
+
+
+                        if(this.newkelas.name && this.newkelas.description) {
                         // console.log(this.newkelas);
                         const data = {
                             id: uuidv4(),
@@ -107,6 +127,7 @@
                         this.$emit('submitkelas', data);
                         this.newkelas.name = "";
                         this.newkelas.description = "";
+                        }
                     },
                     upload: function(e) {
                         const imageName = e.target.files[0].name;
@@ -161,10 +182,14 @@
             el: '#app',
             router,
             data: {
-                kelas:  [
-                    {id: 1, name: 'Javascript' , description: 'Javascript its programing language', photo: ''},
-                    {id: 2, name: 'PHP' , description: 'PHP its programing language', photo: '',}
-                ], 
+                // kelas:  [
+                //     {id: 1, name: 'Javascript' , description: 'Javascript its programing language', photo: ''},
+                //     {id: 2, name: 'PHP' , description: 'PHP its programing language', photo: '',}
+                // ], 
+                kelas : [],
+            },
+            created() {
+                this.kelas = JSON.parse(localStorage.getItem('kelas')) || [];
             },
             components: {
                 'footer-component' : footerComponent,
@@ -177,6 +202,7 @@
                 },
                 submitkelas: function(data) {
                     this.kelas.push(data);
+                    localStorage.setItem('kelas', JSON.stringify(this.kelas));
                 }
             },
         }); 
