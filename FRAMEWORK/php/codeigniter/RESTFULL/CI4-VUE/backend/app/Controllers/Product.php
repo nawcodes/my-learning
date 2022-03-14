@@ -62,7 +62,7 @@ class Product extends BaseController
         return $this->respond($product);
     }
 
-    public function delete($id = null)
+    public function delete($id)
     {
         $cekId = $this->model->find(['id' => $id]);
         if (!$cekId) return $this->fail('Data Tidak ditemukan', 404);
