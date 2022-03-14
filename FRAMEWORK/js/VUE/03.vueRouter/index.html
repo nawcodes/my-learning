@@ -45,6 +45,28 @@
 
 
 
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
+        import { getDatabase } from "firebase/database";
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB05qkATBpI7Laz5J022E2VXDaElkjWTtw",
+            authDomain: "vue-basic-98dcb.firebaseapp.com",
+            projectId: "vue-basic-98dcb",
+            storageBucket: "vue-basic-98dcb.appspot.com",
+            messagingSenderId: "995066901790",
+            appId: "1:995066901790:web:ef19c6c62dd44cda44c50f"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const collection = getDatabase(app);
+    </script>
 
     <script>
 
