@@ -25,6 +25,30 @@
     <script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
     <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.23.0/firebase.js" integrity="sha512-2bCF8fDxMUcatrMII7rVyxrF5IsDymsUyRBjMD+XxJkyo9pnuMxNTBsPg4Mbe66khmhBOvPXsphpUOpKRfsQnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.23.0/firebase-database.js" integrity="sha512-YtkwNOkzkFFx0NKMPJG3HlVEBb2kXQv8AGh9hyDfuWD432dhNQ7cK2yVuGyelu+uob0JW/42EgbtQh5ccvpnUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <script>
+  // Import the functions you need from the SDKs you need
+  
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyB05qkATBpI7Laz5J022E2VXDaElkjWTtw",
+    authDomain: "vue-basic-98dcb.firebaseapp.com",
+    databaseURL: "https://vue-basic-98dcb-default-rtdb.firebaseio.com",
+    projectId: "vue-basic-98dcb",
+    storageBucket: "vue-basic-98dcb.appspot.com",
+    messagingSenderId: "995066901790",
+    appId: "1:995066901790:web:ef19c6c62dd44cda44c50f"
+  };
+
+  const app = firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+  const kelasRef = database.ref('kelas');
+
+
+</script>
 
 </head>
 <body>
@@ -46,30 +70,10 @@
 
 
 
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
-        import { getDatabase } from "firebase/database";
-
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyB05qkATBpI7Laz5J022E2VXDaElkjWTtw",
-            authDomain: "vue-basic-98dcb.firebaseapp.com",
-            projectId: "vue-basic-98dcb",
-            storageBucket: "vue-basic-98dcb.appspot.com",
-            messagingSenderId: "995066901790",
-            appId: "1:995066901790:web:ef19c6c62dd44cda44c50f"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const collection = getDatabase(app);
-    </script>
+   
 
     <script>
+     
 
            
         // Routes Component 
@@ -255,13 +259,20 @@
                console.log('before created: ' + this.kelas);
             },
             created() {
-                const k = this.kelas = JSON.parse(localStorage.getItem('kelas')) || [];
-                console.log('after created:' + this.kelas);
+                kelasRef.on('value', this.resultData, this.errorData);
             },
             components: {
                 'footer-component' : footerComponent,
             },
-            methods: {                
+            methods: {     
+                resultData(result) {
+                    result.forEach((r) => {
+                        this.kelas.push(r.val());
+                    })
+                },
+                errorData() {
+                    console.log(error);
+                },           
                 kelashapus: function(id) {
                     this.kelas = this.kelas.filter(item => item.id != id);
                     localStorage.setItem('kelas', JSON.stringify(this.kelas));
@@ -271,8 +282,18 @@
                     });
                 },
                 submitkelas: function(data) {
-                    this.kelas.push(data);
-                    localStorage.setItem('kelas', JSON.stringify(this.kelas));
+                    // this.kelas.push(data);
+                    // localStorage.setItem('kelas', JSON.stringify(this.kelas));
+                    // insert to firebase
+                    this.kelas = [];
+                    kelasRef.push(
+                        {
+                            name: data.name,
+                            description: data.description,
+                            photo: data.photo
+                        }
+                    );
+
                     Swal.fire( {
                     title: this.kelas.name,
                     text: 'Saved',
