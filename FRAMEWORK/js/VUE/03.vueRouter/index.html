@@ -84,11 +84,14 @@
             const DetailKelas = {
                 template : `
                 <div> Detail kelas! 
+                    <template v-if="detailKelas">
                 <p>uuid - {{$route.params.id}}</p>
                 <p>name - {{detailKelas.name}} </p>
                 <p>description - {{detailKelas.description}} </p>
                 <p>image - <img :src="urlImage(detailKelas.photo)" /> {{detailKelas.photo}} </p> 
                 <router-link to="/kelas">kembali</router-link>   
+                    </template>
+                <p v-else>Kelas Tidak Ditemukan.</p>
                 </div>`,
                 data() {
                     return {
@@ -102,12 +105,16 @@
                     filterKelas() {
                         let kelas = JSON.parse(localStorage.getItem('kelas'));
                         let id = this.$route.params.id;
-                        let filtered = kelas.filter(k => k.id == id);
+                        let rowKelas = database.ref('kelas/' + id);
+                        rowKelas.on('value', (item) => {
+                            // console.log(item.val());
+                            this.detailKelas = item.val();
+                        })
+                        // let filtered = kelas.filter(k => k.id == id);
                         // console.log(filtered); return array
-                        this.detailKelas = filtered[0];
                     },
                     urlImage  : function(urlImage) {
-                        return './image/' + urlImage;
+                        return urlImage ? '../image/' + urlImage : '';
                     }
                 }
             }  
@@ -266,16 +273,23 @@
             },
             methods: {     
                 resultData(result) {
+                    this.kelas = [];
                     result.forEach((r) => {
-                        this.kelas.push(r.val());
+                        let data = {
+                                id: r.key,
+                                name: r.val().name,
+                                description: r.val().description,
+                                photo: r.val().photo
+                        }
+                        this.kelas.push(data);
                     })
                 },
                 errorData() {
                     console.log(error);
                 },           
                 kelashapus: function(id) {
-                    this.kelas = this.kelas.filter(item => item.id != id);
-                    localStorage.setItem('kelas', JSON.stringify(this.kelas));
+                    database.ref('/kelas/' + id).remove()
+                   e.setItem('kelas', JSON.stringify(this.kelas));
                     Swal.fire( {
                         text: 'Deleted',
                         icon : 'warning'
@@ -285,7 +299,6 @@
                     // this.kelas.push(data);
                     // localStorage.setItem('kelas', JSON.stringify(this.kelas));
                     // insert to firebase
-                    this.kelas = [];
                     kelasRef.push(
                         {
                             name: data.name,
