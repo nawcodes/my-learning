@@ -1,56 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Router In Vue. 2</title>
-    <style>
-        body {
-            margin: 5%;
-            font-family: 'Serif';
-        }
-
-        #section .theory {
-            margin-left: 2%;
-        }
-
-        .active {
-            background: salmon;
-            border: 0;
-            padding: 5px;
-        }
-    </style>
-    <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
-    <script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
-    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-</head>
-<body>
-
-    <div id="app">
-      
-        <header-component></header-component>
-        <nav>
-                <router-link to="/">Home</router-link>
-                <router-link to="/about">About</router-link>
-                <router-link to="/kelas">Kelas</router-link>
-        </nav>
-        <hr>
-        <router-view v-bind:kelas="kelas" v-on:hapuskelas="kelashapus" v-on:submitkelas="submitkelas"></router-view>
-        <footer-component>
-            Nawcodes
-        </footer-component>
-    </div>
-
-
-
-
-    <script>
-
-           
-        // Routes Component 
+ // Routes Component 
             // Nav Component
             const Home = {template : '<div> Home </div>'}  
             const About = {template : '<div> About </div>'}  
@@ -58,11 +6,14 @@
             const DetailKelas = {
                 template : `
                 <div> Detail kelas! 
+                    <template v-if="detailKelas">
                 <p>uuid - {{$route.params.id}}</p>
                 <p>name - {{detailKelas.name}} </p>
                 <p>description - {{detailKelas.description}} </p>
                 <p>image - <img :src="urlImage(detailKelas.photo)" /> {{detailKelas.photo}} </p> 
                 <router-link to="/kelas">kembali</router-link>   
+                    </template>
+                <p v-else>Kelas Tidak Ditemukan.</p>
                 </div>`,
                 data() {
                     return {
@@ -76,12 +27,16 @@
                     filterKelas() {
                         let kelas = JSON.parse(localStorage.getItem('kelas'));
                         let id = this.$route.params.id;
-                        let filtered = kelas.filter(k => k.id == id);
+                        let rowKelas = database.ref('kelas/' + id);
+                        rowKelas.on('value', (item) => {
+                            // console.log(item.val());
+                            this.detailKelas = item.val();
+                        })
+                        // let filtered = kelas.filter(k => k.id == id);
                         // console.log(filtered); return array
-                        this.detailKelas = filtered[0];
                     },
                     urlImage  : function(urlImage) {
-                        return './image/' + urlImage;
+                        return urlImage ? '../image/' + urlImage : '';
                     }
                 }
             }  
@@ -201,64 +156,3 @@
             </footer>
             `
         } 
-
-        
-        // Instance  Component To Routes 
-        const routes = [
-            {path: '/', component : Home},
-            {path: '/about', component : About},
-            {path: '/kelas' , component : Kelas},
-            {path: '/kelas/:id' , component : DetailKelas},
-            {path: '*' , component : NotFound},
-        ]
-
-        // Instance Routes To Router
-        const router = new VueRouter({
-            mode: 'history',
-            routes
-        }) 
-
-
-        const vm = new Vue({
-            el: '#app',
-            router,
-            data: {
-                // kelas:  [
-                //     {id: 1, name: 'Javascript' , description: 'Javascript its programing language', photo: ''},
-                //     {id: 2, name: 'PHP' , description: 'PHP its programing language', photo: '',}
-                // ], 
-                kelas : [],
-            },
-            beforeCreate() {
-               console.log('before created: ' + this.kelas);
-            },
-            created() {
-                const k = this.kelas = JSON.parse(localStorage.getItem('kelas')) || [];
-                console.log('after created:' + this.kelas);
-            },
-            components: {
-                'footer-component' : footerComponent,
-            },
-            methods: {                
-                kelashapus: function(id) {
-                    this.kelas = this.kelas.filter(item => item.id != id);
-                    localStorage.setItem('kelas', JSON.stringify(this.kelas));
-                    Swal.fire( {
-                        text: 'Deleted',
-                        icon : 'warning'
-                    });
-                },
-                submitkelas: function(data) {
-                    this.kelas.push(data);
-                    localStorage.setItem('kelas', JSON.stringify(this.kelas));
-                    Swal.fire( {
-                    title: this.kelas.name,
-                    text: 'Saved',
-                    icon : 'success'
-                    });
-                }
-            },
-        }); 
-    </script>
-</body>
-</html>
