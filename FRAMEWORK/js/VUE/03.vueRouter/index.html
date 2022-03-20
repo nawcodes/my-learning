@@ -21,34 +21,7 @@
             padding: 5px;
         }
     </style>
-    <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
-    <script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
-    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.23.0/firebase.js" integrity="sha512-2bCF8fDxMUcatrMII7rVyxrF5IsDymsUyRBjMD+XxJkyo9pnuMxNTBsPg4Mbe66khmhBOvPXsphpUOpKRfsQnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.23.0/firebase-database.js" integrity="sha512-YtkwNOkzkFFx0NKMPJG3HlVEBb2kXQv8AGh9hyDfuWD432dhNQ7cK2yVuGyelu+uob0JW/42EgbtQh5ccvpnUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <script>
-  // Import the functions you need from the SDKs you need
-  
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyB05qkATBpI7Laz5J022E2VXDaElkjWTtw",
-    authDomain: "vue-basic-98dcb.firebaseapp.com",
-    databaseURL: "https://vue-basic-98dcb-default-rtdb.firebaseio.com",
-    projectId: "vue-basic-98dcb",
-    storageBucket: "vue-basic-98dcb.appspot.com",
-    messagingSenderId: "995066901790",
-    appId: "1:995066901790:web:ef19c6c62dd44cda44c50f"
-  };
-
-  const app = firebase.initializeApp(firebaseConfig);
-  const database = firebase.database();
-  const kelasRef = database.ref('kelas');
-
-
-</script>
+   
 
 </head>
 <body>
@@ -68,189 +41,23 @@
         </footer-component>
     </div>
 
-
-
-   
+ <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+<script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.23.0/firebase.js" integrity="sha512-2bCF8fDxMUcatrMII7rVyxrF5IsDymsUyRBjMD+XxJkyo9pnuMxNTBsPg4Mbe66khmhBOvPXsphpUOpKRfsQnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.23.0/firebase-database.js" integrity="sha512-YtkwNOkzkFFx0NKMPJG3HlVEBb2kXQv8AGh9hyDfuWD432dhNQ7cK2yVuGyelu+uob0JW/42EgbtQh5ccvpnUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    
+<script src="firebase.js"></script>
+<script src="component.js"></script>
+<script src="routes.js"></script>
 
     <script>
      
 
            
-        // Routes Component 
-            // Nav Component
-            const Home = {template : '<div> Home </div>'}  
-            const About = {template : '<div> About </div>'}  
-            const NotFound = {template : '<div> Page its not found! </div>'}  
-            const DetailKelas = {
-                template : `
-                <div> Detail kelas! 
-                    <template v-if="detailKelas">
-                <p>uuid - {{$route.params.id}}</p>
-                <p>name - {{detailKelas.name}} </p>
-                <p>description - {{detailKelas.description}} </p>
-                <p>image - <img :src="urlImage(detailKelas.photo)" /> {{detailKelas.photo}} </p> 
-                <router-link to="/kelas">kembali</router-link>   
-                    </template>
-                <p v-else>Kelas Tidak Ditemukan.</p>
-                </div>`,
-                data() {
-                    return {
-                        detailKelas: {}
-                    }
-                },
-                created() {
-                    this.filterKelas();
-                },
-                methods: {
-                    filterKelas() {
-                        let kelas = JSON.parse(localStorage.getItem('kelas'));
-                        let id = this.$route.params.id;
-                        let rowKelas = database.ref('kelas/' + id);
-                        rowKelas.on('value', (item) => {
-                            // console.log(item.val());
-                            this.detailKelas = item.val();
-                        })
-                        // let filtered = kelas.filter(k => k.id == id);
-                        // console.log(filtered); return array
-                    },
-                    urlImage  : function(urlImage) {
-                        return urlImage ? '../image/' + urlImage : '';
-                    }
-                }
-            }  
-            const Kelas = {
-                props: ['name', 'kelas'],
-                template: `
-                <article id="section">
-                    <div>
-                        <h1>Add Class Feature</h1>
-                        <form v-on:submit.prevent="submitkelas">
-                            <div>
-                                <label For="kelas">Judul:</label>
-                                <input type="text" v-model="newkelas.name" name="name" id="name">
-                                <small class="error" v-if="error.name">{{error.name}}</small>    
-                            </div>    
-                            <div>
-                                <label For="deskripsi">Deskripsi:</label>
-                                <textarea v-model="newkelas.description" name="description" id="description"></textarea>
-                                <small class="error" v-if="error.description">{{error.description}}</small>    
-                            </div>    
-                            <div>
-                                <img :src="previewimage" v-if="previewimage" width="200"/>
-                                <label For="kelas">Photo:</label>
-                                <input type="file" ref="photo" v-on:change="upload" name="photo" id="photo">    
-                            </div>
-                            <button type="submit" >Submit</button>     
-                            
-                        </form>
-                        <div class="theory">
-                            <ul>
-                                <li v-for="(c, index) in kelas">
-                                    <img :src="'image/' + c.photo" v-if="c.photo" width="150"/>
-                                    <p>{{index+1}} - {{ c.name }} <a href="#" v-on:click.prevent="$emit('hapuskelas', c.id)"> Delete</a></p> 
-                                    <router-link :to="'kelas/' + c.id ">Lihat kelas</router-link>
-                                </li>
-                            </ul>
-                        </div>
-                        <hr>
-                    </div>
-                </article>
-                `,
-                data: function() {
-                    return {
-                        newkelas : {
-                            name: '',
-                            description: '',
-                            photo: ''
-                        },
-                        previewimage: '',
-                        error: {
-                            name: '',
-                            description: '',
-                        }
-                    }
-                },
-                methods: {
-                    submitkelas: function(e) {
-                        this.error.name = '';
-                        this.error.description = '';
+       
 
-
-                        if(this.newkelas.name == '') {
-                            this.error.name = 'The name of class is required.';
-                        }
-
-                        if(this.newkelas.description == '') {
-                            this.error.description = "The description field is required.";
-                        } 
-
-
-                        if(this.newkelas.name && this.newkelas.description) {
-                        // console.log(this.newkelas);
-                        const data = {
-                            id: uuidv4(),
-                            name: this.newkelas.name,
-                            description: this.newkelas.description,
-                            photo: this.newkelas.photo,
-                        }
-                        this.$emit('submitkelas', data);
-                        this.newkelas.name = "";
-                        this.newkelas.description = "";
-                        this.newkelas.photo = "";
-                        this.previewimage = "";
-                        this.$refs.photo.value = "";
-
-                        }
-                    },
-                    upload: function(e) {
-                        const imageName = e.target.files[0].name;
-                        this.newkelas.photo = imageName;
-                        this.previewimage = URL.createObjectURL(e.target.files[0]);
-                    }
-                }
-            }  
-        // End Routes Component
-
-
-        Vue.component('header-component' , {
-            template: `
-                <header>
-                <img src="image/logo.png" width="80" alt="" style="">
-                <h1>{{ title }}</h1>
-                </header>
-            `,
-            // data must be a function!!!!!!
-            data: function() {
-                return {
-                    title: 'Hello Router In Vue 2', 
-                }
-            }
-        })
-
-        var footerComponent = {
-            template: `
-            <footer id="footer">
-                <p>Copy Right Reserverd <slot></slot></p> 
-            </footer>
-            `
-        } 
-
-        
-        // Instance  Component To Routes 
-        const routes = [
-            {path: '/', component : Home},
-            {path: '/about', component : About},
-            {path: '/kelas' , component : Kelas},
-            {path: '/kelas/:id' , component : DetailKelas},
-            {path: '*' , component : NotFound},
-        ]
-
-        // Instance Routes To Router
-        const router = new VueRouter({
-            mode: 'history',
-            routes
-        }) 
-
+      
 
         const vm = new Vue({
             el: '#app',
