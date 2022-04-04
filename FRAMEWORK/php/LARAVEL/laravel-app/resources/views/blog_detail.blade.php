@@ -7,7 +7,7 @@
         <a href="/blog/{{ $post['slug'] }}"> {{$post['title']}}
     </h2> </a>
     <h5>By: {{$post['author']}}</h5>
-    <p>{{$post['body']}}</p>
+    {!! $post->body !!}
 </article>
 <a href="/blog">Back to blog</a>
 

@@ -34,22 +34,9 @@ Route::get('/about', function () {
 Route::get('/blog', [PostController::class, 'index']);
 
 
-Route::get('blog/{slug}', function ($slug) {
-
-
-
-    // foreach($blog_posts as $post) {
-    //     if($post['slug'] == $slug) {
-    //        $blog_posts = [];
-    //        $blog_posts = $post;
-    //     }
-    // }
-
-    return view('blog_detail', [
-        'title' => 'Blog Detail',
-        'post' => Post::find($slug),
-    ]);
-});
+// Route::get('blog/{slug}', [PostController::class, 'show']);
+// automatic query | routes binding
+Route::get('blog/{post:slug}', [PostController::class, 'show']);
 
 
 
