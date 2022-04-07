@@ -7,15 +7,15 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index() {
-        return view('blog', [
-            'title' => 'Blog',
+        return view('posts', [
+            'title' => 'All Posts',
             // 'posts' => Post::all(),
-            'posts' => Post::latest()->get(),
+            'posts' => Post::with(['author', 'category'])->latest()->get(),
         ]);
     }
 
     public function show(Post $post) {
-        return view('blog_detail', [
+        return view('post', [
             'title' => 'Blog Detail',
             'post' => $post
         ]);

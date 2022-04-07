@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-
 <article class="mb-5">
     <h2>
         <a href="/blog/{{ $post['slug'] }}"> {{$post['title']}}
