@@ -4,22 +4,28 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-lg-4">
-        @if(session()->has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
+        @if(session()->has('loginError'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('loginError') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
         <main class="form-signin mt-5">
             <h1 class="h3 mb-3 fw-normal">Please login</h1>
-            <form>
+            <form method="post" action="/login">
+                @csrf
                 <div class="form-floating">
-                    <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
+                    <input type="email" class="form-control @error('email') is-invalid @endif" name="email" id="email" placeholder="name@example.com" value="{{old('email')}}" autofocus required>
+                    <label for="email">Email address</label>
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                    <label for="password">Password</label>
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
             </form>
