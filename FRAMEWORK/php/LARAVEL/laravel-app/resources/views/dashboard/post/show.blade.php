@@ -17,7 +17,6 @@
                     {!! $post->body !!}
                 </article>
             </div>
-            <a href="/blog">Back to blog</a>
         </div>
     </div>
 </div>

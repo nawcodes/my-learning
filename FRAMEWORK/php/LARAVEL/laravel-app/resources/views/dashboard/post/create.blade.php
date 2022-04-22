@@ -10,26 +10,50 @@
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" name="title" id="title">
-            <div id="" class="form-text">We'll never share your email with anyone else.</div>
+            <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" value="{{old('title')}}" autofocus required>
+            @error('title')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="slug" class="form-label">Slug</label>
-            <input type="text" class="form-control" name="slug" id="slug">
+            <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" value="{{old('slug')}}" required>
+            @error('slug')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label for="category" class="form-label">Category</label>
-            <select class="form-select" aria-label="" name="category_id">
+            <select class="form-select @error('category_id') is-invalid @enderror" aria-label="" name="category_id">
                 @foreach($categories as $c)
-                <option value="{{$c->id}}">{{$c->name}}</option>
+                @if(old('category_id') == $c->id)
+                <option value="{{$c->id}}" selected>{{$c->name}}</option>
+                @else
+                <option value="{{$c->id}}" >{{$c->name}}</option>
+                @endif
                 @endforeach
             </select>
+            @error('category_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
+
 
         <div class="mb-3">
             <label for="category" class="form-label"> Body </label>
-            <input id="body" type="hidden" name="body">
+            @error('body')
+            <p class="text-danger">
+                {{ $message }}
+            </p>
+            @enderror
+            <input id="body" type="hidden" name="body" value="{{old('body')}}">
             <trix-editor input="body">
             </trix-editor>
         </div>
@@ -52,7 +76,6 @@
     document.addEventListener('trix-file-accept', function(e) {
         e.preventDefault();
     });
-
 </script>
 
 @endsection
