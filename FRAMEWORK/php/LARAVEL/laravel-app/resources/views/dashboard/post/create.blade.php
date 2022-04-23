@@ -6,7 +6,7 @@
 
 <div class="col-lg-8">
 
-    <form method="post" action="/dashboard/posts">
+    <form method="post" action="/dashboard/posts" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -34,11 +34,21 @@
                 @if(old('category_id') == $c->id)
                 <option value="{{$c->id}}" selected>{{$c->name}}</option>
                 @else
-                <option value="{{$c->id}}" >{{$c->name}}</option>
+                <option value="{{$c->id}}">{{$c->name}}</option>
                 @endif
                 @endforeach
             </select>
             @error('category_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="formFile" class="form-label  @error('image') is-invalid @enderror">File Image</label>
+            <input class="form-control" type="file" name="image" id="image">
+            @error('image')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
