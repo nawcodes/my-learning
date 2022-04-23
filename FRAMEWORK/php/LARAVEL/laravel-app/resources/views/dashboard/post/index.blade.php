@@ -26,12 +26,20 @@
             @foreach ($posts as $post)
             <tr>
                 <td>{{$loop->iteration}}}</td>
+                @if(strlen($post->title) > 50)
+                <td> <?= substr($post->title, 0, 50) ?> ... </td>
+                @else
                 <td>{{$post->title}}</td>
+                @endif
                 <td>{{$post->category->name}}</td>
                 <td>
                     <a href="/dashboard/posts/{{$post->slug}}" class="badge bg-primary"><span data-feather="eye"></span></a>
-                    <a href="/dashboard/posts/{{$post->id}}" class="badge bg-warning"><span data-feather="edit"></span></a>
-                    <a href="/dashboard/posts/{{$post->id}}" class="badge bg-danger"><span data-feather="x-circle"></span></a>
+                    <a href="/dashboard/posts/{{$post->slug}}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
+                    <form action="/dashboard/posts/{{$post->slug}}" method="post" class="d-inline">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="badge bg-danger" onclick="return confirm('Are you sure?')"><span data-feather="x-circle"></span></button>
+                    </form>
                 </td>
             </tr>
             @endforeach
