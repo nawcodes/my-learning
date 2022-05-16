@@ -15,7 +15,7 @@
                     <td>{{product.title}}</td>
                     <td>{{product.price}}</td>
                     <td>
-                    <router-link to="{name: 'EditProduct', params: {id: product.id}}" class="button is-info is-small">Edit</router-link>
+                    <router-link :to="{name: 'EditProduct', params: {id: product.id}}" class="button is-info is-small">Edit</router-link>
                     <button class="button is-danger is-small" @click="deleteProduct(product.id)">Delete</button>
                     </td>
                 </tr>
