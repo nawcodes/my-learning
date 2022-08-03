@@ -36,7 +36,6 @@
                                 <button type="submit" class="dropdown-item" ><i class="bi bi-box-arrow-right"></i> Logout</button>
                             </li>
                         </form>
-
                     </ul>
                 </li>
                 @else
