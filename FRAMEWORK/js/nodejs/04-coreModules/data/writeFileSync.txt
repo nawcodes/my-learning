@@ -1,1 +1,0 @@
-Mencoba fungsi writeFileSync secara syncronous nodeJs!
