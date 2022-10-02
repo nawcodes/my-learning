@@ -1,9 +1,0 @@
-Tutorial CodeIgniter 4 untuk PEMULA | 4. Routes & Controller
-
----------------- 1. Routes -------------------------
-/App/Config/Config.php
-    1. Jalur Aplikasi kita
-
-
----------------------------------------------------------
-5 Views
