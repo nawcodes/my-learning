@@ -1,10 +1,8 @@
-﻿# What I'm Was Learning?
-History Learn 
-- Javascript 
-    -Advance
-    -Crud
-    -Framework
-- PHP 
-    -Basic
-    -CRUD
-    -Framework
+﻿~~Check version 
+node --version
+
+Run App 
+~ node <your file> | remember yo're in folder file
+
+REPL
+~ node | enter REPL | write .help for more information
