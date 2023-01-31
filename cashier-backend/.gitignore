@@ -1,0 +1,7 @@
+node_modules
+cashier-backend/node_modules
+node_modules/
+/node_modules
+../node_modules
+./node_modules
+./cashier-backend/node_modules
