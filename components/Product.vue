@@ -209,12 +209,18 @@ export  default  {
       return this.products;
     }
   },
+  methods: {
+    resetCategoryId() {
+      this.categoryId = false;
+    }
+  },
   watch: {
     search(val) {
       this.isLoading = true;
       setTimeout(() => {
         this.itemsSearch = this.products.filter(product => {
           this.isLoading = false;
+          this.resetCategoryId();
           return product.title;
         });
       }, 500);
