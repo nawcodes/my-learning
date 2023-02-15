@@ -14,7 +14,7 @@
 
           <v-list>
             <v-list-item-group v-model="categoryId">
-              <v-list-item v-for="(category, i) in categories" :key="i">
+              <v-list-item v-for="(category, i) in categories" :key="i" :value="category.id" :disabled="category.id == categoryId">
                 <v-list-item-title >
                   {{ category.title }}
                 </v-list-item-title>
@@ -62,6 +62,7 @@ export  default  {
     return {
       categoryId: false,
       categories: [
+        { id: false, title: 'All'},
         { id: 1, title: 'Smartphone'},
         { id: 2, title: 'Camera' },
         { id: 3, title: 'Television'}
