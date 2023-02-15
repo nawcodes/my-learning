@@ -10,6 +10,8 @@
         :items="itemsSearch"
         item-text="title"
         item-value="id"
+        v-model="selectedSearch"
+        return-object
         >
 
         </v-autocomplete>
@@ -75,6 +77,7 @@ export  default  {
       search: null,
       isLoading: false,
       itemsSearch: [],
+      selectedSearch: null,
       categories: [
         { id: false, title: 'All'},
         { id: 1, title: 'Smartphone'},
@@ -199,6 +202,8 @@ export  default  {
       if(this.categoryId) {
         console.log(this.categoryId);
         return this.products.filter(product => product.categoryId == this.categoryId);
+      }else if(this.selectedSearch) {
+        return this.products.filter(product => product.title == this.selectedSearch.title);
       }
 
       return this.products;
