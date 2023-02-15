@@ -6,7 +6,11 @@
         label="Search product"
         variant="solo"
         :search-input.sync="search"
-        :loading="isLoading">
+        :loading="isLoading"
+        :items="itemsSearch"
+        item-text="title"
+        item-value="id"
+        >
 
         </v-autocomplete>
       </v-col>
@@ -70,6 +74,7 @@ export  default  {
       categoryId: false,
       search: null,
       isLoading: false,
+      itemsSearch: [],
       categories: [
         { id: false, title: 'All'},
         { id: 1, title: 'Smartphone'},
@@ -203,7 +208,10 @@ export  default  {
     search(val) {
       this.isLoading = true;
       setTimeout(() => {
-        this.isLoading = false;
+        this.itemsSearch = this.products.filter(product => {
+          this.isLoading = false;
+          return product.title;
+        });
       }, 500);
     }
   }
