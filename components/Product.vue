@@ -2,7 +2,13 @@
   <section>
     <v-row>
       <v-col cols="10">
-        Search
+        <v-autocomplete
+        label="Search product"
+        variant="solo"
+        :search-input.sync="search"
+        :loading="isLoading">
+
+        </v-autocomplete>
       </v-col>
       <v-col cols="2">
         <v-menu>
@@ -29,6 +35,7 @@
       <v-col
         v-for="(product, i) in filteredProducts"
         :key="i"
+        :value="product.id"
         cols="2"
       >
         <v-card :title="product.title" :ripple="true">
@@ -61,6 +68,8 @@ export  default  {
   data() {
     return {
       categoryId: false,
+      search: null,
+      isLoading: false,
       categories: [
         { id: false, title: 'All'},
         { id: 1, title: 'Smartphone'},
@@ -188,6 +197,14 @@ export  default  {
       }
 
       return this.products;
+    }
+  },
+  watch: {
+    search(val) {
+      this.isLoading = true;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 500);
     }
   }
 }
