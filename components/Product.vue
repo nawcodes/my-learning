@@ -26,8 +26,8 @@
           </template>
 
           <v-list>
-            <v-list-item-group v-model="categoryId">
-              <v-list-item v-for="(category, i) in categories" :key="i" :value="category.id" :disabled="category.id == categoryId">
+            <v-list-item-group>
+              <v-list-item v-for="(category, i) in categories" :key="i" :value="category.id" :disabled="category.id == categoryId" @change="updateCategoryId(category.id)">
                 <v-list-item-title >
                   {{ category.title }}
                 </v-list-item-title>
@@ -71,28 +71,20 @@
 
 <script>
 
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export  default  {
   data() {
     return {
-      categoryId: false,
       search: null,
       isLoading: false,
       itemsSearch: [],
       selectedSearch: null,
-      categories: [
-        { id: false, title: 'All'},
-        { id: 1, title: 'Smartphone'},
-        { id: 2, title: 'Camera' },
-        { id: 3, title: 'Television'}
-      ],
     }
   },
   computed: {
     filteredProducts() {
       if(this.categoryId) {
-        console.log(this.categoryId);
         return this.products.filter(product => product.categoryId == this.categoryId);
       }else if(this.selectedSearch) {
         return this.products.filter(product => product.title == this.selectedSearch.title);
@@ -101,10 +93,15 @@ export  default  {
       return this.products;
     },
     ...mapState('products', {
-      products: 'products'
-    })
+      products: 'products',
+      categories: 'categories',
+      categoryId: 'categoryId'
+    }),
   },
   methods: {
+     ...mapMutations('products', {
+      updateCategoryId: 'updateCategoryId'
+    }),
     resetCategoryId() {
       this.categoryId = false;
     }
