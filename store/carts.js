@@ -8,19 +8,20 @@ export const mutations = {
       id: id,
       quantity: 1
     })
+  },
+  incrementQuantity(state, id) {
+    state.items.find(item => item.id === id).quantity++
   }
 }
 
 export const actions = {
   addToCart({ commit, state }, id) {
-    commit('addItem', id)
-    console.log(state.items);
-    // const item = state.items.find(item => item.id === id)
-    // if (item) {
-    //   item.quantity++
-    // } else {
-    //   commit('addItem', id)
-    // }
+    const item = state.items.find(item => item.id === id)
+    if (item) {
+      commit('incrementQuantity', id)
+    } else {
+      commit('addItem', id)
+    }
   }
 }
 
