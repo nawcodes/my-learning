@@ -44,6 +44,7 @@
         :key="i"
         :value="product.id"
         cols="2"
+        @click="addToCart(product.id)"
       >
         <v-card :title="product.title" :ripple="true">
           <v-card-actions>
@@ -99,8 +100,9 @@ export  default  {
     }),
   },
   methods: {
-     ...mapActions('products', {
-      updateCategoryId: 'updateCategoryId'
+     ...mapActions({
+      updateCategoryId: 'products/updateCategoryId',
+      addToCart: 'carts/addToCart'
     }),
     resetCategoryId() {
       this.categoryId = false;
