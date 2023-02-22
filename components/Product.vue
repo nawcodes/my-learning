@@ -71,7 +71,7 @@
 
 <script>
 
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 export  default  {
   data() {
@@ -99,7 +99,7 @@ export  default  {
     }),
   },
   methods: {
-     ...mapMutations('products', {
+     ...mapActions('products', {
       updateCategoryId: 'updateCategoryId'
     }),
     resetCategoryId() {
