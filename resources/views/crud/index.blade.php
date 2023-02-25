@@ -1,39 +1,36 @@
 @extends('layouts.console')
 
 @section('title')
-    Kelola {{$content_title}} | Console Admin
+    Crud
 @endsection
 
 @section('nav')
-    <ol class="breadcrumb my-0 ms-2">
-        <li class="breadcrumb-item">
-            <a href="{{ route('console.dashboard') }}">Home</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a href="{{ route('console.contract.index') }}">{{$content_title}}</a>
-        </li>
-        <li class="breadcrumb-item active"><span>Data {{$content_title}}</span></li>
+    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Halaman</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
     </ol>
+    <h6 class="font-weight-bolder mb-0">Dashboard</h6>
 @endsection
 
 @section('content')
-        <div class="card mb-5">
-            <div class="card-header">
-                <div class="col-sm-12">
-                </div>
-                <strong>Kelola {{$content_title}}</strong>
-            </div>
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col">
+            @include('partials.alert')
+        </div>
+    </div>
+    <div class="row">
+        <div class="card">
             <div class="card-body">
-                @include('partials.alert')
-                <div class="table-responsive">
-                    {{ $dataTable->table(['class' => 'table table-stripped']) }}
-                </table>
+
             </div>
         </div>
+    </div>
+</div>
+
+
 
 @endsection
 
-@push('scripts')
-    {{ $dataTable->scripts() }}
-@endpush
 
