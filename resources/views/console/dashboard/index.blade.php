@@ -73,6 +73,27 @@
 
     var layerControl = L.control.layers(baseMaps).addTo(map);
 
+
+    // end initiziliation map
+
+    // start marker
+
+    const icon = L.icon({
+        // icon builidng cdn
+        iconUrl: 'https://cdn.iconscout.com/icon/free/png-256/map-marker-1764984-1502639.png',
+        iconSize: [38, 95],
+        iconAnchor: [22, 94],
+        popupAnchor: [-3, -76],
+        shadowUrl: 'https://cdn.iconscout.com/icon/free/png-256/map-marker-1764984-1502639.png',
+        shadowSize: [68, 95],
+        shadowAnchor: [22, 94]
+    });
+    var cibentangMark = L.marker([-6.933249, 106.898305], {icon: icon}).addTo(map).bindPopup('Cibentang')
+
+    // end marker
+
+
+
 </script>
 
 
