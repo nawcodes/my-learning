@@ -7,21 +7,29 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Soft UI Dashboard by Creative Tim
+    @yield('title')
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
   <link href="{{asset('assets/css/nucleo-icons.css" rel="stylesheet')}}" />
-  <link href="assets('css/nucleo-svg.css" rel="stylesheet" />
+  <link href="{{asset('css/nucleo-svg.css" rel="stylesheet')}}" />
   <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('assets/css/soft-ui-dashboard.css?v=1.0.7')}}" rel="stylesheet" />
+
+  {{-- leaflet --}}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
 </head>
 
-<body class="g-sidenav-show  bg-gray-100">
+{{-- <body class="g-sidenav-show  bg-gray-100 g-sidenav-pinned"> --}}
+<body class="g-sidenav-show  bg-gray-100" id="bodyConsole">
+
   @include('layouts.sidebar')
 
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -255,6 +263,28 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{asset('assets/js/soft-ui-dashboard.min.js?v=1.0.7')}}"></script>
+
+  <script>
+        const burgerEl = document.getElementById('iconNavbarSidenav');
+        const sidenavMainEl = document.getElementById('sidenav-main');
+        const bodyConsole = document.getElementById('bodyConsole');
+
+        burgerEl.addEventListener('click', function(e) {
+            console.log(e);
+            // add classList to body g-sidenav-pinned
+            bodyConsole.classList.toggle('g-sidenav-pinned');
+            sidenavMainEl.classList.toggle('bg-white');
+
+        });
+
+        // unset classList body adn sidenav
+        window.addEventListener('resize', function(e) {
+            if (window.innerWidth > 1200) {
+                bodyConsole.classList.remove('g-sidenav-pinned');
+                sidenavMainEl.classList.remove('bg-white');
+            }
+        });
+   </script>
 </body>
 
 </html>
