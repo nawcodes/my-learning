@@ -17,6 +17,9 @@ export const getters = {
 
     });
   },
+  itemTotal: () => (price, quantity) => {
+    return price * quantity
+  },
 }
 
 export const mutations = {
@@ -28,6 +31,12 @@ export const mutations = {
   },
   incrementQuantity(state, id) {
     state.items.find(item => item.id === id).quantity++
+  },
+  decrementQuantity(state, id) {
+    let item = state.items.find(item => item.id === id)
+    if (item.quantity > 1) {
+      item.quantity--
+    }
   }
 }
 
@@ -39,6 +48,12 @@ export const actions = {
     } else {
       commit('addItem', id)
     }
+  },
+  increment({ commit }, id) {
+    commit('incrementQuantity', id)
+  },
+  decrement({ commit }, id) {
+    commit('decrementQuantity', id)
   }
 }
 
