@@ -6,7 +6,7 @@
         <v-list-item v-for="(item, i) in cartItems" :key="i">
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
-            <v-list-item-subtitle>{{ item.price }}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ currency(item.price) }}</v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action>
             <v-btn icon @click="removeItem(item)">
@@ -23,6 +23,11 @@
 import { mapState, mapGetters } from 'vuex'
 
 export default {
+  methods: {
+    currency(value) {
+      return Intl.NumberFormat('en-US').format(value)
+    }
+  },
   computed: {
     ...mapGetters('carts', {
       cartItems: 'cartItems'
