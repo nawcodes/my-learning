@@ -37,6 +37,11 @@ export const mutations = {
     if (item.quantity > 1) {
       item.quantity--
     }
+  },
+  removeItem(state, id) {
+    let itemId = state.items.findIndex(item => item.id === id)
+    confirm('Are you sure you want to remove this item?');
+    state.items.splice(itemId, 1)
   }
 }
 
@@ -54,6 +59,9 @@ export const actions = {
   },
   decrement({ commit }, id) {
     commit('decrementQuantity', id)
+  },
+  remove({ commit }, id) {
+    commit('removeItem', id)
   }
 }
 
