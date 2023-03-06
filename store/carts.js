@@ -20,6 +20,11 @@ export const getters = {
   itemTotal: () => (price, quantity) => {
     return price * quantity
   },
+  subTotal(state, getters) {
+    return getters.cartItems.reduce((total, item) => {
+      return total + (item.price * item.quantity)
+    }, 0)
+  }
 }
 
 export const mutations = {
@@ -42,7 +47,8 @@ export const mutations = {
     let itemId = state.items.findIndex(item => item.id === id)
     confirm('Are you sure you want to remove this item?');
     state.items.splice(itemId, 1)
-  }
+  },
+
 }
 
 export const actions = {
@@ -62,6 +68,9 @@ export const actions = {
   },
   remove({ commit }, id) {
     commit('removeItem', id)
+  },
+  subTotal({ commit, getters }) {
+    commit('subTotal', getters)
   }
 }
 

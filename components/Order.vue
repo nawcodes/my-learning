@@ -50,6 +50,15 @@
             <v-list-item-title>{{ currency(itemTotal(item.price, item.quantity)) }}</v-list-item-title>
           </v-list-item-action>
         </v-list-item>
+        <v-list-item class="text-h6 black--text grey lighten-2">
+          <v-list-item-content>
+            <v-list-item-title
+            >Sub Total</v-list-item-title>
+          </v-list-item-content>
+          <v-list-action>
+            <v-list-item-title>{{ currency(subTotal) }}</v-list-item-title>
+          </v-list-action>
+        </v-list-item>
       </v-list>
     </v-col>
   </v-row>
@@ -63,7 +72,7 @@ export default {
     ...mapActions('carts', {
       increment: 'increment',
       decrement: 'decrement',
-      remove: 'remove'
+      remove: 'remove',
     }),
     currency(value) {
       return Intl.NumberFormat('en-US').format(value)
@@ -73,6 +82,7 @@ export default {
     ...mapGetters('carts', {
       cartItems: 'cartItems',
       itemTotal: 'itemTotal',
+      subTotal: 'subTotal'
     }),
     ...mapState('carts', {
       items: 'items'
