@@ -1,5 +1,18 @@
 export const state = () => ({
   items: [],
+  additionals: [
+    {
+      title: 'Tax',
+      mode: 'percentage',
+      value: 10,  
+    },
+    {
+      title: 'Service Charge',
+      mode: 'fix',
+      value: 5000,  
+    },
+
+  ]
 })
 
 
