@@ -39,6 +39,20 @@ export const getters = {
   },
   calculatePercentage: (state, getters) => (value) => {
      return getters.subTotal * (value / 100)
+  },
+  sumAddioanals: (state, getters) => {
+    if(state.additionals.length) {
+      return state.additionals.reduce((total, item) => {
+        if(item.mode === 'percentage') {
+          return total + getters.calculatePercentage(item.value)
+        }
+
+        return total + item.value
+      }, 0)
+    }
+  },
+  total: (state, getters) => {
+    return getters.subTotal + getters.sumAddioanals
   }
 }
 
