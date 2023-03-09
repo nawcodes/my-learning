@@ -15,7 +15,6 @@ export const state = () => ({
   ]
 })
 
-
 export const getters = {
   cartItems: (state, getters, rootState) => {
     return state.items.map(({id, quantity}) => {
@@ -37,6 +36,9 @@ export const getters = {
     return getters.cartItems.reduce((total, item) => {
       return total + (item.price * item.quantity)
     }, 0)
+  },
+  calculatePercentage: (state, getters) => (value) => {
+     return getters.subTotal * (value / 100)
   }
 }
 

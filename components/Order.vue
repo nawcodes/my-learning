@@ -51,38 +51,45 @@
           </v-list-item-action>
         </v-list-item>
         <div v-if="cartItems.length">
-        <v-list-item class="text-h6 black--text grey lighten-2">
-          <v-list-item-content>
-            <v-list-item-title
-            >Sub Total</v-list-item-title>
-          </v-list-item-content>
-          <v-list-action>
-            <v-list-item-title>{{ currency(subTotal) }}</v-list-item-title>
-          </v-list-action>
-        </v-list-item>
-        <v-list-group>
-          <template v-slot:activator>
-           <v-list-item-content>
-             <v-list-item-title>
-               Additionals
-             </v-list-item-title>
-           </v-list-item-content>            
-          </template>
-          <template v-for="(additional, i) in additionals" >
-            <v-list-item :key="i">
-                <v-list-item-content>
-                  <v-list-item-title>
-                    {{additional.title}}
-                  </v-list-item-title>
-                </v-list-item-content>
-                <v-list-item-action>
-                  <v-list-item-title>
-                    {{additional.value}}
-                  </v-list-item-title>
-                </v-list-item-action>
-            </v-list-item>
-          </template>
-        </v-list-group>
+          <v-list-item class="text-h6 black--text grey lighten-2">
+            <v-list-item-content>
+              <v-list-item-title
+              >Sub Total</v-list-item-title>
+            </v-list-item-content>
+            <v-list-action>
+              <v-list-item-title>{{ currency(subTotal) }}</v-list-item-title>
+            </v-list-action>
+          </v-list-item>
+          <v-list-group>
+            <template v-slot:activator>
+             <v-list-item-content>
+               <v-list-item-title>
+                 Additionals
+               </v-list-item-title>
+             </v-list-item-content>            
+            </template>
+            <template v-for="(additional, i) in additionals" >
+              <v-list-item :key="i">
+                  <v-list-item-content>
+                    <v-list-item-title >
+                      {{additional.title}}
+                    </v-list-item-title>
+                    <v-list-item-subtitle v-if="additional.mode == 'percentage'">
+                      {{additional.value}} %
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                  <v-list-item-action>
+                    <v-list-item-title v-if="additional.mode == 'fix'">
+                      {{currency(additional.value)}}
+                    </v-list-item-title>
+                    <v-list-item-title v-if="additional.mode == 'percentage'">
+                      {{currency(calculatePercentage(additional.value))}}
+                    </v-list-item-title>
+                  </v-list-item-action>
+              </v-list-item>
+            </template>
+          </v-list-group>
+          
         </div>
       </v-list>
     </v-col>
@@ -107,7 +114,8 @@ export default {
     ...mapGetters('carts', {
       cartItems: 'cartItems',
       itemTotal: 'itemTotal',
-      subTotal: 'subTotal'
+      subTotal: 'subTotal',
+      calculatePercentage: 'calculatePercentage'
     }),
     ...mapState('carts', {
       items: 'items',
