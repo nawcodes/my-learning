@@ -12,4 +12,8 @@ python3 -m venv venv
 pip install -r requirement.txt
 ```
 
-`
+## Step 3: Django Start Project
+
+```bash
+django-admin startproject notesapp
+```
