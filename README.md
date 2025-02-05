@@ -6,3 +6,5 @@
 
 1. MyFirstDjangoApp
    Basicly it is a simple notes app. using django and react
+
+2. SnakeGameApp
