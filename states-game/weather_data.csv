@@ -1,0 +1,8 @@
+Date,Temperature (°C),Humidity (%),Wind Speed (km/h),Condition
+2025-02-01,28,65,12,Sunny
+2025-02-02,30,60,15,Partly Cloudy
+2025-02-03,25,70,10,Cloudy
+2025-02-04,22,80,8,Rainy
+2025-02-05,26,75,11,Thunderstorm
+2025-02-06,29,55,14,Sunny
+2025-02-07,24,85,9,Rainy
